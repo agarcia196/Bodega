@@ -2,19 +2,28 @@ package formsBodega;
 
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
+import java.io.Serializable;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import clasesBodega.Empresa;
+/**
+ * The Class FormLogin.
+ */
+public class FormLogin extends JFrame implements Serializable {
 
-public class FormLogin extends JFrame {
-
+	/** The Constant serialVersionUID. */
+	private static final long serialVersionUID = 7508005990190033109L;
+	
+	/** The content pane. */
 	private JPanel contentPane;
 
 	/**
 	 * Create the frame.
+	 *
+	 * @param empresa La empresa
 	 */
 	public FormLogin(Empresa empresa) {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

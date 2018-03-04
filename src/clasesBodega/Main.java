@@ -7,11 +7,15 @@
 package clasesBodega;
 
 import java.io.File;
+import java.io.Serializable;
 
 import formsBodega.FormLogin;
 import formsBodega.FormPrincipal;
 
-public class Main {
+public class Main implements Serializable{
+
+	/** The Constant serialVersionUID. */
+	private static final long serialVersionUID = 2011284214684701444L;
 
 	/**
 	 * El método main .
@@ -19,8 +23,6 @@ public class Main {
 	 * @param args the arguments
 	 */
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-		
 		File file = new File("empresa.dat");
 		if(file.exists()) {
 			Empresa empresa = new Empresa();

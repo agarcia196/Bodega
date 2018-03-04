@@ -3,6 +3,7 @@
  *
  * @author Alexis García Ramirez 
  * @version 4.3.2018
+ * 
  */
 package clasesBodega;
 
@@ -12,9 +13,16 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.io.Serializable;
 
-public class Recursos {
-		
+/**
+ * The Class Recursos.
+ */
+public class Recursos implements Serializable {
+
+	/** The Constant serialVersionUID. */
+	private static final long serialVersionUID = -4046543297022551479L;
+
 	/**
 	 * Escribir Archivo empresa.
 	 *
@@ -27,12 +35,12 @@ public class Recursos {
 		try {
 			fos = new FileOutputStream(archivo);
 			oos = new ObjectOutputStream(fos);
-				try {
-					oos.writeObject(emp);
-				} catch (IOException e) {
-					System.out.println("Problema al crear las clases");
-				}
-			
+			try {
+				oos.writeObject(emp);
+			} catch (IOException e) {
+				System.out.println("Problema al crear las clases");
+			}
+
 		} catch (FileNotFoundException e) {
 			System.out.println("Problemas con la direcion para crear el fichero");
 		} catch (IOException e) {
@@ -51,7 +59,7 @@ public class Recursos {
 			}
 		}
 	}
-		
+
 	/**
 	 * Leer archivo de objeto empresa.
 	 *
@@ -88,5 +96,5 @@ public class Recursos {
 			return empresa;
 		}
 	}
-	
+
 }

@@ -7,18 +7,39 @@
  */
 package clasesBodega;
 
+import java.io.Serializable;
 import java.util.Arrays;
 
-public class Empresa {
+/**
+ * The Class Empresa.
+ */
+public class Empresa implements Serializable{
+	
+	/** The Constant serialVersionUID. */
+	private static final long serialVersionUID = -306383744197773352L;
+	
+	/** The productos. */
 	private Producto[] productos;
+	
+	/** The bodegas. */
 	private Bodega [] bodegas;
+	
+	/** The usuarios. */
 	private User [] usuarios;
+	
+	/** The categoria. */
 	private String [] categoria;
+	
+	/** The nombre. */
 	private String nombre;
+	
+	/** The logo. */
 	private String logo;
 	
-	/** 
-	 * Constructor
+	/**
+	 *  
+	 * Constructor.
+	 *
 	 * @param nombre de la empresa
 	 * @param logo ruta de acceso de el logo de la empresa
 	 */
@@ -33,40 +54,104 @@ public class Empresa {
 		this.logo=logo;
 	}
 	
+	/**
+	 * Instantiates a new empresa.
+	 */
 	public Empresa() {
 		
 	}
 	
+	/**
+	 * Gets the bodegas.
+	 *
+	 * @return the bodegas
+	 */
 	public Bodega[] getBodegas() {
 		return bodegas;
 	}
 
+	/**
+	 * Sets the bodegas.
+	 *
+	 * @param bodegas the new bodegas
+	 */
 	public void setBodegas(Bodega[] bodegas) {
 		this.bodegas = bodegas;
 	}
 
+	/**
+	 * Gets the usuarios.
+	 *
+	 * @return the usuarios
+	 */
 	public User[] getUsuarios() {
 		return usuarios;
 	}
 
+	/**
+	 * Sets the usuarios.
+	 *
+	 * @param usuarios the new usuarios
+	 */
 	public void setUsuarios(User[] usuarios) {
 		this.usuarios = usuarios;
 	}
+	
+	/**
+	 * Gets the categoria.
+	 *
+	 * @return the categoria
+	 */
 	public String[] getCategoria() {
 		return categoria;
 	}
+	
+	/**
+	 * Sets the categoria.
+	 *
+	 * @param categoria the new categoria
+	 */
 	public void setCategoria(String[] categoria) {
 		this.categoria = categoria;
 	}
+	
+	/**
+	 * Gets the nombre.
+	 *
+	 * @return the nombre
+	 */
 	public String getNombre() {
 		return nombre;
 	}
+	
+	/**
+	 * Sets the nombre.
+	 *
+	 * @param nombre the new nombre
+	 */
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
 	}
+	
+	/**
+	 * Gets the productos.
+	 *
+	 * @return the productos
+	 */
 	public Producto[] getProductos() {
 		return productos;
 	}
+	
+	/**
+	 * Adds the producto.
+	 *
+	 * @param sku the sku
+	 * @param referencia the referencia
+	 * @param volumen the volumen
+	 * @param peso the peso
+	 * @param descripcion the descripcion
+	 * @param catego the catego
+	 */
 	public void AddProducto(int sku,String referencia, double volumen, double peso, String descripcion,String catego) {
 		if(productos==null)
 			productos=new Producto[1];
@@ -74,6 +159,14 @@ public class Empresa {
 			productos=Arrays.copyOf(productos,productos.length+1);
 		productos[productos.length-1]= new Producto(sku, referencia, volumen, peso,descripcion,catego,0);
 	}
+	
+	/**
+	 * Buscar producto.
+	 *
+	 * @param codigo the codigo
+	 * @return the producto
+	 * @throws ProductoNoEncontrado the producto no encontrado
+	 */
 	public Producto BuscarProducto(int codigo)throws ProductoNoEncontrado {
 		int i=0;
 		while (i<productos.length && productos[i].getSku()!=codigo) {
@@ -84,6 +177,12 @@ public class Empresa {
 		else 
 			return productos[i];
 	}
+	
+	/**
+	 * Adds the categoria.
+	 *
+	 * @param categ the categ
+	 */
 	public void AddCategoria(String categ) {
 		if(categoria==null)
 			categoria=new String[1];
@@ -91,6 +190,14 @@ public class Empresa {
 			categoria=Arrays.copyOf(categoria,categoria.length+1);
 		categoria[categoria.length-1]= categ;
 	}
+	
+	/**
+	 * Buscar categoria.
+	 *
+	 * @param categ the categ
+	 * @return the string
+	 * @throws CategoriaNoEncontrada the categoria no encontrada
+	 */
 	public String BuscarCategoria(String categ)throws CategoriaNoEncontrada {
 		int i=0;
 		while (i<categoria.length && categoria[i]!=categ) {
@@ -101,6 +208,14 @@ public class Empresa {
 		else 
 			return categoria[i];
 	}
+	
+	/**
+	 * Ingreso.
+	 *
+	 * @param bodega the bodega
+	 * @param sku the sku
+	 * @param cantidad the cantidad
+	 */
 	public void  Ingreso (String bodega, int sku, int cantidad) {
 		Bodega b = BuscarBodega(bodega);
 		Producto p = BuscarProducto(sku);
@@ -110,6 +225,15 @@ public class Empresa {
 			b.AddProducto(p,cantidad);		
 		}
 	}
+	
+	/**
+	 * Adds the bodega.
+	 *
+	 * @param IDBodega the ID bodega
+	 * @param direccion the direccion
+	 * @param ciudad the ciudad
+	 * @param capMaxima the cap maxima
+	 */
 	//Agregar bodega	
 	public void AddBodega(String IDBodega, String direccion, String ciudad, int capMaxima) {
 		Bodega bodega1 = Bodega();
@@ -120,6 +244,13 @@ public class Empresa {
 		bodegas [bodegas.length-1]= bodega1;
 	}
 
+	/**
+	 * Buscar bodega.
+	 *
+	 * @param IDBodega the ID bodega
+	 * @return the bodega
+	 * @throws BodegaNoExiste the bodega no existe
+	 */
 	//Buscar bodega
 	public Bodega BuscarBodega(String IDBodega) throws BodegaNoExiste{
 		int i=0;
@@ -132,6 +263,20 @@ public class Empresa {
 		else return bodegas[i];
 	}
 
+	/**
+	 * Adds the user.
+	 *
+	 * @param nombre El nombre
+	 * @param apellido the apellido
+	 * @param genero the genero
+	 * @param correo the correo
+	 * @param CC the cc
+	 * @param tipoID the tipo ID
+	 * @param user the user
+	 * @param pwd the pwd
+	 * @param perfil the perfil
+	 * @param tipoPerfil the tipo perfil
+	 */
 	//Agregar Usuario
 	public void AddUser(String nombre, String apellido, String genero, String correo, String CC, String tipoID,
 			String user, String pwd, String perfil, String tipoPerfil) {
@@ -139,19 +284,35 @@ public class Empresa {
 		if(usuarios==null)
 			usuarios = new usuarios[1];
 		else
-			usuarios= Arrays.copyOf(usuarios, usuarios.Length+1);
-		usuarios[usuarios.Length-1]=usuario1;
+			usuarios= Arrays.copyOf(usuarios, usuarios.length+1);
+		usuarios[usuarios.length-1]=usuario1;
 	}
+	
+	/**
+	 * Buscar user.
+	 *
+	 * @param user the user
+	 * @return the user
+	 * @throws UserNoExiste the user no existe
+	 */
 	//Buscar Usuario por User
 	public User BuscarUser(String user) throws UserNoExiste{
 		int i=0;
-		while (i<usuarios.Length && usuarios[i].getUser().compareTo(user)!=0) {
+		while (i<usuarios.length && usuarios[i].getUser().compareTo(user)!=0) {
 			i++;
 		}
-		if (i==usuarios.Length-1)
+		if (i==usuarios.length-1)
 			throw new UserNoExiste();
 		else return usuarios[i];
 	}	
+	
+	/**
+	 * Validar user.
+	 *
+	 * @param user the user
+	 * @param pwd the pwd
+	 * @throws PwdIncorrecta the pwd incorrecta
+	 */
 	//Validar Usuario
 	public void ValidarUser(String user, String pwd) throws PwdIncorrecta {
 		if (BuscarUser(user).Acceder(user, pwd)==(-1)) {
@@ -160,40 +321,99 @@ public class Empresa {
 		else
 			System.out.println("ingresando...");
 	}
+	
+	/**
+	 * Gets the logo.
+	 *
+	 * @return the logo
+	 */
 	public String getLogo() {
 		return logo;
 	}
 
 
+	/**
+	 * Sets the logo.
+	 *
+	 * @param logo the new logo
+	 */
 	public void setLogo(String logo) {
 		this.logo = logo;
 	}
+	
+	/**
+	 * The Class BodegaNoExiste.
+	 */
 	public class BodegaNoExiste extends Exception{
+		
+		/**
+		 * Instantiates a new bodega no existe.
+		 */
 		public BodegaNoExiste() {
 			super ("ID incorrecto o bodega no existe. Verifique nuevamente");
 		}
 	}
+	
+	/**
+	 * The Class UserNoExiste.
+	 */
 	public class UserNoExiste extends Exception{
+		
+		/**
+		 * Instantiates a new user no existe.
+		 */
 		public UserNoExiste() {
 			super("User incorrecto o no existe. Verifique nuevamente");
 		}
 	}
+	
+	/**
+	 * The Class PwdIncorrecta.
+	 */
 	public class PwdIncorrecta extends Exception{
+		
+		/**
+		 * Instantiates a new pwd incorrecta.
+		 */
 		public PwdIncorrecta() {
 			super("Contraseña o usuario incorrectos, verifique nuevamente");
 		}
 	}
+	
+	/**
+	 * The Class DatosInsuficientes.
+	 */
 	public class DatosInsuficientes extends Exception{
+		
+		/**
+		 * Instantiates a new datos insuficientes.
+		 */
 		public DatosInsuficientes() {
 			super("Datos incompletos");
 		}
 	}
+	
+	/**
+	 * The Class ProductoNoEncontrado.
+	 */
 	public class ProductoNoEncontrado extends Exception{
+		
+		/**
+		 * Instantiates a new producto no encontrado.
+		 */
 		public ProductoNoEncontrado() {
 			super("Producto no encontrado");
 		}
 	}
+	
+	/**
+	 * The Class CategoriaNoEncontrada.
+	 */
 	public class CategoriaNoEncontrada extends Exception{
+		
+		/**
+		 * Instantiates a new categoria no encontrada.
+		 */
 		public CategoriaNoEncontrada() {
 			super("Categoria no encontrada");
 		}

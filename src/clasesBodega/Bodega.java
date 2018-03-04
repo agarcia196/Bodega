@@ -1,5 +1,5 @@
 package clasesBodega;
 
-public class Bodega {
+public class Bodega  {
 
 }
