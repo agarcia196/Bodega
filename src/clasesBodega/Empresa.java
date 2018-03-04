@@ -33,13 +33,8 @@ public class Empresa {
 		this.logo=logo;
 	}
 	
-
-	public Empresa(Producto[] productos, Bodega[] bodegas, User[] usuarios, String[] categoria) {
-		super();
-		this.productos = new Producto[0];
-		this.bodegas = new Bodega [0];
-		this.usuarios = new User [0];
-		this.categoria = new String [0];
+	public Empresa() {
+		
 	}
 	
 	public Bodega[] getBodegas() {

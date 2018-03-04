@@ -20,10 +20,35 @@ public class Recursos {
 		oos.close();
 	}
 	//Leer fichero
-		public void LeerFichero(String fichero)throws FileNotFoundException,IOException,ClassNotFoundException {
-			FileInputStream fis = new FileInputStream(fichero);
-			ObjectInputStream ois = new ObjectInputStream(fis);
-			Empresa e= (Empresa) ois.readObject();
-			ois.close();	
+	public static Empresa ReadFileObjectEmpresa(String archivo) {
+		ObjectInputStream ois = null;
+		FileInputStream fis = null;
+		Empresa empresa = new Empresa();
+		try {
+			fis = new FileInputStream(archivo);
+			ois = new ObjectInputStream(fis);
+			while (fis.available() > 0) {
+				Empresa emp = (Empresa) ois.readObject();
+				empresa= emp;
+			}
+		} catch (FileNotFoundException e) {
+			System.out.println("Problemas con la ruta para leer el fichero");
+		} catch (IOException e) {
+			System.out.println("El fichero tiene problemas para ser leido");
+		} catch (ClassNotFoundException e) {
+			System.out.println("Problema al leer fichero");
+		} finally {
+			try {
+				ois.close();
+			} catch (IOException e) {
+				System.out.println("El fichero tiene problemas al leerlo");
+			}
 		}
+		if (empresa==null) {
+			return null;
+		} else {
+			return empresa;
+		}
+	}
+	
 }
