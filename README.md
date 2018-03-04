@@ -12,4 +12,3 @@ Sistema simple de bodegas
 ## Características
  - Escrito en Java
  - Uso de Programación orientada a objetos
- - Pequeño, liviano y rápido
