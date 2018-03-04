@@ -1,3 +1,9 @@
+/**
+ * clasesBodega: Recursos.
+ *
+ * @author Alexis García Ramirez 
+ * @version 4.3.2018
+ */
 package clasesBodega;
 
 import java.io.FileInputStream;
@@ -8,18 +14,50 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 
 public class Recursos {
-	
-	
-	
-	
-	//Escribir Fichero
-	public void EscribirFichero(String fichero, Empresa emp) throws FileNotFoundException, IOException {
-		FileOutputStream fos  = new FileOutputStream(fichero); //cargar archivo
-		ObjectOutputStream oos =new ObjectOutputStream(fos);//utilizar archivo
-		oos.writeObject(emp);
-		oos.close();
+		
+	/**
+	 * Escribir Archivo empresa.
+	 *
+	 * @param archivo El archivo
+	 * @param emp La empresa
+	 */
+	public static void WriteFileObjectEmpresa(String archivo, Empresa emp) {
+		FileOutputStream fos = null;
+		ObjectOutputStream oos = null;
+		try {
+			fos = new FileOutputStream(archivo);
+			oos = new ObjectOutputStream(fos);
+				try {
+					oos.writeObject(emp);
+				} catch (IOException e) {
+					System.out.println("Problema al crear las clases");
+				}
+			
+		} catch (FileNotFoundException e) {
+			System.out.println("Problemas con la direcion para crear el fichero");
+		} catch (IOException e) {
+			System.out.println("El fichero tiene problemas para crearse");
+		} finally {
+			try {
+				if (fos != null) {
+					fos.close();
+				}
+				if (oos != null) {
+					oos.close();
+				}
+
+			} catch (IOException e) {
+				System.out.println("No se pudo cerrar el archivo");
+			}
+		}
 	}
-	//Leer fichero
+		
+	/**
+	 * Leer archivo de objeto empresa.
+	 *
+	 * @param archivo El archivo
+	 * @return La empresa
+	 */
 	public static Empresa ReadFileObjectEmpresa(String archivo) {
 		ObjectInputStream ois = null;
 		FileInputStream fis = null;
