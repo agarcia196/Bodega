@@ -1,3 +1,10 @@
+/**
+ * clasesBodega: Empresa.
+ *
+ * @author Alexis García Ramirez 
+ * @author Jorge Luis Soriano Cuevas
+ * @version 2.3.2018
+ */
 package clasesBodega;
 
 import java.util.Arrays;
@@ -10,6 +17,11 @@ public class Empresa {
 	private String nombre;
 	private String logo;
 	
+	/** 
+	 * Constructor
+	 * @param nombre de la empresa
+	 * @param logo ruta de acceso de el logo de la empresa
+	 */
 	
 	public Empresa(String nombre,String logo) {
 		super();
@@ -94,7 +106,7 @@ public class Empresa {
 		else 
 			return categoria[i];
 	}
-	public void  Ingreso (String bodega, String sku, int cantidad) {
+	public void  Ingreso (String bodega, int sku, int cantidad) {
 		Bodega b = BuscarBodega(bodega);
 		Producto p = BuscarProducto(sku);
 		if(b==null || p==null || cantidad<0) {
