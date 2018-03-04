@@ -10,7 +10,7 @@ import java.io.File;
 import java.io.Serializable;
 
 import formsBodega.FormLogin;
-import formsBodega.FormPrincipal;
+import formsBodega.FormPrincipalLogin;
 
 public class Main implements Serializable{
 
@@ -31,7 +31,7 @@ public class Main implements Serializable{
 			inicio.setVisible(true);
 		}else {
 			Empresa empresa = new Empresa();
-			FormPrincipal principal = new FormPrincipal(empresa);
+			FormPrincipalLogin principal = new FormPrincipalLogin();
 			principal.setVisible(true);
 		}
 	}
