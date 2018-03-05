@@ -9,7 +9,11 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import clasesBodega.Empresa;
+import clasesBodega.Recursos;
+
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+
 import java.awt.Font;
 import javax.swing.JTextField;
 import javax.swing.JComboBox;
@@ -18,6 +22,10 @@ import javax.swing.DefaultComboBoxModel;
 import javax.swing.JPasswordField;
 import javax.swing.JButton;
 import javax.swing.ImageIcon;
+import java.awt.Toolkit;
+import javax.swing.SwingConstants;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 /**
  * The Class FormPrincipalLogin.
@@ -36,22 +44,25 @@ public class FormPrincipalLogin extends JFrame implements Serializable {
 	private JTextField txtCorreoU;
 	private JTextField txtCcU;
 	private JPasswordField passwordField;
-	private JPasswordField passwordField_1;
+	private JPasswordField cpasswordField;
 	/**
 	 * Launch the application.
 	 *
 	 * @param empresa the empresa
 	 */
-	public static void main(String[] args) {
+	/*public static void main(String[] args) {
 				FormPrincipalLogin frame = new FormPrincipalLogin();
 					frame.setVisible(true);
 				
-	}
+	}*/
 
 	/**
-	 * Create the frame.Empresa empresa
+	 * Create the frame.
 	 */
 	public FormPrincipalLogin() {
+		
+		setTitle("Registro del sistema");
+		setIconImage(Toolkit.getDefaultToolkit().getImage("icono-2png-130x130.png"));
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 600, 451);
 		contentPane = new JPanel();
@@ -81,7 +92,7 @@ public class FormPrincipalLogin extends JFrame implements Serializable {
 		
 		JLabel lblLogo = new JLabel("Logo");
 		lblLogo.setFont(new Font("Century Gothic", Font.PLAIN, 14));
-		lblLogo.setBounds(20, 135, 65, 14);
+		lblLogo.setBounds(20, 135, 65, 18);
 		contentPane.add(lblLogo);
 		
 		txtNombre = new JTextField();
@@ -126,7 +137,7 @@ public class FormPrincipalLogin extends JFrame implements Serializable {
 		
 		
 		JComboBox <String> comboBox = new JComboBox<>();
-		comboBox.setModel(new DefaultComboBoxModel(new String[] {"Masculino", "Femenino", "Otro"}));
+		comboBox.setModel(new DefaultComboBoxModel<String>(new String[] {"Masculino", "Femenino", "Otro"}));
 		comboBox.setBounds(95, 215, 195, 18);
 		contentPane.add(comboBox);
 		
@@ -146,7 +157,7 @@ public class FormPrincipalLogin extends JFrame implements Serializable {
 		contentPane.add(lblTipoIDU);
 		
 		JComboBox <String> cbTipoIDU = new JComboBox<>();
-		cbTipoIDU.setModel(new DefaultComboBoxModel(new String[] {"Cédula", "Pasaporte","Nit"}));
+		cbTipoIDU.setModel(new DefaultComboBoxModel<String>(new String[] {"Cédula", "Pasaporte","Nit"}));
 		cbTipoIDU.setBounds(95, 240, 195, 18);
 		contentPane.add(cbTipoIDU);
 		
@@ -179,20 +190,43 @@ public class FormPrincipalLogin extends JFrame implements Serializable {
 		lblCPwd.setBounds(300, 310, 200, 14);
 		contentPane.add(lblCPwd);
 		
-		passwordField_1 = new JPasswordField();
-		passwordField_1.setBounds(300, 330, 195, 18);
-		contentPane.add(passwordField_1);
+		cpasswordField = new JPasswordField();
+		cpasswordField.setBounds(300, 330, 195, 18);
+		contentPane.add(cpasswordField);
 		
 		JButton btnAceptar = new JButton("Aceptar");
+		btnAceptar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				int validar = JOptionPane.showConfirmDialog(contentPane,
+						"¿Está seguro de que la información es correcta?");
+				if (validar == 0) {
+				
+					if (txtNombre.getText().compareTo("")==0 || txtNombreU.getText().compareTo("")==0 ||
+						txtApellidoU.getText().compareTo("")==0 || txtCcU.getText().compareTo("")==0 || 
+						textField.getText().compareTo("")==0  || txtCorreoU.getText().compareTo("")==0 ||
+						String.valueOf(passwordField.getPassword()).compareTo("") == 0 ||
+						String.valueOf(cpasswordField.getPassword()).compareTo("") == 0) {
+						JOptionPane.showMessageDialog(contentPane, "Todos los campos deben rellenarse");
+					} else {
+						Empresa empresa = new Empresa(txtNombre.getText(),textField.getText());
+						//empresa.setUsuarios(usuarios);
+						dispose();
+						Recursos.WriteFileObjectEmpresa("empresa.dat", empresa);
+						FormLogin login = new FormLogin(empresa);
+						login.setVisible(true);
+					}
+				}
+			}
+		});
 		btnAceptar.setBounds(220, 370, 90, 20);
 		contentPane.add(btnAceptar);
 		
 		JLabel lblImagen = new JLabel("Logo");
+		lblImagen.setHorizontalAlignment(SwingConstants.CENTER);
+		lblImagen.setFont(new Font("Century Gothic", Font.PLAIN, 11));
 		lblImagen.setIcon(new ImageIcon("icono-2png-130x130.png"));
 		lblImagen.setBounds(429, 51, 130, 130);
 		contentPane.add(lblImagen);
-		
-		
 		
 		
 		

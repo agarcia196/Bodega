@@ -152,7 +152,7 @@ public class Empresa implements Serializable{
 	 * @param descripcion the descripcion
 	 * @param catego the catego
 	 */
-	public void AddProducto(int sku,String referencia, double volumen, double peso, String descripcion,String catego) {
+	/*public void AddProducto(int sku,String referencia, double volumen, double peso, String descripcion,String catego) {
 		if(productos==null)
 			productos=new Producto[1];
 		else 
@@ -167,7 +167,7 @@ public class Empresa implements Serializable{
 	 * @return the producto
 	 * @throws ProductoNoEncontrado the producto no encontrado
 	 */
-	public Producto BuscarProducto(int codigo)throws ProductoNoEncontrado {
+	/*public Producto BuscarProducto(int codigo)throws ProductoNoEncontrado {
 		int i=0;
 		while (i<productos.length && productos[i].getSku()!=codigo) {
 			i++;
@@ -183,7 +183,7 @@ public class Empresa implements Serializable{
 	 *
 	 * @param categ the categ
 	 */
-	public void AddCategoria(String categ) {
+	/*public void AddCategoria(String categ) {
 		if(categoria==null)
 			categoria=new String[1];
 		else 
@@ -216,7 +216,7 @@ public class Empresa implements Serializable{
 	 * @param sku the sku
 	 * @param cantidad the cantidad
 	 */
-	public void  Ingreso (String bodega, int sku, int cantidad) {
+	/*public void  Ingreso (String bodega, int sku, int cantidad) {
 		Bodega b = BuscarBodega(bodega);
 		Producto p = BuscarProducto(sku);
 		if(b==null || p==null || cantidad<0) {
@@ -235,7 +235,7 @@ public class Empresa implements Serializable{
 	 * @param capMaxima the cap maxima
 	 */
 	//Agregar bodega	
-	public void AddBodega(String IDBodega, String direccion, String ciudad, int capMaxima) {
+	/*public void AddBodega(String IDBodega, String direccion, String ciudad, int capMaxima) {
 		Bodega bodega1 = Bodega();
 		if (bodegas==null)
 			bodegas = new bodegas[1];
@@ -252,7 +252,7 @@ public class Empresa implements Serializable{
 	 * @throws BodegaNoExiste the bodega no existe
 	 */
 	//Buscar bodega
-	public Bodega BuscarBodega(String IDBodega) throws BodegaNoExiste{
+	/*public Bodega BuscarBodega(String IDBodega) throws BodegaNoExiste{
 		int i=0;
 		while (i<bodegas.length && bodegas[i].getIDBodega().compareTo(IDBodega)!=0) {
 			i++;	
@@ -278,7 +278,7 @@ public class Empresa implements Serializable{
 	 * @param tipoPerfil the tipo perfil
 	 */
 	//Agregar Usuario
-	public void AddUser(String nombre, String apellido, String genero, String correo, String CC, String tipoID,
+	/*public void AddUser(String nombre, String apellido, String genero, String correo, String CC, String tipoID,
 			String user, String pwd, String perfil, String tipoPerfil) {
 		User usuario1=new User(nombre,apellido,genero,correo,CC,tipoID,user,pwd,perfil,tipoPerfil);
 		if(usuarios==null)
@@ -296,7 +296,7 @@ public class Empresa implements Serializable{
 	 * @throws UserNoExiste the user no existe
 	 */
 	//Buscar Usuario por User
-	public User BuscarUser(String user) throws UserNoExiste{
+	/*public User BuscarUser(String user) throws UserNoExiste{
 		int i=0;
 		while (i<usuarios.length && usuarios[i].getUser().compareTo(user)!=0) {
 			i++;
@@ -314,7 +314,7 @@ public class Empresa implements Serializable{
 	 * @throws PwdIncorrecta the pwd incorrecta
 	 */
 	//Validar Usuario
-	public void ValidarUser(String user, String pwd) throws PwdIncorrecta {
+	/*public void ValidarUser(String user, String pwd) throws PwdIncorrecta {
 		if (BuscarUser(user).Acceder(user, pwd)==(-1)) {
 			throw new PwdIncorrecta();
 		}

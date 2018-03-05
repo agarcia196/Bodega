@@ -30,7 +30,6 @@ public class Main implements Serializable{
 			FormLogin inicio = new FormLogin(empresa);
 			inicio.setVisible(true);
 		}else {
-			Empresa empresa = new Empresa();
 			FormPrincipalLogin principal = new FormPrincipalLogin();
 			principal.setVisible(true);
 		}
