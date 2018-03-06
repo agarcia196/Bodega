@@ -11,6 +11,8 @@ Sistema simple de bodegas
 
 ## Características
  - Escrito en Java
+ - Creación de empresa.
+ - Almacenamiento de objeto en Fichero.
  
 
 ### Estado actual
