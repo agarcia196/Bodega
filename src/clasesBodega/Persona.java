@@ -1,4 +1,4 @@
-package Mi_Parte;
+package clasesBodega;
 
 public abstract class Persona {
 	protected String nombre;
