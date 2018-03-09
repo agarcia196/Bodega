@@ -1,5 +1,6 @@
 package clasesBodega;
 
+<<<<<<< HEAD
 
 /**
  * The Class Persona.
@@ -7,6 +8,14 @@ package clasesBodega;
 public abstract class Persona {
 	
 	/** The nombre. */
+=======
+import java.io.Serializable;
+
+public abstract class Persona implements Serializable{
+	
+	/** The Constant serialVersionUID. */
+	private static final long serialVersionUID = 2555601808505230554L;
+>>>>>>> 0bd637da95e6616658be632d6951c17166a85ef8
 	protected String nombre;
 	
 	/** The apellido. */
