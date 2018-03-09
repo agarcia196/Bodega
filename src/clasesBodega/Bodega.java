@@ -23,19 +23,19 @@ public class Bodega {
 
 
 
-	public String getDireccion() {
+	public String getDireccion() {//optener dirección
 		return direccion;
 	}
-	public String getIdBodega() {
+	public String getIdBodega() {//optener identificación de bodega
 		return idBodega;
 	}
-	public String getCiudad() {
+	public String getCiudad() {//optener ciudad de locación de bodega
 		return ciudad;
 	}
-	public int getCapacidadMax() {
+	public int getCapacidadMax() {//optener la Capacidad máxima de la bodega
 		return capacidadMax;
 	}
-	public String[] getSeccion() {
+	public String[] getSeccion() {//optener una Sección de la Bodega
 		return seccion;
 	}
 	
