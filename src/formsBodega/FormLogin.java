@@ -35,35 +35,35 @@ public class FormLogin extends JFrame implements Serializable {
 	public FormLogin(Empresa empresa) {
 		setTitle("Ingreso");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 375, 408);
+		setBounds(100, 100, 302, 364);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
 		textField = new JTextField();
-		textField.setBounds(118, 197, 183, 29);
+		textField.setBounds(118, 161, 158, 29);
 		contentPane.add(textField);
 		textField.setColumns(10);
 		
 		JLabel lblUsuario = new JLabel("Usuario:");
 		lblUsuario.setFont(new Font("Century Gothic", Font.ITALIC, 14));
-		lblUsuario.setBounds(10, 198, 79, 22);
+		lblUsuario.setBounds(10, 162, 79, 22);
 		contentPane.add(lblUsuario);
 		
 		JLabel lblNewLabel = new JLabel("Bienvenido");
 		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		lblNewLabel.setFont(new Font("Century Gothic", Font.BOLD, 25));
-		lblNewLabel.setBounds(32, 12, 302, 39);
+		lblNewLabel.setBounds(32, 12, 227, 39);
 		contentPane.add(lblNewLabel);
 		
 		JLabel lblContrasea = new JLabel("Contrase\u00F1a:");
 		lblContrasea.setFont(new Font("Century Gothic", Font.ITALIC, 14));
-		lblContrasea.setBounds(10, 250, 98, 26);
+		lblContrasea.setBounds(10, 219, 98, 26);
 		contentPane.add(lblContrasea);
 		
 		textField_1 = new JTextField();
-		textField_1.setBounds(118, 251, 183, 29);
+		textField_1.setBounds(118, 220, 158, 29);
 		contentPane.add(textField_1);
 		textField_1.setColumns(10);
 	}

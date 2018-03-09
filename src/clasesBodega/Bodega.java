@@ -141,7 +141,7 @@ public class Bodega implements Serializable{
 	 * @param producto el producto
 	 * @param cantidad la cantidad
 	 */
-	public void addProducto(Producto producto, int cantidad) {
+	public void addProducto(int sku,int cantidad_disponible,String referencia,String descripcion,String categoria,double volumen,double peso) {
 		if (lista_producto==null) {							   //Si el arreglo de productos es vacio
 			lista_producto=new Producto[1];					   //se inicializa en 1
 		}else {
@@ -149,7 +149,7 @@ public class Bodega implements Serializable{
 																				  //arreglo
 			//Producto deberia tener dos constructores, uno con cantidad = 0 
 			//y otro con la cantidad pasada como atributo en este metodo
-			lista_producto[lista_producto.length-1]= new Producto(producto, cantidad);//Añadir producto
+			lista_producto[lista_producto.length-1]= new Producto(cantidad_disponible, referencia, descripcion, categoria, volumen, peso);//Añadir producto
 		}
 	}
 	
@@ -162,12 +162,12 @@ public class Bodega implements Serializable{
 	 */
 	public void compradeproducto(int sku,int cantidad)throws CantidadInsuficiente {
 		int i=0;
-		while(i<lista_producto.length && lista_producto[i].getSku.compareTo(sku)!=0) {//recorre vector
+		while(i<lista_producto.length && lista_producto[i].getSku() !=sku) {//recorre vector
 			i++;																	  //de productos
 		}
 		if(i<lista_producto.length) {									//No existe un producto igual
-			if(cantidad<=lista_producto[i].getCantidad_disponible) {	//comprueba disponibilidad
-				int aux=lista_producto[i].getCantidad_disponible - cantidad;
+			if(cantidad<=lista_producto[i].getCantidad_disponible()) {	//comprueba disponibilidad
+				int aux=lista_producto[i].getCantidad_disponible() - cantidad;
 				lista_producto[i].setCantidad_disponible(aux);			//quita cantidad comprada
 			}
 		}
