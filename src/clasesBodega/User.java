@@ -1,4 +1,4 @@
-package Mi_Parte;
+package clasesBodega;
 
 public class User extends Persona{
 	private String user;
@@ -8,7 +8,7 @@ public class User extends Persona{
 	
 	public User(String nombre, String apellido, String genero, String correo, String cc, String tipoID, String user,
 			String pwd, String perfil, String tipoferfil) {
-		super(nombre, apellido, genero, correo, cc, tipoID);
+		super(nombre, apellido, genero, correo, cc, tipoID,pwd);
 		this.user = user;
 		this.pwd = pwd;
 		this.perfil = perfil;
