@@ -8,7 +8,12 @@
  */
 package clasesBodega;
 
-public abstract class Persona {
+import java.io.Serializable;
+
+public abstract class Persona implements Serializable{
+	
+	/** The Constant serialVersionUID. */
+	private static final long serialVersionUID = 2555601808505230554L;
 	protected String nombre;
 	protected String apellido;
 	protected String genero;
