@@ -14,6 +14,7 @@ import javax.swing.JTextField;
 import javax.swing.JLabel;
 import java.awt.Font;
 import javax.swing.SwingConstants;
+import javax.swing.JPasswordField;
 /**
  * The Class FormLogin.
  */
@@ -25,14 +26,29 @@ public class FormLogin extends JFrame implements Serializable {
 	/** The content pane. */
 	private JPanel contentPane;
 	private JTextField textField;
-	private JTextField textField_1;
+	private JPasswordField passwordField;
+	private Empresa Empresa;
 
-	/**
-	 * Create the frame.
-	 *
-	 * @param empresa La empresa
-	 */
+	public Empresa getEmpresa() {
+		return Empresa;
+	}
+	public JTextField getTextField() {
+		return textField;
+	}
+	
+	public void setTextField(JTextField textField) {
+		this.textField = textField;
+	}
+
+	public JPasswordField getPasswordField() {
+		return passwordField;
+	}
+
+	public void setPasswordField(JPasswordField passwordField) {
+		this.passwordField = passwordField;
+	}
 	public FormLogin(Empresa empresa) {
+		this.Empresa=Empresa;
 		setTitle("Ingreso");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 302, 364);
@@ -40,6 +56,8 @@ public class FormLogin extends JFrame implements Serializable {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
+		
+		
 		
 		textField = new JTextField();
 		textField.setBounds(118, 161, 158, 29);
@@ -62,9 +80,13 @@ public class FormLogin extends JFrame implements Serializable {
 		lblContrasea.setBounds(10, 219, 98, 26);
 		contentPane.add(lblContrasea);
 		
-		textField_1 = new JTextField();
-		textField_1.setBounds(118, 220, 158, 29);
-		contentPane.add(textField_1);
-		textField_1.setColumns(10);
+		passwordField = new JPasswordField();
+		passwordField.setBounds(118, 219, 158, 29);
+		contentPane.add(passwordField);
+		
+		JButton btnIngresar = new JButton("Ingresar");
+		btnIngresar.setFont(new Font("Century Gothic", Font.ITALIC, 14));
+		btnIngresar.setBounds(79, 274, 117, 40);
+		contentPane.add(btnIngresar);
 	}
 }
