@@ -15,6 +15,7 @@ import java.awt.Font;
 import javax.swing.JProgressBar;
 
 import clasesBodega.Gerente;
+import clasesBodega.Bodeguero;
 import clasesBodega.Empresa;
 import clasesBodega.Persona;
 import clasesBodega.Recursos;
@@ -31,6 +32,9 @@ public class FormPrincipal implements Serializable {
 	private JFrame frmBodegas;
 	private Empresa empresa;
 	private Persona persona;
+	private int n=16; //Tamaño iconos
+	private int n2= 15; //Tamaño Titulos barra de menú
+	private int n3= 14; //Tampo de Subtitulos barra de menu
 	/**
 	 * Launch the application.
 	 */
@@ -39,7 +43,7 @@ public class FormPrincipal implements Serializable {
 			public void run() {
 				try {
 					Empresa em= new Empresa();
-					Persona p = new Persona("Alexis", "Garcia", "mascu", "ddd", "ddd", "CC", "1234") {
+					Persona p = new Gerente("Alexis", "Garcia", "mascu", "ddd", "ddd", "CC", "1234") {
 					};
 					FormPrincipal window = new FormPrincipal(em,p);
 					window.frmBodegas.setVisible(true);
@@ -58,6 +62,15 @@ public class FormPrincipal implements Serializable {
 		this.persona = persona;
 		initialize();
 	}
+	
+
+	public JFrame getFrmBodegas() {
+		return frmBodegas;
+	}
+
+	public void setFrmBodegas(JFrame frmBodegas) {
+		this.frmBodegas = frmBodegas;
+	}
 
 	/**
 	 * Initialize the contents of the frame.
@@ -74,16 +87,16 @@ public class FormPrincipal implements Serializable {
 		frmBodegas.setJMenuBar(menuBar);
 		
 		JMenu mnInicio = new JMenu("Inicio");
-		mnInicio.setFont(new Font("Century Gothic", Font.PLAIN, 14));
+		mnInicio.setFont(new Font("Century Gothic", Font.PLAIN, n2));
 		ImageIcon iconInicio =new ImageIcon("png\\home-button.png");
-		Icon iconoInicio = new ImageIcon(iconInicio.getImage().getScaledInstance(15,15, Image.SCALE_DEFAULT));
+		Icon iconoInicio = new ImageIcon(iconInicio.getImage().getScaledInstance(n,n, Image.SCALE_DEFAULT));
 		
 		JLabel lblUsuario_1 = new JLabel("  Bienvenido  ");
-		lblUsuario_1.setFont(new Font("Century Gothic", Font.PLAIN, 14));
+		lblUsuario_1.setFont(new Font("Century Gothic", Font.PLAIN, n2));
 		menuBar.add(lblUsuario_1);
 		
 		JLabel lblUsuario = new JLabel(persona.getNombre()+" "+persona.getApellido());
-		lblUsuario.setFont(new Font("Century Gothic", Font.PLAIN, 14));
+		lblUsuario.setFont(new Font("Century Gothic", Font.PLAIN, n2));
 		menuBar.add(lblUsuario);
 		mnInicio.setIcon(iconoInicio);
 		menuBar.add(mnInicio);
@@ -97,78 +110,161 @@ public class FormPrincipal implements Serializable {
 				login.setVisible(true);
 			}
 		});
-		mntmCerrarSesion.setFont(new Font("Century Gothic", Font.PLAIN, 13));
+		mntmCerrarSesion.setFont(new Font("Century Gothic", Font.PLAIN, n3));
 		ImageIcon iconexit =new ImageIcon("png\\exit-to-app-button.png");
-		Icon iconosalir = new ImageIcon(iconexit.getImage().getScaledInstance(15,15, Image.SCALE_DEFAULT));
+		Icon iconosalir = new ImageIcon(iconexit.getImage().getScaledInstance(n,n, Image.SCALE_DEFAULT));
 		mntmCerrarSesion.setIcon(iconosalir);
 		mnInicio.add(mntmCerrarSesion);
 		
-		//if(persona instanceof Gerente) {
+		
+		ImageIcon iconConsultar =new ImageIcon("png\\searching-magnifying-glass.png");
+		Icon iconoConsultar = new ImageIcon(iconConsultar.getImage().getScaledInstance(n,n, Image.SCALE_DEFAULT));
+		
+		ImageIcon iconAgregarBodega =new ImageIcon("png\\add-plus-button.png");
+		Icon iconoAgregarBodega = new ImageIcon(iconAgregarBodega.getImage().getScaledInstance(n,n, Image.SCALE_DEFAULT));
+		if(persona instanceof Gerente) {
 		
 		
 		JMenu mnBodega = new JMenu("Bodega");
-		mnBodega.setFont(new Font("Century Gothic", Font.PLAIN, 14));
+		mnBodega.setFont(new Font("Century Gothic", Font.PLAIN, n2));
 		ImageIcon iconBodega =new ImageIcon("png\\bodega.png");
-		Icon iconoBodega = new ImageIcon(iconBodega.getImage().getScaledInstance(15,15, Image.SCALE_DEFAULT));
+		Icon iconoBodega = new ImageIcon(iconBodega.getImage().getScaledInstance(n,n, Image.SCALE_DEFAULT));
 		mnBodega.setIcon(iconoBodega);
 		menuBar.add(mnBodega);
 		
 		JMenuItem mntmAgregarBodega = new JMenuItem("Crear");
-		mntmAgregarBodega.setFont(new Font("Century Gothic", Font.PLAIN, 13));
-		ImageIcon iconAgregarBodega =new ImageIcon("png\\add-plus-button.png");
-		Icon iconoAgregarBodega = new ImageIcon(iconAgregarBodega.getImage().getScaledInstance(15,15, Image.SCALE_DEFAULT));
+		mntmAgregarBodega.setFont(new Font("Century Gothic", Font.PLAIN, n3));
+		
 		mntmAgregarBodega.setIcon(iconoAgregarBodega);
 		mnBodega.add(mntmAgregarBodega);
 		
 		JMenuItem mntmConsultar = new JMenuItem("Consultar");
-		mntmConsultar.setFont(new Font("Century Gothic", Font.PLAIN, 13));
-		ImageIcon iconConsultar =new ImageIcon("png\\searching-magnifying-glass.png");
-		Icon iconoConsultar = new ImageIcon(iconConsultar.getImage().getScaledInstance(15,15, Image.SCALE_DEFAULT));
+		mntmConsultar.setFont(new Font("Century Gothic", Font.PLAIN, n3));
+
 		mntmConsultar.setIcon(iconoConsultar);
 		mnBodega.add(mntmConsultar);
 		
+		JMenu mnActividad = new JMenu("Actividad");
+		mnActividad.setFont(new Font("Century Gothic", Font.PLAIN, n3));
+		ImageIcon iconActividad =new ImageIcon("png\\lista.png");
+		Icon iconoActividad = new ImageIcon(iconActividad.getImage().getScaledInstance(n,n, Image.SCALE_DEFAULT));
+		mnActividad.setIcon(iconoActividad);
+		mnBodega.add(mnActividad);
+		
+		JMenuItem mntmIngreso = new JMenuItem("Ingreso");
+		mntmIngreso.setFont(new Font("Century Gothic", Font.PLAIN, n3));
+		ImageIcon iconIngreso  =new ImageIcon("png\\ingreso.png");
+		Icon iconoIngreso  = new ImageIcon(iconIngreso.getImage().getScaledInstance(n,n, Image.SCALE_DEFAULT));
+		mntmIngreso.setIcon(iconoIngreso);
+		mnActividad.add(mntmIngreso);
+		
+		JMenuItem mntmTraslado = new JMenuItem("Traslado");
+		mntmTraslado.setFont(new Font("Century Gothic", Font.PLAIN, n3));
+		ImageIcon iconTraslado  =new ImageIcon("png\\traslado.png");
+		Icon iconoTraslado  = new ImageIcon(iconTraslado.getImage().getScaledInstance(n,n, Image.SCALE_DEFAULT));
+		mntmTraslado.setIcon(iconoTraslado);
+		mnActividad.add(mntmTraslado);
+		
+	   
+		
 		JMenu mnProducto = new JMenu("Producto");
-		mnProducto.setFont(new Font("Century Gothic", Font.PLAIN, 14));
-		ImageIcon iconProducto =new ImageIcon("png\\puzzle-piece-plugin.png");
-		Icon iconoProducto = new ImageIcon(iconProducto.getImage().getScaledInstance(15,15, Image.SCALE_DEFAULT));
+		mnProducto.setFont(new Font("Century Gothic", Font.PLAIN, n2));
+	    ImageIcon iconProducto =new ImageIcon("png\\puzzle-piece-plugin.png");
+		Icon iconoProducto = new ImageIcon(iconProducto.getImage().getScaledInstance(n,n, Image.SCALE_DEFAULT));
 		mnProducto.setIcon(iconoProducto);
 		menuBar.add(mnProducto);
 		
 		JMenuItem mntmCrear = new JMenuItem("Crear");
-		mntmCrear.setFont(new Font("Century Gothic", Font.PLAIN, 13));
+		mntmCrear.setFont(new Font("Century Gothic", Font.PLAIN, n3));
 		mntmCrear.setIcon(iconoAgregarBodega);
 		mnProducto.add(mntmCrear);
 		
 		JMenuItem mntmBuscar = new JMenuItem("Buscar");
-		mntmBuscar.setFont(new Font("Century Gothic", Font.PLAIN, 13));
+		mntmBuscar.setFont(new Font("Century Gothic", Font.PLAIN, n3));
 		mntmBuscar.setIcon(iconoConsultar);
 		mnProducto.add(mntmBuscar);
 		
 		JMenuItem mntmEditar = new JMenuItem("Editar");
-		mntmEditar.setFont(new Font("Century Gothic", Font.PLAIN, 13));
+		mntmEditar.setFont(new Font("Century Gothic", Font.PLAIN, n3));
 		ImageIcon iconEditar  =new ImageIcon("png\\edit.png");
-		Icon iconoEditar  = new ImageIcon(iconEditar.getImage().getScaledInstance(15,15, Image.SCALE_DEFAULT));
+		Icon iconoEditar  = new ImageIcon(iconEditar.getImage().getScaledInstance(n,n, Image.SCALE_DEFAULT));
 		mntmEditar.setIcon(iconoEditar);
 		mnProducto.add(mntmEditar);
 		
 		JMenu mnUsuarios = new JMenu("Usuarios");
-		mnUsuarios.setFont(new Font("Century Gothic", Font.PLAIN, 14));
+		mnUsuarios.setFont(new Font("Century Gothic", Font.PLAIN, n2));
 		ImageIcon iconUsuarios =new ImageIcon("png\\user-shape.png");
-		Icon iconoUsuarios = new ImageIcon(iconUsuarios.getImage().getScaledInstance(15,15, Image.SCALE_DEFAULT));
+		Icon iconoUsuarios = new ImageIcon(iconUsuarios.getImage().getScaledInstance(n,n, Image.SCALE_DEFAULT));
 		mnUsuarios.setIcon(iconoUsuarios);
 		menuBar.add(mnUsuarios);
 		
 		JMenuItem mntmCrear_1 = new JMenuItem("Crear");
-		mntmCrear_1.setFont(new Font("Century Gothic", Font.PLAIN, 13));
+		mntmCrear_1.setFont(new Font("Century Gothic", Font.PLAIN, n3));
 		ImageIcon iconCrear_1 =new ImageIcon("png\\add-user-button.png");
-		Icon iconoCrear_1 = new ImageIcon(iconCrear_1.getImage().getScaledInstance(15,15, Image.SCALE_DEFAULT));
+		Icon iconoCrear_1 = new ImageIcon(iconCrear_1.getImage().getScaledInstance(n,n, Image.SCALE_DEFAULT));
 		mntmCrear_1.setIcon(iconoCrear_1);
 		mnUsuarios.add(mntmCrear_1);
 		
 		JMenuItem mntmConsultar_1 = new JMenuItem("Consultar");
-		mntmConsultar_1.setFont(new Font("Century Gothic", Font.PLAIN, 13));
+		mntmConsultar_1.setFont(new Font("Century Gothic", Font.PLAIN, n3));
 		mntmConsultar_1.setIcon(iconoConsultar);
 		mnUsuarios.add(mntmConsultar_1);
+		}
+		if(persona instanceof Bodeguero) {
+			JMenu mnBodega = new JMenu("Bodega");
+			mnBodega.setFont(new Font("Century Gothic", Font.PLAIN, n2));
+			ImageIcon iconBodega =new ImageIcon("png\\bodega.png");
+			Icon iconoBodega = new ImageIcon(iconBodega.getImage().getScaledInstance(n,n, Image.SCALE_DEFAULT));
+			mnBodega.setIcon(iconoBodega);
+			menuBar.add(mnBodega);
+			
+			JMenu mnActividad = new JMenu("Actividad");
+			mnActividad.setFont(new Font("Century Gothic", Font.PLAIN, n3));
+			ImageIcon iconActividad =new ImageIcon("png\\lista.png");
+			Icon iconoActividad = new ImageIcon(iconActividad.getImage().getScaledInstance(n,n, Image.SCALE_DEFAULT));
+			mnActividad.setIcon(iconoActividad);
+			mnBodega.add(mnActividad);
+			
+			JMenuItem mntmIngreso = new JMenuItem("Ingreso");
+			mntmIngreso.setFont(new Font("Century Gothic", Font.PLAIN, n3));
+			ImageIcon iconIngreso  =new ImageIcon("png\\ingreso.png");
+			Icon iconoIngreso  = new ImageIcon(iconIngreso.getImage().getScaledInstance(n,n, Image.SCALE_DEFAULT));
+			mntmIngreso.setIcon(iconoIngreso);
+			mnActividad.add(mntmIngreso);
+			
+			JMenuItem mntmTraslado = new JMenuItem("Traslado");
+			mntmTraslado.setFont(new Font("Century Gothic", Font.PLAIN, n3));
+			ImageIcon iconTraslado  =new ImageIcon("png\\traslado.png");
+			Icon iconoTraslado  = new ImageIcon(iconTraslado.getImage().getScaledInstance(n,n, Image.SCALE_DEFAULT));
+			mntmTraslado.setIcon(iconoTraslado);
+			mnActividad.add(mntmTraslado);
+			
+		   		
+			JMenu mnProducto = new JMenu("Producto");
+			mnProducto.setFont(new Font("Century Gothic", Font.PLAIN, n2));
+		    ImageIcon iconProducto =new ImageIcon("png\\puzzle-piece-plugin.png");
+			Icon iconoProducto = new ImageIcon(iconProducto.getImage().getScaledInstance(n,n, Image.SCALE_DEFAULT));
+			mnProducto.setIcon(iconoProducto);
+			menuBar.add(mnProducto);
+			
+			JMenuItem mntmCrear = new JMenuItem("Crear");
+			mntmCrear.setFont(new Font("Century Gothic", Font.PLAIN, n3));
+			mntmCrear.setIcon(iconoAgregarBodega);
+			mnProducto.add(mntmCrear);
+			
+			JMenuItem mntmBuscar = new JMenuItem("Buscar");
+			mntmBuscar.setFont(new Font("Century Gothic", Font.PLAIN, n3));
+			mntmBuscar.setIcon(iconoConsultar);
+			mnProducto.add(mntmBuscar);
+			
+			JMenuItem mntmEditar = new JMenuItem("Editar");
+			mntmEditar.setFont(new Font("Century Gothic", Font.PLAIN, n3));
+			ImageIcon iconEditar  =new ImageIcon("png\\edit.png");
+			Icon iconoEditar  = new ImageIcon(iconEditar.getImage().getScaledInstance(n,n, Image.SCALE_DEFAULT));
+			mntmEditar.setIcon(iconoEditar);
+			mnProducto.add(mntmEditar);
+			
+		}
 		
 	}
 }
