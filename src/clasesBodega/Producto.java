@@ -1,4 +1,5 @@
 package clasesBodega;
+//@autor: Youlvis
 
 public class Producto {
 	private int sku,cantidad_disponible;

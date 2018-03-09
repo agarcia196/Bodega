@@ -9,12 +9,22 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import clasesBodega.Empresa;
+import clasesBodega.Persona;
+
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JTextField;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+
 import java.awt.Font;
+import java.awt.Image;
+import java.awt.event.ActionEvent;
+
 import javax.swing.SwingConstants;
 import javax.swing.JPasswordField;
+import java.awt.event.ActionListener;
 /**
  * The Class FormLogin.
  */
@@ -27,10 +37,10 @@ public class FormLogin extends JFrame implements Serializable {
 	private JPanel contentPane;
 	private JTextField textField;
 	private JPasswordField passwordField;
-	private Empresa Empresa;
+	private Empresa empresa;
 
 	public Empresa getEmpresa() {
-		return Empresa;
+		return empresa;
 	}
 	public JTextField getTextField() {
 		return textField;
@@ -48,7 +58,7 @@ public class FormLogin extends JFrame implements Serializable {
 		this.passwordField = passwordField;
 	}
 	public FormLogin(Empresa empresa) {
-		this.Empresa=Empresa;
+		this.empresa=empresa;
 		setTitle("Ingreso");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 302, 364);
@@ -58,22 +68,21 @@ public class FormLogin extends JFrame implements Serializable {
 		contentPane.setLayout(null);
 		
 		
-		
-		textField = new JTextField();
-		textField.setBounds(118, 161, 158, 29);
-		contentPane.add(textField);
-		textField.setColumns(10);
+		JLabel lblNewLabel = new JLabel("Bienvenido");
+		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
+		lblNewLabel.setFont(new Font("Century Gothic", Font.BOLD, 25));
+		lblNewLabel.setBounds(32, 12, 227, 39);
+		contentPane.add(lblNewLabel);
 		
 		JLabel lblUsuario = new JLabel("Usuario:");
 		lblUsuario.setFont(new Font("Century Gothic", Font.ITALIC, 14));
 		lblUsuario.setBounds(10, 162, 79, 22);
 		contentPane.add(lblUsuario);
 		
-		JLabel lblNewLabel = new JLabel("Bienvenido");
-		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
-		lblNewLabel.setFont(new Font("Century Gothic", Font.BOLD, 25));
-		lblNewLabel.setBounds(32, 12, 227, 39);
-		contentPane.add(lblNewLabel);
+		textField = new JTextField();
+		textField.setBounds(118, 161, 158, 29);
+		contentPane.add(textField);
+		textField.setColumns(10);	
 		
 		JLabel lblContrasea = new JLabel("Contrase\u00F1a:");
 		lblContrasea.setFont(new Font("Century Gothic", Font.ITALIC, 14));
@@ -85,8 +94,35 @@ public class FormLogin extends JFrame implements Serializable {
 		contentPane.add(passwordField);
 		
 		JButton btnIngresar = new JButton("Ingresar");
+		btnIngresar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Persona auxp = empresa.BuscarUser(textField.getText());
+				if(auxp==null) {
+					JOptionPane.showMessageDialog(null, "Usuario Incorrecto");
+				}else {
+				if(textField.getText().compareTo(auxp.getCc())==0) {
+					if (String.valueOf(passwordField.getPassword())
+							.compareTo(auxp.getPwd())==0) {
+						FormPrincipal ventana = new FormPrincipal(empresa,auxp);
+						dispose();
+						ventana.getFrmBodegas().setVisible(true);
+					}else {
+						JOptionPane.showMessageDialog(null, "Contraseña Incorrecta");
+					}
+				}
+			}
+			}
+		});
+		
 		btnIngresar.setFont(new Font("Century Gothic", Font.ITALIC, 14));
 		btnIngresar.setBounds(79, 274, 117, 40);
 		contentPane.add(btnIngresar);
+		
+		JLabel label = new JLabel(".");
+		label.setBounds(105, 62, 80, 80);
+		ImageIcon iconexit =new ImageIcon("png\\round-account-button-with-user-inside.png");
+		Icon iconosalir = new ImageIcon(iconexit.getImage().getScaledInstance(label.getWidth(),label.getHeight(), Image.SCALE_DEFAULT));
+		label.setIcon(iconosalir);
+		contentPane.add(label);
 	}
 }

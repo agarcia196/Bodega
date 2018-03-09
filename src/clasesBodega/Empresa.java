@@ -285,14 +285,15 @@ public class Empresa implements Serializable{
 	 * @throws UserNoExiste the user no existe
 	 */
 	//Buscar Usuario por User
-	/*public User BuscarUser(String user) throws UserNoExiste{
+	public Persona BuscarUser(String cc) {
 		int i=0;
-		while (i<usuarios.length && usuarios[i].getUser().compareTo(user)!=0) {
+		while (i<usuarios.length && cc.compareTo(usuarios[i].getCc())!=0) {
 			i++;
 		}
-		if (i==usuarios.length-1)
-			throw new UserNoExiste();
-		else return usuarios[i];
+		if (i==usuarios.length)
+			return null;
+		else 
+			return usuarios[i];
 	}	
 	
 	/**
