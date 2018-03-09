@@ -76,6 +76,7 @@ public class Bodega {
 			lista_producto=new Producto[1];
 		}else {
 			lista_producto=Arrays.copyOf(lista_producto, lista_producto.length+1);
+			//Producto deberia tener dos constructores, uno con cantidad = 0 y otro con la cantidad pasada como atributo en este metodo
 			lista_producto[lista_producto.length-1]= new Producto(producto, cantidad);
 		}
 	}
