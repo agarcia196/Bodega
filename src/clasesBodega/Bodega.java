@@ -71,7 +71,7 @@ public class Bodega {
 		}
 	}
 	
-	public void compradeproducto(int sku,int cantidad)throw CantidadInsuficiente {
+	public void compradeproducto(int sku,int cantidad)throws CantidadInsuficiente {
 		int i=0;
 		while(i<lista_producto.length && lista_producto[i].getSku.compareTo(sku)!=0) {
 			i++;
@@ -94,4 +94,12 @@ public class Bodega {
 		System.out.println(aux);
 		System.out.println(aux2);
 	}
+	
 }
+ class CantidadInsuficiente extends Exception{
+	 public CantidadInsuficiente() {
+		 super("La cantidad de productos es insufucuiente");
+	 }
+	 
+ }
+ 
