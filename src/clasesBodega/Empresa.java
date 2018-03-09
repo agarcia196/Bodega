@@ -19,19 +19,12 @@ public class Empresa implements Serializable{
 	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = -306383744197773352L;
 	
-	/** The productos. */
+	
 	private Producto[] productos;
-	
-	/** The bodegas. */
 	private Bodega [] bodegas;
-	
-	/** The categoria. */
 	private String [] categoria;
-	
-	/** The nombre. */
+	private Persona [] usuarios;
 	private String nombre;
-	
-	/** The logo. */
 	private String logo;
 	
 	/**
@@ -47,10 +40,22 @@ public class Empresa implements Serializable{
 		this.productos = new Producto[0];
 		this.bodegas = new Bodega [0];
 		this.categoria = new String [0];
+		this.usuarios = new Persona[0];
 		this.nombre = nombre;
 		this.logo=logo;
 	}
 	
+	
+	public Persona[] getUsuarios() {
+		return usuarios;
+	}
+
+
+	public void setUsuarios(Persona[] usuarios) {
+		this.usuarios = usuarios;
+	}
+
+
 	/**
 	 * Instantiates a new empresa.
 	 */
