@@ -1,3 +1,12 @@
+/**
+ * clasesBodega: Recursos.
+ *
+ * @author Jeisson Harvey Barrera Sanchez
+ * @author Jorge Luis Soriano Cuevas
+ * @version 9.3.2018
+ * 
+ */
+
 package clasesBodega;
 
 import java.util.Arrays;
@@ -23,31 +32,31 @@ public class Bodega {
 
 
 
-	public String getDireccion() {//optener dirección
+	public String getDireccion() {//obtener dirección
 		return direccion;
 	}
-	public String getIdBodega() {//optener identificación de bodega
+	public String getIdBodega() {//obtener identificación de bodega
 		return idBodega;
 	}
-	public String getCiudad() {//optener ciudad de locación de bodega
+	public String getCiudad() {//obtener ciudad de locación de bodega
 		return ciudad;
 	}
-	public int getCapacidadMax() {//optener la Capacidad máxima de la bodega
+	public int getCapacidadMax() {//obtener la Capacidad máxima de la bodega
 		return capacidadMax;
 	}
-	public String[] getSeccion() {//optener una Sección de la Bodega
+	public String[] getSeccion() {//obtener una Sección de la Bodega
 		return seccion;
 	}
 	
-	public String bucarSeccion(String numseccion) {
-		int i=0;
-		while(i<seccion.length && seccion[i].compareTo(numseccion)!=0) {
-			i++;
-		}
-		if(i==seccion.length) {
+	public String bucarSeccion(String numseccion) {//se Busca una sección por el número de sección
+		int i=0;								   //especifico de esta
+		while(i<seccion.length && seccion[i].compareTo(numseccion)!=0) {//condición de parada:
+			i++;	//aumentar el contador								//-al recorrer el vector
+		}																//-al encontrar la sección
+		if(i==seccion.length) {						//condición de no encontrada
 			return null;
 
-		}else {
+		}else {										//se encontró la sección
 			return seccion[i];
 		}
 	}
