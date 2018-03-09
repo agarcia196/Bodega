@@ -2,6 +2,7 @@ package formsBodega;
 
 import java.awt.EventQueue;
 import java.awt.Image;
+import java.io.Serializable;
 
 import javax.swing.JFrame;
 import javax.swing.JMenuBar;
@@ -11,11 +12,25 @@ import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import java.awt.Font;
+import javax.swing.JProgressBar;
 
-public class FormPrincipal {
+import clasesBodega.Gerente;
+import clasesBodega.Empresa;
+import clasesBodega.Persona;
+import clasesBodega.Recursos;
 
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+
+public class FormPrincipal implements Serializable {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 7122512140857515626L;
 	private JFrame frmBodegas;
-
+	private Empresa empresa;
+	private Persona persona;
 	/**
 	 * Launch the application.
 	 */
@@ -23,7 +38,10 @@ public class FormPrincipal {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					FormPrincipal window = new FormPrincipal();
+					Empresa em= new Empresa();
+					Persona p = new Persona("Alexis", "Garcia", "mascu", "ddd", "ddd", "CC", "1234") {
+					};
+					FormPrincipal window = new FormPrincipal(em,p);
 					window.frmBodegas.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -35,7 +53,9 @@ public class FormPrincipal {
 	/**
 	 * Create the application.
 	 */
-	public FormPrincipal() {
+	public FormPrincipal(Empresa empresa, Persona persona) {
+		this.empresa= empresa;
+		this.persona = persona;
 		initialize();
 	}
 
@@ -44,8 +64,9 @@ public class FormPrincipal {
 	 */
 	private void initialize() {
 		frmBodegas = new JFrame();
+		frmBodegas.getContentPane().setFont(new Font("Century Gothic", Font.PLAIN, 12));
 		frmBodegas.setTitle("Bodegas");
-		frmBodegas.setBounds(100, 100, 900, 500);
+		frmBodegas.setBounds(100, 100, 650, 500);
 		frmBodegas.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frmBodegas.getContentPane().setLayout(null);
 		
@@ -57,19 +78,33 @@ public class FormPrincipal {
 		ImageIcon iconInicio =new ImageIcon("png\\home-button.png");
 		Icon iconoInicio = new ImageIcon(iconInicio.getImage().getScaledInstance(15,15, Image.SCALE_DEFAULT));
 		
-		JLabel lblUsuario = new JLabel("          Usuario        ");
+		JLabel lblUsuario_1 = new JLabel("  Bienvenido  ");
+		lblUsuario_1.setFont(new Font("Century Gothic", Font.PLAIN, 14));
+		menuBar.add(lblUsuario_1);
+		
+		JLabel lblUsuario = new JLabel(persona.getNombre()+" "+persona.getApellido());
 		lblUsuario.setFont(new Font("Century Gothic", Font.PLAIN, 14));
 		menuBar.add(lblUsuario);
 		mnInicio.setIcon(iconoInicio);
-		lblUsuario.setBounds(20, 2, 100, 50);
 		menuBar.add(mnInicio);
 		
 		JMenuItem mntmCerrarSesion = new JMenuItem("Cerrar sesion");
+		mntmCerrarSesion.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				Recursos.WriteFileObjectEmpresa("empresa.dat", empresa);
+				frmBodegas.setVisible(false);
+				FormLogin login = new FormLogin(empresa);
+				login.setVisible(true);
+			}
+		});
 		mntmCerrarSesion.setFont(new Font("Century Gothic", Font.PLAIN, 13));
 		ImageIcon iconexit =new ImageIcon("png\\exit-to-app-button.png");
 		Icon iconosalir = new ImageIcon(iconexit.getImage().getScaledInstance(15,15, Image.SCALE_DEFAULT));
 		mntmCerrarSesion.setIcon(iconosalir);
 		mnInicio.add(mntmCerrarSesion);
+		
+		//if(persona instanceof Gerente) {
+		
 		
 		JMenu mnBodega = new JMenu("Bodega");
 		mnBodega.setFont(new Font("Century Gothic", Font.PLAIN, 14));
@@ -134,5 +169,6 @@ public class FormPrincipal {
 		mntmConsultar_1.setFont(new Font("Century Gothic", Font.PLAIN, 13));
 		mntmConsultar_1.setIcon(iconoConsultar);
 		mnUsuarios.add(mntmConsultar_1);
+		
 	}
 }
