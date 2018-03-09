@@ -1,3 +1,9 @@
+/**
+ * clasesBodega: Empresa.
+ * 
+ * @author Jorge Luis Soriano Cuevas
+ * @version 2.3.2018
+ */
 package formsBodega;
 
 import java.awt.BorderLayout;
@@ -6,16 +12,28 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import clasesBodega.Producto;
+import clasesBodega.Recursos;
+import clasesBodega.Empresa;
+import clasesBodega.Main;
+import jdk.nashorn.internal.scripts.JO;
+
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+
 import java.awt.Font;
 import javax.swing.JComboBox;
 import javax.swing.JTextField;
 import javax.swing.JButton;
+import java.awt.Toolkit;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+
 
 public class FormAddProducto extends JFrame {
 
 	private JPanel contentPane;
-	private JTextField SKU_textField;
 	private JTextField Ref_textField;
 	private JTextField Vol_textField;
 	private JTextField Peso_textField;
@@ -29,7 +47,8 @@ public class FormAddProducto extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					FormAddProducto frame = new FormAddProducto();
+					Empresa empresa = new Empresa();
+					FormAddProducto frame = new FormAddProducto(empresa);
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -41,7 +60,8 @@ public class FormAddProducto extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public FormAddProducto() {
+	public FormAddProducto(Empresa empresa) {
+		setIconImage(Toolkit.getDefaultToolkit().getImage("C:\\Java Estructuras\\Bodega\\png\\vender-producto.png"));
 		setTitle("A\u00F1adir producto");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 488, 508);
@@ -50,19 +70,9 @@ public class FormAddProducto extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-		JLabel lblSeleccionarProducto = new JLabel("SKU:");
-		lblSeleccionarProducto.setFont(new Font("Century Gothic", Font.ITALIC, 14));
-		lblSeleccionarProducto.setBounds(12, 70, 40, 26);
-		contentPane.add(lblSeleccionarProducto);
-		
-		SKU_textField = new JTextField();
-		SKU_textField.setBounds(107, 73, 239, 22);
-		contentPane.add(SKU_textField);
-		SKU_textField.setColumns(10);
-		
 		JLabel lblDatosDeProducto = new JLabel("Datos de producto");
 		lblDatosDeProducto.setFont(new Font("Century Gothic", Font.BOLD, 25));
-		lblDatosDeProducto.setBounds(150, 13, 239, 44);
+		lblDatosDeProducto.setBounds(107, 13, 239, 44);
 		contentPane.add(lblDatosDeProducto);
 		
 		JLabel lblNewLabel = new JLabel("Referencia:");
@@ -116,7 +126,33 @@ public class FormAddProducto extends JFrame {
 		Descrip_textField.setColumns(10);
 		
 		JButton btnAadir = new JButton("A\u00D1ADIR");
+		btnAadir.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				int alerta = JOptionPane.showConfirmDialog(contentPane, "¿Desea guardar?");//confirmar el guardado
+				if (alerta==0) {		//acepta guardado
+					if (Ref_textField.getText().compareTo("")==0
+							||Vol_textField.getText().compareTo("")==0||Peso_textField.getText().compareTo("")==0
+							||Cat_textField.getText().compareTo("")==0||		//comparar datos vacíos
+							Descrip_textField.getText().compareTo("")==0) {
+						JOptionPane.showMessageDialog(contentPane, "Por favor llene todos los campos para continuarf");
+					}
+					else {
+						empresa.AddProducto(0,Ref_textField.getText(),Descrip_textField.getText(),
+								Cat_textField.getText(),Double.parseDouble(Peso_textField.getText()),
+								Double.parseDouble(Vol_textField.getText()));
+						dispose();
+					}
+					
+					Recursos.WriteFileObjectEmpresa("empresa.dat", empresa);
+				}
+			}
+		});
 		btnAadir.setBounds(375, 175, 83, 25);
 		contentPane.add(btnAadir);
+		
+		JLabel lblIngreseTodosLos = new JLabel("Por favor ingrese todos los datos del producto");
+		lblIngreseTodosLos.setFont(new Font("Century Gothic", Font.ITALIC, 14));
+		lblIngreseTodosLos.setBounds(70, 70, 327, 30);
+		contentPane.add(lblIngreseTodosLos);
 	}
 }

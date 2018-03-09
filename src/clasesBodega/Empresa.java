@@ -10,6 +10,7 @@ package clasesBodega;
 import java.io.Serializable;
 import java.util.Arrays;
 
+// TODO: Auto-generated Javadoc
 /**
  * The Class Empresa.
  */
@@ -121,21 +122,28 @@ public class Empresa implements Serializable{
 	}
 	
 	/**
+	 * Sets the productos.
+	 *
+	 * @param productos the new productos
+	 */
+	public void setProductos(Producto[] productos) {
+		this.productos = productos;
+	}
+
+	/**
 	 * Adds the producto.
 	 *
-	 * @param sku the sku
-	 * @param referencia the referencia
-	 * @param volumen the volumen
-	 * @param peso the peso
-	 * @param descripcion the descripcion
-	 * @param catego the catego
+	 * @param categ the categ
+	 * @return the string
+	 * @throws CategoriaNoEncontrada the categoria no encontrada
 	 */
-	/*public void AddProducto(int sku,String referencia, double volumen, double peso, String descripcion,String catego) {
+	public void AddProducto(int cantidad_disponible, String referencia, String descripcion, String categoria,
+			double volumen, double peso) {
 		if(productos==null)
 			productos=new Producto[1];
 		else 
 			productos=Arrays.copyOf(productos,productos.length+1);
-		productos[productos.length-1]= new Producto(sku, referencia, volumen, peso,descripcion,catego,0);
+		productos[productos.length-1]= new Producto(cantidad_disponible,referencia,descripcion,categoria,volumen,peso);
 	}
 	
 	/**
@@ -190,9 +198,7 @@ public class Empresa implements Serializable{
 	/**
 	 * Ingreso.
 	 *
-	 * @param bodega the bodega
-	 * @param sku the sku
-	 * @param cantidad the cantidad
+	 * @return the logo
 	 */
 	/*public void  Ingreso (String bodega, int sku, int cantidad) {
 		Bodega b = BuscarBodega(bodega);
