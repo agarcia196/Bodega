@@ -9,17 +9,42 @@
 
 package clasesBodega;
 
+import java.io.Serializable;
 import java.util.Arrays;
 
-public class Bodega {
+// TODO: Auto-generated Javadoc
+/**
+ * The Class Bodega.
+ */
+public class Bodega implements Serializable{
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 58352670855964000L;
+
+	/** The ciudad. */
 	private String direccion, idBodega, ciudad;
+	
+	/** The lista producto. */
 	private Producto [] lista_producto;
+	
+	/** The capacidad max. */
 	private int capacidadMax;
+	
+	/** The seccion. */
 	private String [] seccion;
 
 
 
+	/**
+	 * Instantiates a new bodega.
+	 *
+	 * @param direccion la direccion
+	 * @param idBodega el id bodega
+	 * @param ciudad la ciudad
+	 * @param capacidadMax la capacidad max
+	 */
 	public Bodega(String direccion, String idBodega, String ciudad, int capacidadMax) {
 		super();
 		this.direccion = direccion;
@@ -32,22 +57,57 @@ public class Bodega {
 
 
 
-	public String getDireccion() {//obtener dirección
+	/**
+	 * Gets the direccion.
+	 *
+	 * @return the direccion
+	 */
+	public String getDireccion() {
 		return direccion;
 	}
-	public String getIdBodega() {//obtener identificación de bodega
+	
+	/**
+	 * Gets the id bodega.
+	 *
+	 * @return the id bodega
+	 */
+	public String getIdBodega() {
 		return idBodega;
 	}
-	public String getCiudad() {//obtener ciudad de locación de bodega
+	
+	/**
+	 * Gets the ciudad.
+	 *
+	 * @return the ciudad
+	 */
+	public String getCiudad() {
 		return ciudad;
 	}
-	public int getCapacidadMax() {//obtener la Capacidad máxima de la bodega
+	
+	/**
+	 * Gets the capacidad max.
+	 *
+	 * @return the capacidad max
+	 */
+	public int getCapacidadMax() {
 		return capacidadMax;
 	}
-	public String[] getSeccion() {//obtener una Sección de la Bodega
+	
+	/**
+	 * Gets the seccion.
+	 *
+	 * @return the seccion
+	 */
+	public String[] getSeccion() {
 		return seccion;
 	}
 	
+	/**
+	 * Bucar seccion.
+	 *
+	 * @param numseccion the numseccion
+	 * @return the string
+	 */
 	public String bucarSeccion(String numseccion) {//se Busca una sección por el número de sección
 		int i=0;								   //especifico de esta
 		while(i<seccion.length && seccion[i].compareTo(numseccion)!=0) {//condición de parada:
@@ -60,6 +120,10 @@ public class Bodega {
 			return seccion[i];
 		}
 	}
+	
+	/**
+	 * Añadir una seccion.
+	 */
 	public void AddSeccion() {
 		int i=1;
 		if (seccion == null) {
@@ -71,38 +135,42 @@ public class Bodega {
 		}
 	}
 
-	public void addProducto(Producto producto, int cantidad) {
-		if (lista_producto==null) {
-			lista_producto=new Producto[1];
+	/**
+	 * Añadir the producto.
+	 *
+	 * @param producto el producto
+	 * @param cantidad la cantidad
+	 */
+	public void addProducto(int sku,int cantidad_disponible,String referencia,String descripcion,String categoria,double volumen,double peso) {
+		if (lista_producto==null) {							   //Si el arreglo de productos es vacio
+			lista_producto=new Producto[1];					   //se inicializa en 1
 		}else {
-			lista_producto=Arrays.copyOf(lista_producto, lista_producto.length+1);
-			//Producto deberia tener dos constructores, uno con cantidad = 0 y otro con la cantidad pasada como atributo en este metodo
-			lista_producto[lista_producto.length-1]= new Producto(producto, cantidad);
+			lista_producto=Arrays.copyOf(lista_producto, lista_producto.length+1);//Aumentar tamaño
+																				  //arreglo
+			//Producto deberia tener dos constructores, uno con cantidad = 0 
+			//y otro con la cantidad pasada como atributo en este metodo
+			lista_producto[lista_producto.length-1]= new Producto(cantidad_disponible, referencia, descripcion, categoria, volumen, peso);//Añadir producto
 		}
 	}
 	
+	/**
+	 * Compradeproducto.
+	 *
+	 * @param sku el sku
+	 * @param cantidad la cantidad
+	 * @throws CantidadInsuficiente la cantidad es insuficiente
+	 */
 	public void compradeproducto(int sku,int cantidad)throws CantidadInsuficiente {
 		int i=0;
-		while(i<lista_producto.length && lista_producto[i].getSku.compareTo(sku)!=0) {
-			i++;
+		while(i<lista_producto.length && lista_producto[i].getSku() !=sku) {//recorre vector
+			i++;																	  //de productos
 		}
-		if(i<lista_producto.length) {
-			if(cantidad<=lista_producto[i].getCantidad_disponible) {
-				int aux=lista_producto[i].getCantidad_disponible - cantidad;
-				lista_producto[i].setCantidad_disponible(aux);
+		if(i<lista_producto.length) {									//No existe un producto igual
+			if(cantidad<=lista_producto[i].getCantidad_disponible()) {	//comprueba disponibilidad
+				int aux=lista_producto[i].getCantidad_disponible() - cantidad;
+				lista_producto[i].setCantidad_disponible(aux);			//quita cantidad comprada
 			}
 		}
-	}
-	
-	
-	public static void main(String[] args) {
-		Bodega a=new Bodega("calle 25", "id01", "Yopal", 6);
-		a.AddSeccion();
-		a.AddSeccion();
-		String aux=a.getSeccion()[0];
-		String aux2=a.getSeccion()[1];
-		System.out.println(aux);
-		System.out.println(aux2);
 	}
 	
 }

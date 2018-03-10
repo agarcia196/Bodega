@@ -10,6 +10,7 @@ package clasesBodega;
 import java.io.Serializable;
 import java.util.Arrays;
 
+// TODO: Auto-generated Javadoc
 /**
  * The Class Empresa.
  */
@@ -18,19 +19,17 @@ public class Empresa implements Serializable{
 	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = -306383744197773352L;
 	
-	/** The productos. */
-	private Producto[] productos;
 	
-	/** The bodegas. */
+	private Producto[] productos;
 	private Bodega [] bodegas;
+<<<<<<< HEAD
 	
 	/** The categoria. */
+=======
+>>>>>>> 775aae149eb50f47990b589cd22ef9342d3a405b
 	private String [] categoria;
-	
-	/** The nombre. */
+	private Persona [] usuarios;
 	private String nombre;
-	
-	/** The logo. */
 	private String logo;
 	
 	/**
@@ -46,10 +45,22 @@ public class Empresa implements Serializable{
 		this.productos = new Producto[0];
 		this.bodegas = new Bodega [0];
 		this.categoria = new String [0];
+		this.usuarios = new Persona[0];
 		this.nombre = nombre;
 		this.logo=logo;
 	}
 	
+	
+	public Persona[] getUsuarios() {
+		return usuarios;
+	}
+
+
+	public void setUsuarios(Persona[] usuarios) {
+		this.usuarios = usuarios;
+	}
+
+
 	/**
 	 * Instantiates a new empresa.
 	 */
@@ -76,6 +87,7 @@ public class Empresa implements Serializable{
 	}
 
 	/**
+<<<<<<< HEAD
 	 * Gets the usuarios.
 	 *
 	 * @return the usuarios
@@ -89,6 +101,8 @@ public class Empresa implements Serializable{
 	 */
 	
 	/**
+=======
+>>>>>>> 775aae149eb50f47990b589cd22ef9342d3a405b
 	 * Gets the categoria.
 	 *
 	 * @return the categoria
@@ -134,21 +148,28 @@ public class Empresa implements Serializable{
 	}
 	
 	/**
+	 * Sets the productos.
+	 *
+	 * @param productos the new productos
+	 */
+	public void setProductos(Producto[] productos) {
+		this.productos = productos;
+	}
+
+	/**
 	 * Adds the producto.
 	 *
-	 * @param sku the sku
-	 * @param referencia the referencia
-	 * @param volumen the volumen
-	 * @param peso the peso
-	 * @param descripcion the descripcion
-	 * @param catego the catego
+	 * @param categ the categ
+	 * @return the string
+	 * @throws CategoriaNoEncontrada the categoria no encontrada
 	 */
-	/*public void AddProducto(int sku,String referencia, double volumen, double peso, String descripcion,String catego) {
+	public void AddProducto(int cantidad_disponible, String referencia, String descripcion, String categoria,
+			double volumen, double peso) {
 		if(productos==null)
 			productos=new Producto[1];
 		else 
 			productos=Arrays.copyOf(productos,productos.length+1);
-		productos[productos.length-1]= new Producto(sku, referencia, volumen, peso,descripcion,catego,0);
+		productos[productos.length-1]= new Producto(cantidad_disponible,referencia,descripcion,categoria,volumen,peso);
 	}
 	
 	/**
@@ -203,9 +224,7 @@ public class Empresa implements Serializable{
 	/**
 	 * Ingreso.
 	 *
-	 * @param bodega the bodega
-	 * @param sku the sku
-	 * @param cantidad the cantidad
+	 * @return the logo
 	 */
 	/*public void  Ingreso (String bodega, int sku, int cantidad) {
 		Bodega b = BuscarBodega(bodega);
@@ -287,14 +306,15 @@ public class Empresa implements Serializable{
 	 * @throws UserNoExiste the user no existe
 	 */
 	//Buscar Usuario por User
-	/*public User BuscarUser(String user) throws UserNoExiste{
+	public Persona BuscarUser(String cc) {
 		int i=0;
-		while (i<usuarios.length && usuarios[i].getUser().compareTo(user)!=0) {
+		while (i<usuarios.length && cc.compareTo(usuarios[i].getCc())!=0) {
 			i++;
 		}
-		if (i==usuarios.length-1)
-			throw new UserNoExiste();
-		else return usuarios[i];
+		if (i==usuarios.length)
+			return null;
+		else 
+			return usuarios[i];
 	}	
 	
 	/**
