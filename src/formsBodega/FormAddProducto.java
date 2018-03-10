@@ -17,6 +17,7 @@ import clasesBodega.Producto;
 import clasesBodega.Recursos;
 import clasesBodega.Empresa;
 import clasesBodega.Main;
+import clasesBodega.Persona;
 import jdk.nashorn.internal.scripts.JO;
 
 import javax.swing.JLabel;
@@ -38,11 +39,13 @@ public class FormAddProducto extends JFrame {
 	private JTextField Ref_textField;
 	private JTextField Peso_textField;
 	private JTextField Descrip_textField;
+	private Empresa empresa;
+	private Persona persona;
 
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String[] args) {
+	/*public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
@@ -54,15 +57,17 @@ public class FormAddProducto extends JFrame {
 				}
 			}
 		});
-	}
+	}*/
 
 	/**
 	 * Create the frame.
 	 */
-	public FormAddProducto(Empresa empresa) {
+	public FormAddProducto(Persona persona,Empresa empresa) {
+		this.empresa= empresa;
+		this.persona = persona;
 		setIconImage(Toolkit.getDefaultToolkit().getImage("C:\\Java Estructuras\\Bodega\\png\\vender-producto.png"));
 		setTitle("A\u00F1adir producto");
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 488, 508);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));

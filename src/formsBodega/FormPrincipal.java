@@ -38,7 +38,7 @@ public class FormPrincipal implements Serializable {
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String[] args) {
+	/*public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
@@ -52,7 +52,7 @@ public class FormPrincipal implements Serializable {
 				}
 			}
 		});
-	}
+	}*/
 
 	/**
 	 * Create the application.
@@ -122,7 +122,9 @@ public class FormPrincipal implements Serializable {
 		
 		ImageIcon iconAgregarBodega =new ImageIcon("png\\add-plus-button.png");
 		Icon iconoAgregarBodega = new ImageIcon(iconAgregarBodega.getImage().getScaledInstance(n,n, Image.SCALE_DEFAULT));
-		if(persona instanceof Gerente) {
+		
+		// Condición de usuario Gerente
+		//if(persona instanceof Gerente) {
 		
 		
 		JMenu mnBodega = new JMenu("Bodega");
@@ -133,12 +135,20 @@ public class FormPrincipal implements Serializable {
 		menuBar.add(mnBodega);
 		
 		JMenuItem mntmAgregarBodega = new JMenuItem("Crear");
+		mntmAgregarBodega.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+			}
+		});
 		mntmAgregarBodega.setFont(new Font("Century Gothic", Font.PLAIN, n3));
 		
 		mntmAgregarBodega.setIcon(iconoAgregarBodega);
 		mnBodega.add(mntmAgregarBodega);
 		
 		JMenuItem mntmConsultar = new JMenuItem("Consultar");
+		mntmConsultar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+			}
+		});
 		mntmConsultar.setFont(new Font("Century Gothic", Font.PLAIN, n3));
 
 		mntmConsultar.setIcon(iconoConsultar);
@@ -152,6 +162,12 @@ public class FormPrincipal implements Serializable {
 		mnBodega.add(mnActividad);
 		
 		JMenuItem mntmIngreso = new JMenuItem("Ingreso");
+		mntmIngreso.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				FormAddProductoCant ingreso = new FormAddProductoCant(persona,empresa);
+				ingreso.setVisible(true);
+			}
+		});
 		mntmIngreso.setFont(new Font("Century Gothic", Font.PLAIN, n3));
 		ImageIcon iconIngreso  =new ImageIcon("png\\ingreso.png");
 		Icon iconoIngreso  = new ImageIcon(iconIngreso.getImage().getScaledInstance(n,n, Image.SCALE_DEFAULT));
@@ -159,14 +175,16 @@ public class FormPrincipal implements Serializable {
 		mnActividad.add(mntmIngreso);
 		
 		JMenuItem mntmTraslado = new JMenuItem("Traslado");
+		mntmTraslado.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+			}
+		});
 		mntmTraslado.setFont(new Font("Century Gothic", Font.PLAIN, n3));
 		ImageIcon iconTraslado  =new ImageIcon("png\\traslado.png");
 		Icon iconoTraslado  = new ImageIcon(iconTraslado.getImage().getScaledInstance(n,n, Image.SCALE_DEFAULT));
 		mntmTraslado.setIcon(iconoTraslado);
 		mnActividad.add(mntmTraslado);
-		
-	   
-		
+		  		
 		JMenu mnProducto = new JMenu("Producto");
 		mnProducto.setFont(new Font("Century Gothic", Font.PLAIN, n2));
 	    ImageIcon iconProducto =new ImageIcon("png\\puzzle-piece-plugin.png");
@@ -175,16 +193,30 @@ public class FormPrincipal implements Serializable {
 		menuBar.add(mnProducto);
 		
 		JMenuItem mntmCrear = new JMenuItem("Crear");
+		mntmCrear.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				FormAddProducto crear_producto = new FormAddProducto(persona,empresa);
+				crear_producto.setVisible(true);
+			}
+		});
 		mntmCrear.setFont(new Font("Century Gothic", Font.PLAIN, n3));
 		mntmCrear.setIcon(iconoAgregarBodega);
 		mnProducto.add(mntmCrear);
 		
 		JMenuItem mntmBuscar = new JMenuItem("Buscar");
+		mntmBuscar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+			}
+		});
 		mntmBuscar.setFont(new Font("Century Gothic", Font.PLAIN, n3));
 		mntmBuscar.setIcon(iconoConsultar);
 		mnProducto.add(mntmBuscar);
 		
 		JMenuItem mntmEditar = new JMenuItem("Editar");
+		mntmEditar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+			}
+		});
 		mntmEditar.setFont(new Font("Century Gothic", Font.PLAIN, n3));
 		ImageIcon iconEditar  =new ImageIcon("png\\edit.png");
 		Icon iconoEditar  = new ImageIcon(iconEditar.getImage().getScaledInstance(n,n, Image.SCALE_DEFAULT));
@@ -199,6 +231,10 @@ public class FormPrincipal implements Serializable {
 		menuBar.add(mnUsuarios);
 		
 		JMenuItem mntmCrear_1 = new JMenuItem("Crear");
+		mntmCrear_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+			}
+		});
 		mntmCrear_1.setFont(new Font("Century Gothic", Font.PLAIN, n3));
 		ImageIcon iconCrear_1 =new ImageIcon("png\\add-user-button.png");
 		Icon iconoCrear_1 = new ImageIcon(iconCrear_1.getImage().getScaledInstance(n,n, Image.SCALE_DEFAULT));
@@ -206,10 +242,14 @@ public class FormPrincipal implements Serializable {
 		mnUsuarios.add(mntmCrear_1);
 		
 		JMenuItem mntmConsultar_1 = new JMenuItem("Consultar");
+		mntmConsultar_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+			}
+		});
 		mntmConsultar_1.setFont(new Font("Century Gothic", Font.PLAIN, n3));
 		mntmConsultar_1.setIcon(iconoConsultar);
 		mnUsuarios.add(mntmConsultar_1);
-		}
+		}/*
 		if(persona instanceof Bodeguero) {
 			JMenu mnBodega = new JMenu("Bodega");
 			mnBodega.setFont(new Font("Century Gothic", Font.PLAIN, n2));
@@ -264,7 +304,7 @@ public class FormPrincipal implements Serializable {
 			mntmEditar.setIcon(iconoEditar);
 			mnProducto.add(mntmEditar);
 			
-		}
+		}*/
 		
 	}
-}
+
