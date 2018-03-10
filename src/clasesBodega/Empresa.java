@@ -24,9 +24,6 @@ public class Empresa implements Serializable{
 	/** The bodegas. */
 	private Bodega [] bodegas;
 	
-	/** The usuarios. */
-	private User [] usuarios;
-	
 	/** The categoria. */
 	private String [] categoria;
 	
@@ -48,7 +45,6 @@ public class Empresa implements Serializable{
 		super();
 		this.productos = new Producto[0];
 		this.bodegas = new Bodega [0];
-		this.usuarios = new User [0];
 		this.categoria = new String [0];
 		this.nombre = nombre;
 		this.logo=logo;
@@ -84,18 +80,13 @@ public class Empresa implements Serializable{
 	 *
 	 * @return the usuarios
 	 */
-	public User[] getUsuarios() {
-		return usuarios;
-	}
+
 
 	/**
 	 * Sets the usuarios.
 	 *
 	 * @param usuarios the new usuarios
 	 */
-	public void setUsuarios(User[] usuarios) {
-		this.usuarios = usuarios;
-	}
 	
 	/**
 	 * Gets the categoria.
