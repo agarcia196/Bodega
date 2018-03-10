@@ -9,6 +9,8 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import clasesBodega.Empresa;
+import clasesBodega.Gerente;
+import clasesBodega.Persona;
 import clasesBodega.Recursos;
 
 import javax.swing.JLabel;
@@ -205,11 +207,12 @@ public class FormPrincipalLogin extends JFrame implements Serializable {
 						txtApellidoU.getText().compareTo("")==0 || txtCcU.getText().compareTo("")==0 || 
 						textField.getText().compareTo("")==0  || txtCorreoU.getText().compareTo("")==0 ||
 						String.valueOf(passwordField.getPassword()).compareTo("") == 0 ||
-						String.valueOf(cpasswordField.getPassword()).compareTo("") == 0) {
+						String.valueOf(cpasswordField.getPassword()).compareTo("") == 0 && String.valueOf(passwordField.getPassword()).compareTo(String.valueOf(cpasswordField.getPassword()))==0 ) {
 						JOptionPane.showMessageDialog(contentPane, "Todos los campos deben rellenarse");
 					} else {
 						Empresa empresa = new Empresa(txtNombre.getText(),textField.getText());
-						//empresa.setUsuarios(usuarios);
+						Persona p = new Gerente(txtNombreU.getText(), txtApellidoU.getText(), comboBox.getToolTipText(), txtCorreoU.getText(), txtCcU.getText(), cbTipoIDU.getToolTipText(), String.valueOf(passwordField.getPassword()));
+						empresa.AddUser(p);
 						dispose();
 						Recursos.WriteFileObjectEmpresa("empresa.dat", empresa);
 						FormLogin login = new FormLogin(empresa);
