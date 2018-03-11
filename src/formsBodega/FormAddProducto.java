@@ -122,8 +122,8 @@ public class FormAddProducto extends JFrame {
 		for(String a:empresa.getCategoria()) {
 			Cat_comboBox.addItem(a);
 		}*/
-		DefaultComboBoxModel modelo = new DefaultComboBoxModel(empresa.getCategoria());
-		Cat_comboBox.setModel(modelo);
+		DefaultComboBoxModel modelo = new DefaultComboBoxModel(empresa.getCategoria());//crear modelo para el comnbobox de categoria
+		Cat_comboBox.setModel(modelo);//ingresar el modelo creado en el combobox categoria
 		
 		JLabel lblIngreseTodosLos = new JLabel("Por favor ingrese todos los datos del producto");
 		lblIngreseTodosLos.setFont(new Font("Century Gothic", Font.ITALIC, 14));
@@ -141,12 +141,12 @@ public class FormAddProducto extends JFrame {
 							Descrip_textField.getText().compareTo("")==0 || Cat_comboBox.getSelectedItem()==null) {
 						JOptionPane.showMessageDialog(contentPane, "Por favor llene todos los campos para continuar");
 					}
-					else {
+					else {//agregar el producto al array de la empresa
 						empresa.AddProducto(0,Ref_textField.getText(),Descrip_textField.getText(),
 								Cat_comboBox.getSelectedItem().toString(),0,Double.parseDouble(Peso_textField.getText()));
 						dispose();
 					}
-					Recursos.WriteFileObjectEmpresa("empresa.dat", empresa);
+					Recursos.WriteFileObjectEmpresa("empresa.dat", empresa);//sobreescribir el archivo de la empresa
 				}
 			}
 		});

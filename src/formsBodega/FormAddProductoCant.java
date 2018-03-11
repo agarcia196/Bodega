@@ -7,8 +7,10 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+import clasesBodega.Bodega;
 import clasesBodega.Empresa;
 import clasesBodega.Persona;
+import clasesBodega.Producto;
 import clasesBodega.Recursos;
 
 import javax.swing.JLabel;
@@ -21,16 +23,16 @@ import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.Toolkit;
 
 public class FormAddProductoCant extends JFrame {
 
 	private JPanel contentPane;
-	private JTextField Ref_textField;
-	private JTextField Peso_textField;
 	private Persona persona;
 	private Empresa empresa;
 	private JTextField Cant_textField;
-	private JTextField Descrip_textField;
+	private JTextField Prod_textField;
+	private JTextField Bodega_textField;
 
 	/**
 	 * Launch the application.
@@ -52,8 +54,10 @@ public class FormAddProductoCant extends JFrame {
 	 * Create the frame.
 	 */
 	public FormAddProductoCant(Persona persona, Empresa empresa) {
+		setIconImage(Toolkit.getDefaultToolkit().getImage("C:\\Java Estructuras\\Bodega\\png\\forward-arrow.png"));
+		setTitle("Ingresar producto");
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		setBounds(100, 100, 475, 568);
+		setBounds(100, 100, 475, 334);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -69,82 +73,49 @@ public class FormAddProductoCant extends JFrame {
 		lblBodega.setBounds(12, 83, 63, 19);
 		contentPane.add(lblBodega);
 		
-		JLabel lblReferencia = new JLabel("Referencia:");
-		lblReferencia.setFont(new Font("Century Gothic", Font.ITALIC, 14));
-		lblReferencia.setBounds(12, 140, 88, 16);
-		contentPane.add(lblReferencia);
-		
-		JLabel lblPeso = new JLabel("Peso:");
-		lblPeso.setFont(new Font("Century Gothic", Font.ITALIC, 14));
-		lblPeso.setBounds(12, 190, 56, 16);
-		contentPane.add(lblPeso);
-		
-		JLabel lblCategora = new JLabel("Categor\u00EDa:");
-		lblCategora.setFont(new Font("Century Gothic", Font.ITALIC, 14));
-		lblCategora.setBounds(12, 240, 88, 22);
-		contentPane.add(lblCategora);
+		JLabel lblProducto = new JLabel("Producto:");
+		lblProducto.setFont(new Font("Century Gothic", Font.ITALIC, 14));
+		lblProducto.setBounds(12, 140, 88, 16);
+		contentPane.add(lblProducto);
 		
 		JLabel lblCatidad = new JLabel("Cantidad:");
 		lblCatidad.setFont(new Font("Century Gothic", Font.ITALIC, 14));
-		lblCatidad.setBounds(12, 290, 73, 16);
+		lblCatidad.setBounds(12, 190, 73, 16);
 		contentPane.add(lblCatidad);
 		
-		JLabel lblDescripcin = new JLabel("Descripci\u00F3n:");
-		lblDescripcin.setFont(new Font("Century Gothic", Font.ITALIC, 14));
-		lblDescripcin.setBounds(12, 340, 88, 16);
-		contentPane.add(lblDescripcin);
-		
-		JComboBox Bodega_comboBox = new JComboBox();
-		Bodega_comboBox.setBounds(108, 82, 264, 22);
-		contentPane.add(Bodega_comboBox);
-		DefaultComboBoxModel modelo=new DefaultComboBoxModel(empresa.getBodegas());
-		Bodega_comboBox.setModel(modelo);
-		
-		Ref_textField = new JTextField();
-		Ref_textField.setBounds(108, 138, 264, 22);
-		contentPane.add(Ref_textField);
-		Ref_textField.setColumns(10);
-		
-		Peso_textField = new JTextField();
-		Peso_textField.setBounds(108, 188, 264, 22);
-		contentPane.add(Peso_textField);
-		Peso_textField.setColumns(10);
-		
-		JComboBox Cat_comboBox = new JComboBox();
-		Cat_comboBox.setBounds(108, 241, 264, 22);
-		contentPane.add(Cat_comboBox);
-		DefaultComboBoxModel modeloCat=new DefaultComboBoxModel(empresa.getCategoria());
-		Cat_comboBox.setModel(modelo);
-		
 		Cant_textField = new JTextField();
-		Cant_textField.setBounds(108, 288, 264, 22);
+		Cant_textField.setBounds(108, 188, 264, 22);
 		contentPane.add(Cant_textField);
 		Cant_textField.setColumns(10);
 		
-		Descrip_textField = new JTextField();
-		Descrip_textField.setBounds(108, 338, 311, 106);
-		contentPane.add(Descrip_textField);
-		Descrip_textField.setColumns(10);
-		
-		JButton btnAadir = new JButton("A\u00F1adir");
+		JButton btnAadir = new JButton("A\u00F1adir");//acción clic en el boton acepat
 		btnAadir.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				int alerta=JOptionPane.showConfirmDialog(contentPane, "¿Desea guardar?");
 				if (alerta==0) {
-					if(Bodega_comboBox.getSelectedItem()==null || Cat_comboBox.getSelectedItem()==null ||
-							Ref_textField.getText().compareTo("")==0 || Peso_textField.getText().compareTo("")==0 ||
-							Cant_textField.getText().compareTo("")==0 || Descrip_textField.getText().compareTo("")==0)
+					if(Bodega_textField.getText().compareTo("")==0 || Prod_textField.getText().compareTo("")==0 ||
+							Cant_textField.getText().compareTo("")==0) //revisar si hay campos vacíos
 						JOptionPane.showMessageDialog(contentPane, "Por favor llene todos los campos para continuar");
 				}else {
-					empresa.AddProducto(Integer.parseInt(Cant_textField.getText()), Ref_textField.getText(),
-							Descrip_textField.getText(), Cat_comboBox.getSelectedItem().toString(),0,
-							Double.parseDouble(Peso_textField.getText()));
+					Bodega bod = empresa.BuscarBodega(Bodega_textField.getText()); //buscar bodega para ingresar el producto
+					Producto prod=empresa.BuscarProducto(Prod_textField.getText()); //buscar el producto a ingresar
+					bod.addProducto(prod,Integer.parseInt(Cant_textField.getText()));//añadir el producto a la bodega
 					dispose();
 				}
-				Recursos.WriteFileObjectEmpresa("empresa.dat", empresa);
+				Recursos.WriteFileObjectEmpresa("empresa.dat", empresa);//sobreescribir el archivo de datos de la empresa
 			}
 		});
-		btnAadir.setBounds(175, 483, 97, 25);
+		btnAadir.setBounds(183, 236, 97, 25);
 		contentPane.add(btnAadir);
+		
+		Prod_textField = new JTextField();
+		Prod_textField.setBounds(108, 138, 264, 22);
+		contentPane.add(Prod_textField);
+		Prod_textField.setColumns(10);
+		
+		Bodega_textField = new JTextField();
+		Bodega_textField.setBounds(108, 82, 264, 22);
+		contentPane.add(Bodega_textField);
+		Bodega_textField.setColumns(10);
 	}
 }
