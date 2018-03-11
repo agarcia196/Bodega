@@ -68,7 +68,7 @@ public class FormAddProducto extends JFrame {
 		setIconImage(Toolkit.getDefaultToolkit().getImage("C:\\Java Estructuras\\Bodega\\png\\vender-producto.png"));
 		setTitle("A\u00F1adir producto");
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		setBounds(100, 100, 488, 508);
+		setBounds(100, 100, 488, 561);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -100,12 +100,12 @@ public class FormAddProducto extends JFrame {
 		contentPane.add(lblDescripcin);
 		
 		Ref_textField = new JTextField();
-		Ref_textField.setBounds(107, 124, 239, 22);
+		Ref_textField.setBounds(107, 124, 288, 22);
 		contentPane.add(Ref_textField);
 		Ref_textField.setColumns(10);
 		
 		Peso_textField = new JTextField();
-		Peso_textField.setBounds(107, 183, 239, 22);
+		Peso_textField.setBounds(107, 183, 288, 22);
 		contentPane.add(Peso_textField);
 		Peso_textField.setColumns(10);
 		
@@ -115,20 +115,22 @@ public class FormAddProducto extends JFrame {
 		Descrip_textField.setColumns(10);
 		
 		JComboBox Cat_comboBox = new JComboBox();
-		Cat_comboBox.setBounds(107, 247, 239, 22);
+		Cat_comboBox.setBounds(107, 247, 288, 22);
 		contentPane.add(Cat_comboBox);
-		//String [] b= {"jorge"};
-		//empresa.setCategoria(b);
+		/*String [] b= {"jorge"};
+		empresa.setCategoria(b);
 		for(String a:empresa.getCategoria()) {
 			Cat_comboBox.addItem(a);
-		}
+		}*/
+		DefaultComboBoxModel modelo = new DefaultComboBoxModel(empresa.getCategoria());
+		Cat_comboBox.setModel(modelo);
 		
 		JLabel lblIngreseTodosLos = new JLabel("Por favor ingrese todos los datos del producto");
 		lblIngreseTodosLos.setFont(new Font("Century Gothic", Font.ITALIC, 14));
 		lblIngreseTodosLos.setBounds(70, 70, 327, 30);
 		contentPane.add(lblIngreseTodosLos);
 		
-		JButton btnAadir = new JButton("A\u00D1ADIR");
+		JButton btnAadir = new JButton("A\u00F1adir");
 		btnAadir.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				int alerta = JOptionPane.showConfirmDialog(contentPane, "¿Desea guardar?");//confirmar el guardado
@@ -136,19 +138,19 @@ public class FormAddProducto extends JFrame {
 					if (Ref_textField.getText().compareTo("")==0
 							||Peso_textField.getText().compareTo("")==0
 							|| Cat_comboBox.getSelectedItem().toString().compareTo("")==0||		//comparar datos vacíos
-							Descrip_textField.getText().compareTo("")==0) {
-						JOptionPane.showMessageDialog(contentPane, "Por favor llene todos los campos para continuarf");
+							Descrip_textField.getText().compareTo("")==0 || Cat_comboBox.getSelectedItem()==null) {
+						JOptionPane.showMessageDialog(contentPane, "Por favor llene todos los campos para continuar");
 					}
 					else {
 						empresa.AddProducto(0,Ref_textField.getText(),Descrip_textField.getText(),
-								Cat_comboBox.getSelectedItem().toString(),Double.parseDouble(Peso_textField.getText()),0);
+								Cat_comboBox.getSelectedItem().toString(),0,Double.parseDouble(Peso_textField.getText()));
 						dispose();
 					}
 					Recursos.WriteFileObjectEmpresa("empresa.dat", empresa);
 				}
 			}
 		});
-		btnAadir.setBounds(375, 182, 83, 25);
+		btnAadir.setBounds(196, 462, 83, 25);
 		contentPane.add(btnAadir);
 	}
 }
