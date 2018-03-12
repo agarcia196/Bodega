@@ -101,7 +101,7 @@ public class Bodega implements Serializable{
 	public String[] getSeccion() {
 		return seccion;
 	}
-	
+	x
 	/**
 	 * Bucar seccion.
 	 *
