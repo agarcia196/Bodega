@@ -258,10 +258,22 @@ public class Empresa implements Serializable{
 	 * @throws BodegaNoExiste the bodega no existe
 	 */
 	//Buscar bodega
-	/*public Bodega BuscarBodega(String IDBodega) throws BodegaNoExiste{
+	public Bodega BuscarBodega(int IDBodega) throws BodegaNoExiste{
 		int i=0;
-		while (i<bodegas.length && bodegas[i].getIDBodega().compareTo(IDBodega)!=0) {
+		String id = Integer.toString(IDBodega);
+		while (i<bodegas.length && bodegas[i].getIdBodega().compareTo(id)!=0) {
 			i++;	
+		}
+		if (i==bodegas.length) {
+			throw new BodegaNoExiste();
+		}
+		else return bodegas[i];
+	}
+	
+	public Bodega BuscarBodega(String ciudad) throws BodegaNoExiste{
+		int i=0;
+		while(i<bodegas.length && bodegas[i].getCiudad().compareTo(ciudad)!=0) {
+			i++;
 		}
 		if (i==bodegas.length) {
 			throw new BodegaNoExiste();
