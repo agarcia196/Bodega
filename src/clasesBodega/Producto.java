@@ -2,12 +2,11 @@ package clasesBodega;
 //@autor: Youlvis
 
 public class Producto {
-	private int sku,cantidad_disponible;
+	private int sku,cantidad_disponible,cantidad_minima;
 	private String referencia,descripcion,categoria;
 	private double volumen,peso;
 	
-	public Producto(int cantidad_disponible, String referencia, String descripcion, String categoria,
-			double volumen, double peso) {
+	public Producto(String referencia, String descripcion, String categoria, double peso) {
 		super();
 		this.sku = sku;//codigo del producto
 		this.cantidad_disponible = cantidad_disponible;
@@ -16,6 +15,12 @@ public class Producto {
 		this.categoria = categoria;
 		this.volumen = volumen;
 		this.peso = peso;
+		this.cantidad_minima=cantidad_minima;
+	}
+	
+
+	public int getCantidad_minima() {
+		return cantidad_minima;
 	}
 
 	public int getCantidad_disponible() {
