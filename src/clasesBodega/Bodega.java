@@ -141,7 +141,8 @@ public class Bodega implements Serializable{
 	 * @param producto el producto
 	 * @param cantidad la cantidad
 	 */
-	public void addProducto(int sku,int cantidad_disponible,String referencia,String descripcion,String categoria,double volumen,double peso) {
+	public void addProducto(Producto producto, int cantidad) {
+		producto.setCantidad_disponible(cantidad);
 		if (lista_producto==null) {							   //Si el arreglo de productos es vacio
 			lista_producto=new Producto[1];					   //se inicializa en 1
 		}else {
@@ -149,7 +150,7 @@ public class Bodega implements Serializable{
 																				  //arreglo
 			//Producto deberia tener dos constructores, uno con cantidad = 0 
 			//y otro con la cantidad pasada como atributo en este metodo
-			lista_producto[lista_producto.length-1]= new Producto(cantidad_disponible, referencia, descripcion, categoria, volumen, peso);//Añadir producto
+			lista_producto[lista_producto.length-1]= producto;//Añadir producto
 		}
 	}
 	

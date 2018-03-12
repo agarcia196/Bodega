@@ -175,7 +175,7 @@ public class Empresa implements Serializable{
 	 * @return the producto
 	 * @throws ProductoNoEncontrado the producto no encontrado
 	 */
-	/*public Producto BuscarProducto(int codigo)throws ProductoNoEncontrado {
+	public Producto BuscarProducto(Integer codigo)throws ProductoNoEncontrado {
 		int i=0;
 		while (i<productos.length && productos[i].getSku()!=codigo) {
 			i++;
