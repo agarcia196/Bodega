@@ -233,6 +233,8 @@ public class FormPrincipal implements Serializable {
 		JMenuItem mntmCrear_1 = new JMenuItem("Crear");
 		mntmCrear_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+				FormAddUser agregar_usuario = new FormAddUser();
+				agregar_usuario.setVisible(true);
 			}
 		});
 		mntmCrear_1.setFont(new Font("Century Gothic", Font.PLAIN, n3));

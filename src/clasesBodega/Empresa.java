@@ -22,11 +22,7 @@ public class Empresa implements Serializable{
 	
 	private Producto[] productos;
 	private Bodega [] bodegas;
-<<<<<<< HEAD
-	
 	/** The categoria. */
-=======
->>>>>>> 775aae149eb50f47990b589cd22ef9342d3a405b
 	private String [] categoria;
 	private Persona [] usuarios;
 	private String nombre;
@@ -290,12 +286,20 @@ public class Empresa implements Serializable{
 	//Agregar Usuario
 	/*public void AddUser(String nombre, String apellido, String genero, String correo, String CC, String tipoID,
 			String user, String pwd, String perfil, String tipoPerfil) {
-		User usuario1=new User(nombre,apellido,genero,correo,CC,tipoID,user,pwd,perfil,tipoPerfil);
+		Persona usuario1=new User(nombre,apellido,genero,correo,CC,tipoID,user,pwd,perfil,tipoPerfil);
 		if(usuarios==null)
 			usuarios = new usuarios[1];
 		else
 			usuarios= Arrays.copyOf(usuarios, usuarios.length+1);
 		usuarios[usuarios.length-1]=usuario1;
+	}*/
+	
+	public void AddUser(Persona p) {
+		if(usuarios==null)
+			usuarios = new Persona[1];
+		else
+			usuarios= Arrays.copyOf(usuarios, usuarios.length+1);
+		usuarios[usuarios.length-1]=p;
 	}
 	
 	/**
