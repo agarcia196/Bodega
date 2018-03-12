@@ -101,14 +101,14 @@ public class Bodega implements Serializable{
 	public String[] getSeccion() {
 		return seccion;
 	}
-	x
+	
 	/**
 	 * Bucar seccion.
 	 *
 	 * @param numseccion the numseccion
 	 * @return the string
 	 */
-	public String bucarSeccion(String numseccion) {//se Busca una sección por el número de sección
+	public String buscarSeccion(String numseccion) {//se Busca una sección por el número de sección
 		int i=0;								   //especifico de esta
 		while(i<seccion.length && seccion[i].compareTo(numseccion)!=0) {//condición de parada:
 			i++;	//aumentar el contador								//-al recorrer el vector
