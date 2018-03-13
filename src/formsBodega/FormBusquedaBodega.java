@@ -1,0 +1,156 @@
+/**
+ * formsBodega: Empresa.
+ * 
+ * @author Jorge Luis Soriano Cuevas
+ * @version 2.3.2018
+ */
+
+package formsBodega;
+
+import java.awt.BorderLayout;
+import java.awt.EventQueue;
+
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.border.EmptyBorder;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.text.AbstractDocument.Content;
+
+import com.sun.glass.events.KeyEvent;
+
+import clasesBodega.Bodega;
+import clasesBodega.Empresa;
+import clasesBodega.Persona;
+
+import javax.swing.JList;
+import javax.swing.JOptionPane;
+import javax.swing.JTable;
+import javax.swing.JToggleButton;
+import javax.swing.AbstractAction;
+import javax.swing.Action;
+import javax.swing.JButton;
+import java.awt.event.ActionListener;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+import java.awt.event.ActionEvent;
+import javax.swing.JTextField;
+import javax.swing.JScrollPane;
+import javax.swing.JLabel;
+import java.awt.Font;
+import javax.swing.JComboBox;
+import java.awt.Toolkit;
+
+public class FormBusquedaBodega extends JFrame {
+
+	private JPanel contentPane;
+	private Empresa empresa;
+	private Persona persona;
+	//	private FormAddProductoCant form;
+	private JTextField Busc_textField;
+	private JTable table_1;
+	private JTextField bodega_textField;
+
+
+	/**
+	 * Launch the application.
+	 */
+	/*public static void main(String[] args) {
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					FormBusquedaBodega frame = new FormBusquedaBodega();
+					frame.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+	}*/
+
+	/**
+	 * Create the frame.
+	 */
+
+	public FormBusquedaBodega(Empresa empresa, JTextField bodega_textField) {
+		this.empresa=empresa;
+		this.bodega_textField=bodega_textField;
+		setIconImage(Toolkit.getDefaultToolkit().getImage("C:\\Java Estructuras\\Bodega\\png\\searching-magnifying-glass.png"));
+		setTitle("Seleccionar bodega");
+		this.empresa= empresa;
+		this.bodega_textField=bodega_textField;
+		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		setBounds(100, 100, 702, 645);
+		contentPane = new JPanel();
+		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		setContentPane(contentPane);
+		contentPane.setLayout(null);
+
+		JLabel lblBuscarPorId = new JLabel("Buscar:");
+		lblBuscarPorId.setFont(new Font("Century Gothic", Font.ITALIC, 14));
+		lblBuscarPorId.setBounds(10, 47, 73, 16);
+		contentPane.add(lblBuscarPorId);
+		JScrollPane scrollPane = new JScrollPane();
+		scrollPane.setBounds(12, 80, 660, 453);
+		contentPane.add(scrollPane);
+		String [] titulos = {"ID Bodega", "Ciudad", "Dirección"};	//crear vector con titulos de la tabla
+		DefaultTableModel modeloTable= new DefaultTableModel(titulos,0); //crear modelo con el vector de titulos
+		table_1 = new JTable(modeloTable);							//cargar modelo en la tabla
+
+		scrollPane.setViewportView(table_1);
+
+		Busc_textField = new JTextField();
+		Busc_textField.setBounds(95, 45, 350, 22);
+		contentPane.add(Busc_textField);
+		Busc_textField.setColumns(10);
+
+		JButton btnBuscar = new JButton("Buscar");
+		btnBuscar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				int numFilas = modeloTable.getRowCount();
+				for (int i=numFilas-1; i>=0; i--) {
+					modeloTable.removeRow(i);
+				}
+				String id=Busc_textField.getText();		//capturar datos del textfile
+				if (empresa.getBodegas()==null) {		//comprobar que el vector de bodegas
+					JOptionPane.showMessageDialog(contentPane, "No existen productos");
+				}else {		//si existe el vector
+					int i=0;
+					while(i<empresa.getBodegas().length) {	//recorrer el vector de bodegas para hacer la busqueda
+						if(empresa.getBodegas()[i].getIdBodega().contains(id) || 	//buscar por ID
+								empresa.getBodegas()[i].getCiudad().contains(id)) {	//buscar por ciudad
+							String [] model = {empresa.getBodegas()[i].getIdBodega(),empresa.getBodegas()[i].getCiudad(),
+									empresa.getBodegas()[i].getDireccion()}; //crear modelo para agregar filas
+							modeloTable.addRow(model);		//agregar modelo a las filas de la tabla
+						}
+						i++;
+					}
+					if (i==empresa.getBodegas().length) {		//comprobar si encontro la bodega
+						JOptionPane.showMessageDialog(contentPane, "No se puede encontrar, intente nuevamente");
+					}
+				}
+			}
+		});
+		btnBuscar.setBounds(482, 44, 97, 25);
+		contentPane.add(btnBuscar);
+
+
+		JButton btnAceptar = new JButton("Aceptar");
+		btnAceptar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+
+				if (table_1.getSelectedRow()==-1) {		//comprobar si se selecciono una fila
+					JOptionPane.showMessageDialog(contentPane, "Seleccione una bodega para continuar");
+				}else{		//pasarle la ID de la bodega al textfile del form para agregar el producto
+					bodega_textField.setText((String) table_1.getValueAt(table_1.getSelectedRow(),0));
+					dispose();}
+			}
+		});
+		btnAceptar.setBounds(286, 560, 97, 25);
+		contentPane.add(btnAceptar);
+
+		JLabel lblPuedeBuscarPor = new JLabel("Puede buscar por ID de bodega o por ciudad.");
+		lblPuedeBuscarPor.setFont(new Font("Century Gothic", Font.ITALIC, 14));
+		lblPuedeBuscarPor.setBounds(10, 13, 423, 16);
+		contentPane.add(lblPuedeBuscarPor);
+	}
+}

@@ -233,7 +233,7 @@ public class FormPrincipal implements Serializable {
 		JMenuItem mntmCrear_1 = new JMenuItem("Crear");
 		mntmCrear_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				FormAddUser agregar_usuario = new FormAddUser();
+				FormAddUser agregar_usuario = new FormAddUser(empresa, persona);
 				agregar_usuario.setVisible(true);
 			}
 		});
