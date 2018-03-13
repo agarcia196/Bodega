@@ -152,6 +152,7 @@ public class Bodega implements Serializable{
 			//y otro con la cantidad pasada como atributo en este metodo
 			lista_producto[lista_producto.length-1]= producto;//Añadir producto
 		}
+		
 	}
 	
 	/**
