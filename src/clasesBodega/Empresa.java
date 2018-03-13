@@ -310,11 +310,8 @@ public class Empresa implements Serializable{
 	 * @throws UserNoExiste the user no existe
 	 */
 	//Buscar Usuario por User
-	public Persona BuscarUser(String cc) throws EArregloNoInicializado {
+	public Persona BuscarUser(String cc) {
 		int i=0;
-		if (usuarios == null)
-			throw new EArregloNoInicializado();
-			//usuarios = new Persona[0];
 		while (i<usuarios.length && cc.compareTo(usuarios[i].getCc())!=0) {
 			i++;
 		}
@@ -436,12 +433,5 @@ public class Empresa implements Serializable{
 			super("Categoria no encontrada");
 		}
 	}
-	
-	public class EArregloNoInicializado extends Exception{
-		public EArregloNoInicializado() {
-			super ("El arreglo de usuarios no ha sido inicializado");
-		}
-	}
 }
 
-	
