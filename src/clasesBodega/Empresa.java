@@ -175,7 +175,7 @@ public class Empresa implements Serializable{
 	 * @return the producto
 	 * @throws ProductoNoEncontrado the producto no encontrado
 	 */
-	public Producto BuscarProducto(Integer codigo)throws ProductoNoEncontrado {
+	/*public Producto BuscarProducto(int codigo)throws ProductoNoEncontrado {
 		int i=0;
 		while (i<productos.length && productos[i].getSku()!=codigo) {
 			i++;
@@ -258,22 +258,10 @@ public class Empresa implements Serializable{
 	 * @throws BodegaNoExiste the bodega no existe
 	 */
 	//Buscar bodega
-	public Bodega BuscarBodega(int IDBodega) throws BodegaNoExiste{
+	/*public Bodega BuscarBodega(String IDBodega) throws BodegaNoExiste{
 		int i=0;
-		String id = Integer.toString(IDBodega);
-		while (i<bodegas.length && bodegas[i].getIdBodega().compareTo(id)!=0) {
+		while (i<bodegas.length && bodegas[i].getIDBodega().compareTo(IDBodega)!=0) {
 			i++;	
-		}
-		if (i==bodegas.length) {
-			throw new BodegaNoExiste();
-		}
-		else return bodegas[i];
-	}
-	
-	public Bodega BuscarBodega(String ciudad) throws BodegaNoExiste{
-		int i=0;
-		while(i<bodegas.length && bodegas[i].getCiudad().compareTo(ciudad)!=0) {
-			i++;
 		}
 		if (i==bodegas.length) {
 			throw new BodegaNoExiste();
@@ -322,11 +310,8 @@ public class Empresa implements Serializable{
 	 * @throws UserNoExiste the user no existe
 	 */
 	//Buscar Usuario por User
-	public Persona BuscarUser(String cc) throws EArregloNoInicializado {
+	public Persona BuscarUser(String cc) {
 		int i=0;
-		if (usuarios == null)
-			throw new EArregloNoInicializado();
-			//usuarios = new Persona[0];
 		while (i<usuarios.length && cc.compareTo(usuarios[i].getCc())!=0) {
 			i++;
 		}
@@ -448,12 +433,5 @@ public class Empresa implements Serializable{
 			super("Categoria no encontrada");
 		}
 	}
-	
-	public class EArregloNoInicializado extends Exception{
-		public EArregloNoInicializado() {
-			super ("El arreglo de usuarios no ha sido inicializado");
-		}
-	}
 }
 
-	

@@ -1,5 +1,5 @@
 /**
- * clasesBodega: Empresa.
+ * formsBodega: Empresa.
  * 
  * @author Jorge Luis Soriano Cuevas
  * @version 2.3.2018

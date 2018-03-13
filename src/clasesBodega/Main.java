@@ -34,5 +34,4 @@ public class Main implements Serializable{
 			principal.setVisible(true);
 		}
 	}
-
 }
