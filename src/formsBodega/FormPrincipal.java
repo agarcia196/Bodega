@@ -164,7 +164,7 @@ public class FormPrincipal implements Serializable {
 		JMenuItem mntmIngreso = new JMenuItem("Ingreso");
 		mntmIngreso.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				FormAddProductoCant ingreso = new FormAddProductoCant(empresa);
+				FormAddProductoCant ingreso = new FormAddProductoCant(persona,empresa);
 				ingreso.setVisible(true);
 			}
 		});
