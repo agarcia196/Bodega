@@ -185,7 +185,13 @@ public class FormAddProductoCant extends JFrame implements Serializable {
 					Producto prod=empresa.BuscarProducto(Integer.valueOf(Prod_textField.getText())); //buscar el producto a ingresar
 					bod.addProducto(prod,Integer.parseInt(Cant_textField.getText()));//añadir el producto a la bodega
 					Recursos.WriteFileObjectEmpresa("empresa.dat", empresa);//sobreescribir el archivo de datos de la empresa
-
+					if (bod.getCapacidadMax()<(Double.parseDouble(Cant_textField.getText()))*prod.getVolumen()) {
+						JOptionPane.showMessageDialog(contentPane, "No se puede ingresar la cantidad de productos, la capacidad de la bodega no soporta.");
+					}else {
+						bod.setCapacidadMax(bod.getCapacidadMax()-Double.parseDouble(Cant_textField.getText())
+								*prod.getVolumen());//restar capMax de modega
+					}
+					
 				}catch (BodegaNoExiste e) {
 					JOptionPane.showMessageDialog(contentPane, e.getMessage());
 				}catch (ProductoNoEncontrado e) {

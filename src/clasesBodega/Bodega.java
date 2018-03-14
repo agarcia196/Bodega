@@ -32,7 +32,7 @@ public class Bodega implements Serializable{
 	private Producto [] lista_producto;
 	
 	/** The capacidad max. */
-	private int capacidadMax;
+	private double capacidadMax;
 	
 	/** The seccion. */
 	private String [] seccion;
@@ -68,6 +68,10 @@ public class Bodega implements Serializable{
 		return direccion;
 	}
 	
+	
+
+
+
 	/**
 	 * Gets the id bodega.
 	 *
@@ -91,8 +95,12 @@ public class Bodega implements Serializable{
 	 *
 	 * @return the capacidad max
 	 */
-	public int getCapacidadMax() {
+	public double getCapacidadMax() {
 		return capacidadMax;
+	}
+	
+	public void setCapacidadMax(double d) {
+		this.capacidadMax = d;
 	}
 	
 	/**

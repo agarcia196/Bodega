@@ -59,7 +59,7 @@ public class FormCrearBodega extends JFrame implements Serializable {
 	 */
 	public FormCrearBodega(Persona persona, Empresa empresa) {
 		setTitle("Crear una nueva bodega");
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 482, 405);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));

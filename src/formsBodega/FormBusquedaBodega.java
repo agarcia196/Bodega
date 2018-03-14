@@ -119,7 +119,7 @@ public class FormBusquedaBodega extends JFrame {
 				}
 				String id=Busc_textField.getText();		//capturar datos del textfile
 				if (empresa.getBodegas()==null) {		//comprobar que el vector de bodegas
-					JOptionPane.showMessageDialog(contentPane, "No existen productos");
+					JOptionPane.showMessageDialog(contentPane, "No existen Bodegas");
 				}else {		//si existe el vector
 					int i=0;
 					while(i<empresa.getBodegas().length) {	//recorrer el vector de bodegas para hacer la busqueda
