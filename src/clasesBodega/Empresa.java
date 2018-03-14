@@ -241,10 +241,10 @@ public class Empresa implements Serializable{
 	 * @param capMaxima the cap maxima
 	 */
 	//Agregar bodega	
-	/*public void AddBodega(String IDBodega, String direccion, String ciudad, int capMaxima) {
-		Bodega bodega1 = Bodega();
+	public void AddBodega(String IDBodega, String direccion, String ciudad, int capMaxima) {
+		Bodega bodega1 = new Bodega(IDBodega,direccion,ciudad,capMaxima);
 		if (bodegas==null)
-			bodegas = new bodegas[1];
+			bodegas= new Bodega[1];
 		else 
 			bodegas = Arrays.copyOf(bodegas, bodegas.length+1);
 		bodegas [bodegas.length-1]= bodega1;

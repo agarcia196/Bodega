@@ -25,13 +25,13 @@ public class Bodega implements Serializable{
 
 	/** The ciudad. */
 	private String direccion, idBodega, ciudad;
-	
+
 	/** The lista producto. */
 	private Producto [] lista_producto;
-	
+
 	/** The capacidad max. */
 	private int capacidadMax;
-	
+
 	/** The seccion. */
 	private String [] seccion;
 
@@ -65,7 +65,7 @@ public class Bodega implements Serializable{
 	public String getDireccion() {
 		return direccion;
 	}
-	
+
 	/**
 	 * Gets the id bodega.
 	 *
@@ -74,7 +74,7 @@ public class Bodega implements Serializable{
 	public String getIdBodega() {
 		return idBodega;
 	}
-	
+
 	/**
 	 * Gets the ciudad.
 	 *
@@ -83,7 +83,7 @@ public class Bodega implements Serializable{
 	public String getCiudad() {
 		return ciudad;
 	}
-	
+
 	/**
 	 * Gets the capacidad max.
 	 *
@@ -92,7 +92,7 @@ public class Bodega implements Serializable{
 	public int getCapacidadMax() {
 		return capacidadMax;
 	}
-	
+
 	/**
 	 * Gets the seccion.
 	 *
@@ -101,7 +101,7 @@ public class Bodega implements Serializable{
 	public String[] getSeccion() {
 		return seccion;
 	}
-	
+
 	/**
 	 * Bucar seccion.
 	 *
@@ -120,7 +120,7 @@ public class Bodega implements Serializable{
 			return seccion[i];
 		}
 	}
-	
+
 	/**
 	 * Añadir una seccion.
 	 */
@@ -154,7 +154,7 @@ public class Bodega implements Serializable{
 				producto.getPeso());
 		lista_producto[lista_producto.length-1]= prod;//Añadir producto
 	}
-	
+
 	/**
 	 * Compradeproducto.
 	 *
@@ -176,35 +176,30 @@ public class Bodega implements Serializable{
 			}
 		}else {
 			throw new ProductoNoExistente();
+		}if(lista_producto[i].getCantidad_disponible()==0) {
+			throw new SinProducto();
 		}
-		/*if(lista_producto[i].getCantidad_disponible()<=lista_producto[i].getCantidad_minima()) {
-			throw new ProductoCasiAgotado();
-		}else */{
-			if(lista_producto[i].getCantidad_disponible()==0) {
-				throw new SinProducto();
-			}
-		}
-		
+
 	}
-	
+
 }
 class SinProducto extends Exception{
-	 public SinProducto() {
-		 super("Se agotando el producto");
-	 }	 
+	public SinProducto() {
+		super("Se agotando el producto");
+	}	 
 }
 class ProductoCasiAgotado extends Exception{
-	 public ProductoCasiAgotado() {
-		 super("Se esta agotando su existencia");
-	 }	 
+	public ProductoCasiAgotado() {
+		super("Se esta agotando su existencia");
+	}	 
 }
- class CantidadInsuficiente extends Exception{
-	 public CantidadInsuficiente() {
-		 super("La cantidad de productos es insufucuiente");
-	 }	 
- }
- class ProductoNoExistente extends Exception{
-	 public ProductoNoExistente() {
-		 super("Producto no Existente");
-	 }
+class CantidadInsuficiente extends Exception{
+	public CantidadInsuficiente() {
+		super("La cantidad de productos es insufucuiente");
+	}	 
+}
+class ProductoNoExistente extends Exception{
+	public ProductoNoExistente() {
+		super("Producto no Existente");
+	}
 }

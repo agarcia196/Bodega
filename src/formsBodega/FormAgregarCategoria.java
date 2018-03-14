@@ -1,3 +1,10 @@
+/**
+ * formsBodega: Empresa.
+ * 
+ * @author Jorge Luis Soriano Cuevas
+ * @version 2.3.2018
+ */
+
 package formsBodega;
 
 import java.awt.BorderLayout;
@@ -11,6 +18,7 @@ import javax.swing.border.LineBorder;
 
 import clasesBodega.Empresa;
 import clasesBodega.Persona;
+import clasesBodega.Recursos;
 
 import javax.swing.JTextField;
 import javax.swing.JButton;
@@ -77,6 +85,7 @@ public class FormAgregarCategoria extends JFrame {
 					formProduct.setVisible(true);
 					dispose();
 				}
+				Recursos.WriteFileObjectEmpresa("empresa.dat", empresa);//sobreescribir el archivo de la empresa
 			}
 		});
 		btnAceptar.setBounds(134, 131, 97, 35);
