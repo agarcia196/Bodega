@@ -47,7 +47,7 @@ public class FormAgregarCategoria extends JFrame {
 	 */
 	public FormAgregarCategoria(Persona persona, Empresa empresa) {
 		this.empresa= empresa;
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 383, 226);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -66,6 +66,7 @@ public class FormAgregarCategoria extends JFrame {
 					JOptionPane.showMessageDialog(contentPane, "Debe ingresar un nombre para continuar");
 				}else {
 					empresa.AddCategoria(nombre_textField.getText());
+					dispose();
 				}
 			}
 		});
