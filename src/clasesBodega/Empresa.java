@@ -10,6 +10,8 @@ package clasesBodega;
 import java.io.Serializable;
 import java.util.Arrays;
 
+import Excepciones.ProductoNoEncontrado;
+
 // TODO: Auto-generated Javadoc
 /**
  * The Class Empresa.
@@ -242,9 +244,9 @@ public class Empresa implements Serializable{
 	 */
 	//Agregar bodega	
 	public void AddBodega(String IDBodega, String direccion, String ciudad, int capMaxima) {
-		Bodega bodega1 = new Bodega(IDBodega,direccion,ciudad,capMaxima);
+		Bodega bodega1 = new Bodega(direccion, IDBodega, ciudad, capMaxima);
 		if (bodegas==null)
-			bodegas= new Bodega[1];
+			bodegas = new Bodega[1];
 		else 
 			bodegas = Arrays.copyOf(bodegas, bodegas.length+1);
 		bodegas [bodegas.length-1]= bodega1;
@@ -408,22 +410,7 @@ public class Empresa implements Serializable{
 		}
 	}
 	
-	/**
-	 * The Class ProductoNoEncontrado.
-	 */
-	public class ProductoNoEncontrado extends Exception{
-		
-		/**
-		 * Instantiates a new producto no encontrado.
-		 */
-		public ProductoNoEncontrado() {
-			super("Producto no encontrado");
-		}
-	}
-	
-	/**
-	 * The Class CategoriaNoEncontrada.
-	 */
+
 	public class CategoriaNoEncontrada extends Exception{
 		
 		/**
@@ -433,5 +420,21 @@ public class Empresa implements Serializable{
 			super("Categoria no encontrada");
 		}
 	}
+
+	public void Transferencia(String b1,String b2,int p,int cantidad)throws BodegaNoExiste,ProductoNoEncontrado{
+		Bodega bb1= BuscarBodega(b1);
+		Bodega bb2= BuscarBodega(b2);
+		Producto producto = bb1.BuscarProducto(p);
+		bb1.RemoveProducto(producto, cantidad);
+		Producto producto2= bb2.BuscarProducto(p);
+		if(producto2==null)
+			bb2.addProducto(producto,cantidad);
+		else
+			bb2.addProducto(producto2.getSku(),cantidad);
+
+	}
+	
+	
+	
 }
 

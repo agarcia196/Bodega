@@ -258,15 +258,20 @@ public class FormPrincipalLogin extends JFrame implements Serializable, ActionLi
 						txtApellidoU.getText().compareTo("")==0 || txtCcU.getText().compareTo("")==0 || 
 						txtCorreoU.getText().compareTo("")==0 ||
 						String.valueOf(passwordField.getPassword()).compareTo("") == 0 ||
-						String.valueOf(cpasswordField.getPassword()).compareTo("") == 0 && String.valueOf(passwordField.getPassword()).compareTo(String.valueOf(cpasswordField.getPassword()))==0 ) {
+						String.valueOf(cpasswordField.getPassword()).compareTo("") == 0) {
 						JOptionPane.showMessageDialog(contentPane, "Todos los campos deben rellenarse");
-					} else {
+					}else if(String.valueOf(passwordField.getPassword()).length()<8) {
+						JOptionPane.showMessageDialog(contentPane, "La contraseña debe tener minimo 8 carateres");
+					}else if(String.valueOf(cpasswordField.getPassword()).compareTo(String.valueOf(passwordField.getPassword()))!=0) {
+						JOptionPane.showMessageDialog(contentPane, "Las contraseñas no coinciden");
+					}
+					else {
 						Empresa empresa = new Empresa(txtNombre.getText(),textlogo.getText());
 						Persona p = new Gerente(txtNombreU.getText(), txtApellidoU.getText(), comboBox.getToolTipText(), txtCorreoU.getText(), txtCcU.getText(), cbTipoIDU.getToolTipText(), String.valueOf(passwordField.getPassword()));
 						empresa.AddUser(p);
 						try {
 							Files.copy(FileSystems.getDefault().getPath(RutaImagen),
-								       FileSystems.getDefault().getPath("C:\\Users\\Alexis\\eclipse-workspace\\Proyecto_Bodega\\Imagenes\\"+txtNombre.getText()+".jpg"),
+								       FileSystems.getDefault().getPath("Imagenes\\"+txtNombre.getText()+".jpg"),
 								       StandardCopyOption.REPLACE_EXISTING);
 							Recursos.WriteFileObjectEmpresa("empresa.dat", empresa);
 							dispose();

@@ -16,10 +16,10 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
 
+import Excepciones.ProductoNoEncontrado;
 import clasesBodega.Bodega;
 import clasesBodega.Empresa;
 import clasesBodega.Empresa.BodegaNoExiste;
-import clasesBodega.Empresa.ProductoNoEncontrado;
 import clasesBodega.Persona;
 import clasesBodega.Producto;
 import clasesBodega.Recursos;
@@ -36,13 +36,18 @@ import javax.swing.DefaultComboBoxModel;
 import javax.swing.Icon;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
+import java.io.Serializable;
 import java.awt.event.ActionEvent;
 import java.awt.Toolkit;
 import javax.swing.ImageIcon;
 import javax.swing.JTextArea;
 
-public class FormAddProductoCant extends JFrame {
+public class FormAddProductoCant extends JFrame implements Serializable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 6351524704096647185L;
 	private JPanel contentPane;
 	private Persona persona;
 	private Empresa empresa;
@@ -53,7 +58,7 @@ public class FormAddProductoCant extends JFrame {
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String[] args) {
+	/*public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
@@ -76,7 +81,7 @@ public class FormAddProductoCant extends JFrame {
 	 * Create the frame.
 	 */
 
-	public FormAddProductoCant(/*Persona persona, */Empresa empresa) {
+	public FormAddProductoCant(Persona persona, Empresa empresa) {
 		setResizable(false);
 		this.empresa= empresa;
 		this.persona = persona;

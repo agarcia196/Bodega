@@ -7,6 +7,7 @@
  */
 package clasesBodega;
 
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -96,5 +97,23 @@ public class Recursos implements Serializable {
 			return empresa;
 		}
 	}
+	public static void CopiarImagen(String sourceFile) {
+		try {
+			File inFile = new File(sourceFile);
+			File outFile = new File("Imagenes");
 
+			FileInputStream in = new FileInputStream(inFile);
+			FileOutputStream out = new FileOutputStream(outFile);
+
+			int c;
+			while( (c = in.read() ) != -1)
+				out.write(c);
+
+			in.close();
+			out.close();
+		} catch(IOException e) {
+			System.err.println("Hubo un error de entrada/salida!!!");
+		}
+	}
+	
 }

@@ -138,6 +138,8 @@ public class FormPrincipal implements Serializable {
 		JMenuItem mntmAgregarBodega = new JMenuItem("Crear");
 		mntmAgregarBodega.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+				FormCrearBodega crear=new FormCrearBodega(persona,empresa);
+				crear.setVisible(true);
 			}
 		});
 		mntmAgregarBodega.setFont(new Font("Century Gothic", Font.PLAIN, n3));
@@ -148,6 +150,8 @@ public class FormPrincipal implements Serializable {
 		JMenuItem mntmConsultar = new JMenuItem("Consultar");
 		mntmConsultar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+				FormBusquedaBodega bbodega =new FormBusquedaBodega(empresa, null);
+				bbodega.setVisible(true);
 			}
 		});
 		mntmConsultar.setFont(new Font("Century Gothic", Font.PLAIN, n3));
@@ -165,8 +169,8 @@ public class FormPrincipal implements Serializable {
 		JMenuItem mntmIngreso = new JMenuItem("Ingreso");
 		mntmIngreso.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				//FormAddProductoCant ingreso = new FormAddProductoCant(persona,empresa);
-				//ingreso.setVisible(true);
+				FormAddProductoCant ingreso = new FormAddProductoCant(persona,empresa);
+				ingreso.setVisible(true);
 			}
 		});
 		mntmIngreso.setFont(new Font("Century Gothic", Font.PLAIN, n3));
@@ -178,6 +182,8 @@ public class FormPrincipal implements Serializable {
 		JMenuItem mntmTraslado = new JMenuItem("Traslado");
 		mntmTraslado.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+				FormTraslado traslado = new FormTraslado(empresa, persona);
+				traslado.setVisible(true);
 			}
 		});
 		mntmTraslado.setFont(new Font("Century Gothic", Font.PLAIN, n3));

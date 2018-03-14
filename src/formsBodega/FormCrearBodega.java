@@ -20,10 +20,15 @@ import java.awt.Font;
 import javax.swing.JTextField;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
+import java.io.Serializable;
 import java.awt.event.ActionEvent;
 
-public class FormCrearBodega extends JFrame {
+public class FormCrearBodega extends JFrame implements Serializable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -2296770556119676835L;
 	private JPanel contentPane;
 	private JTextField ID_textField;
 	private JTextField Ciudad_textField;

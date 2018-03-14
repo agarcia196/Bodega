@@ -19,11 +19,6 @@ import javax.swing.JButton;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import javax.swing.ImageIcon;
-import java.awt.Dimension;
-import java.awt.Insets;
-import javax.swing.border.TitledBorder;
-import java.awt.Rectangle;
 
 public class FormBuscarUser extends JFrame implements Serializable {
 
@@ -64,7 +59,8 @@ public class FormBuscarUser extends JFrame implements Serializable {
 		this.empresa = empresa;
 	}
 
-	// Launch the application.
+	/**
+	 * Launch the application.
 	 
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
@@ -79,6 +75,7 @@ public class FormBuscarUser extends JFrame implements Serializable {
 		});
 	}
 
+
 	/**
 	 * Create the frame.
 	 */
@@ -89,23 +86,33 @@ public class FormBuscarUser extends JFrame implements Serializable {
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
-		contentPane.setBounds(new Rectangle(20, 20, 20, 20));
-		contentPane.setBorder(new TitledBorder(null, "Buscador de usuarios", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
 		txtIngreseCedulaPara = new JTextField();
-		txtIngreseCedulaPara.setBounds(12, 22, 277, 23);
+		txtIngreseCedulaPara.setBounds(91, 135, 277, 23);
 		txtIngreseCedulaPara.setFont(new Font("Century Gothic", Font.PLAIN, 13));
+		txtIngreseCedulaPara.setText("Ingrese cedula para buscar usuario");
 		contentPane.add(txtIngreseCedulaPara);
 		txtIngreseCedulaPara.setColumns(10);
 		
 		JButton btnBuscar = new JButton("Buscar");
-		btnBuscar.setIcon(null);
-	
+		btnBuscar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Persona auxp = empresa.BuscarUser(txtIngreseCedulaPara.getText());
+				if(auxp==null) {
+					JOptionPane.showMessageDialog(null, "Usuario No Encontrado");
+				}else {
+					JOptionPane.showMessageDialog(null, "Usuario Encontrado");
+					
+		
+					}
+				}
+		});
 		
 		btnBuscar.setFont(new Font("Century Gothic", Font.PLAIN, 13));
-		btnBuscar.setBounds(301, 21, 97, 25);
+		btnBuscar.setBounds(163, 188, 97, 25);
 		contentPane.add(btnBuscar);
 	}
 }
