@@ -116,14 +116,14 @@ public class FormAddProducto extends JFrame {
 		contentPane.add(lblIngreseTodosLos);
 		
 		Ref_textField = new JTextField();
-		Ref_textField.setBounds(123, 118, 291, 35);
+		Ref_textField.setBounds(121, 118, 291, 35);
 		contentPane.add(Ref_textField);
 		Ref_textField.setColumns(10);
 		Ref_textField.setBackground(Color.decode("#9FA5A5"));
 		Ref_textField.setBorder(new LineBorder(Color.decode("#EDEDED"),2 , true));
 		
 		Peso_textField = new JTextField();
-		Peso_textField.setBounds(107, 183, 288, 22);
+		Peso_textField.setBounds(121, 145, 291, 35);
 		contentPane.add(Peso_textField);
 		Peso_textField.setColumns(10);
 		Peso_textField.setBackground(Color.decode("#9FA5A5"));
@@ -169,6 +169,7 @@ public class FormAddProducto extends JFrame {
 		btnAgregar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				FormAgregarCategoria formCat= new FormAgregarCategoria(persona, empresa);
+				formCat.setVisible(true);
 			}
 		});
 		btnAgregar.setBounds(358, 246, 97, 25);
