@@ -1,5 +1,11 @@
+/**
+ * clasesBodega: Empresa.
+ *
+ * @author Youlvis 
+ * @author Jorge Luis Soriano Cuevas
+ * @version 2.3.2018
+ */
 package clasesBodega;
-//@autor: Youlvis
 
 public class Producto {
 	private int sku,cantidad_disponible;

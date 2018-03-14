@@ -142,16 +142,17 @@ public class Bodega implements Serializable{
 	 * @param cantidad la cantidad
 	 */
 	public void addProducto(Producto producto, int cantidad) {
-		producto.setCantidad_disponible(cantidad);
 		if (lista_producto==null) {							   //Si el arreglo de productos es vacio
 			lista_producto=new Producto[1];					   //se inicializa en 1
 		}else {
-			lista_producto=Arrays.copyOf(lista_producto, lista_producto.length+1);//Aumentar tamaño
-																				  //arreglo
+			lista_producto=Arrays.copyOf(lista_producto, lista_producto.length+1);//Aumentar tamaño arreglo												  
 			//Producto deberia tener dos constructores, uno con cantidad = 0 
 			//y otro con la cantidad pasada como atributo en este metodo
-			lista_producto[lista_producto.length-1]= producto;//Añadir producto
 		}
+		Producto prod= new Producto(cantidad, producto.getReferencia(), producto.getDescripcion(),//crear nuevo
+				producto.getCategoria(), producto.getMarca(), producto.getVolumen(),			  //producto(clonar)
+				producto.getPeso());
+		lista_producto[lista_producto.length-1]= prod;//Añadir producto
 	}
 	
 	/**
@@ -176,9 +177,9 @@ public class Bodega implements Serializable{
 		}else {
 			throw new ProductoNoExistente();
 		}
-		if(lista_producto[i].getCantidad_disponible()<=lista_producto[i].getCantidad_minima()) {
+		/*if(lista_producto[i].getCantidad_disponible()<=lista_producto[i].getCantidad_minima()) {
 			throw new ProductoCasiAgotado();
-		}else {
+		}else */{
 			if(lista_producto[i].getCantidad_disponible()==0) {
 				throw new SinProducto();
 			}
