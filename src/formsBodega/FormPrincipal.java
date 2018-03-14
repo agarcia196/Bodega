@@ -8,6 +8,7 @@ import javax.swing.JFrame;
 import javax.swing.JMenuBar;
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
@@ -195,8 +196,14 @@ public class FormPrincipal implements Serializable {
 		JMenuItem mntmCrear = new JMenuItem("Crear");
 		mntmCrear.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+				if (empresa.getCategoria()==null) {
+					JOptionPane.showMessageDialog(frmBodegas, "No existen categorías, por favor agregue una");
+					FormAgregarCategoria formcat = new FormAgregarCategoria(persona, empresa);
+					formcat.setVisible(true);
+				}else {
 				FormAddProducto crear_producto = new FormAddProducto(persona,empresa);
-				crear_producto.setVisible(true);
+				
+				crear_producto.setVisible(true);}
 			}
 		});
 		mntmCrear.setFont(new Font("Century Gothic", Font.PLAIN, n3));

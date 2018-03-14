@@ -175,7 +175,7 @@ public class Empresa implements Serializable{
 	 * @return the producto
 	 * @throws ProductoNoEncontrado the producto no encontrado
 	 */
-	/*public Producto BuscarProducto(int codigo)throws ProductoNoEncontrado {
+	public Producto BuscarProducto(int codigo)throws ProductoNoEncontrado {
 		int i=0;
 		while (i<productos.length && productos[i].getSku()!=codigo) {
 			i++;
@@ -191,7 +191,7 @@ public class Empresa implements Serializable{
 	 *
 	 * @param categ the categ
 	 */
-	/*public void AddCategoria(String categ) {
+	public void AddCategoria(String categ) {
 		if(categoria==null)
 			categoria=new String[1];
 		else 
@@ -258,9 +258,9 @@ public class Empresa implements Serializable{
 	 * @throws BodegaNoExiste the bodega no existe
 	 */
 	//Buscar bodega
-	/*public Bodega BuscarBodega(String IDBodega) throws BodegaNoExiste{
+	public Bodega BuscarBodega(String IDBodega) throws BodegaNoExiste{
 		int i=0;
-		while (i<bodegas.length && bodegas[i].getIDBodega().compareTo(IDBodega)!=0) {
+		while (i<bodegas.length && bodegas[i].getIdBodega().compareTo(IDBodega)!=0) {
 			i++;	
 		}
 		if (i==bodegas.length) {
