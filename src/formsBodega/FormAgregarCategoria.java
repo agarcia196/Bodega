@@ -83,9 +83,9 @@ public class FormAgregarCategoria extends JFrame {
 					empresa.AddCategoria(nombre_textField.getText());
 					FormAddProducto formProduct = new FormAddProducto(persona, empresa);
 					formProduct.setVisible(true);
-					dispose();
+					Recursos.WriteFileObjectEmpresa("empresa.dat", empresa);//sobreescribir el archivo de la empresa
 				}
-				Recursos.WriteFileObjectEmpresa("empresa.dat", empresa);//sobreescribir el archivo de la empresa
+				dispose();
 			}
 		});
 		btnAceptar.setBounds(134, 131, 97, 35);

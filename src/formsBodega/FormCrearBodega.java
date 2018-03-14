@@ -34,6 +34,9 @@ public class FormCrearBodega extends JFrame implements Serializable {
 	private JTextField Ciudad_textField;
 	private JTextField Direcc_textField;
 	private JTextField CapMax_textField;
+	private String color="#343A41";
+	private String color2="#9FA5A5";
+	private String color3="#27AFA3";
 
 	/**
 	 * Launch the application.
@@ -62,7 +65,7 @@ public class FormCrearBodega extends JFrame implements Serializable {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
-		contentPane.setBackground(Color.decode("#343A41"));
+		contentPane.setBackground(Color.decode(color));
 
 		JLabel lblDatosDeLa = new JLabel("Datos de la bodega");
 		lblDatosDeLa.setForeground(Color.LIGHT_GRAY);
@@ -98,28 +101,28 @@ public class FormCrearBodega extends JFrame implements Serializable {
 		ID_textField.setBounds(173, 70, 258, 35);
 		contentPane.add(ID_textField);
 		ID_textField.setColumns(10);
-		ID_textField.setBackground(Color.decode("#9FA5A5"));
+		ID_textField.setBackground(Color.decode(color2));
 		ID_textField.setBorder(new LineBorder(new Color(237, 237, 237), 3, true));
 
 		Ciudad_textField = new JTextField();
 		Ciudad_textField.setBounds(173, 130, 258, 35);
 		contentPane.add(Ciudad_textField);
 		Ciudad_textField.setColumns(10);
-		Ciudad_textField.setBackground(Color.decode("#9FA5A5"));
+		Ciudad_textField.setBackground(Color.decode(color2));
 		Ciudad_textField.setBorder(new LineBorder(new Color(237, 237, 237), 3, true));
 
 		Direcc_textField = new JTextField();
 		Direcc_textField.setBounds(173, 190, 258, 35);
 		contentPane.add(Direcc_textField);
 		Direcc_textField.setColumns(10);
-		Direcc_textField.setBackground(Color.decode("#9FA5A5"));
+		Direcc_textField.setBackground(Color.decode(color2));
 		Direcc_textField.setBorder(new LineBorder(new Color(237, 237, 237), 3, true));
 
 		CapMax_textField = new JTextField();
 		CapMax_textField.setBounds(173, 250, 258, 35);
 		contentPane.add(CapMax_textField);
 		CapMax_textField.setColumns(10);
-		CapMax_textField.setBackground(Color.decode("#9FA5A5"));
+		CapMax_textField.setBackground(Color.decode(color2));
 		CapMax_textField.setBorder(new LineBorder(new Color(237, 237, 237), 3, true));
 
 		JButton btnAceptar = new JButton("Agregar");
@@ -136,14 +139,14 @@ public class FormCrearBodega extends JFrame implements Serializable {
 						empresa.AddBodega(ID_textField.getText(), Direcc_textField.getText(),
 								Ciudad_textField.getText(),
 								Integer.parseInt(CapMax_textField.getText()));
-						dispose();
+						Recursos.WriteFileObjectEmpresa("empresa.dat", empresa);//sobreescribir el archivo de la empresa
 					}
-					Recursos.WriteFileObjectEmpresa("empresa.dat", empresa);//sobreescribir el archivo de la empresa
+					dispose();
 				}
 			}
 		});
 		btnAceptar.setBounds(184, 310, 97, 35);
 		contentPane.add(btnAceptar);
-		btnAceptar.setBackground(Color.decode("#27AFA3"));
+		btnAceptar.setBackground(Color.decode(color3));
 	}
 }

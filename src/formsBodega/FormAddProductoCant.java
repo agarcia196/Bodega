@@ -54,6 +54,9 @@ public class FormAddProductoCant extends JFrame implements Serializable {
 	private JTextField Cant_textField;
 	private JTextField Prod_textField;
 	private JTextField Bodega_textField;
+	private String color="#343A41";
+	private String color2="#9FA5A5";
+	private String color3="#27AFA3";
 
 	/**
 	 * Launch the application.
@@ -93,7 +96,7 @@ public class FormAddProductoCant extends JFrame implements Serializable {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
-		contentPane.setBackground(Color.decode("#343A41"));
+		contentPane.setBackground(Color.decode(color));
 
 
 		JLabel lblDatosDeProducto = new JLabel("Datos de producto");
@@ -125,7 +128,7 @@ public class FormAddProductoCant extends JFrame implements Serializable {
 		Bodega_textField.setBounds(97, 80, 250, 35);
 		contentPane.add(Bodega_textField);
 		Bodega_textField.setColumns(10);
-		Bodega_textField.setBackground(Color.decode("#9FA5A5"));
+		Bodega_textField.setBackground(Color.decode(color2));
 		Bodega_textField.setBorder(new LineBorder(new Color(237, 237, 237), 3, true));
 
 		Prod_textField = new JTextField();
@@ -133,7 +136,7 @@ public class FormAddProductoCant extends JFrame implements Serializable {
 		Prod_textField.setBounds(97, 140, 250, 35);
 		contentPane.add(Prod_textField);
 		Prod_textField.setColumns(10);
-		Prod_textField.setBackground(Color.decode("#9FA5A5"));
+		Prod_textField.setBackground(Color.decode(color2));
 		Prod_textField.setBorder(new LineBorder(new Color(237, 237, 237), 3, true));
 
 		Cant_textField = new JTextField();
@@ -141,7 +144,7 @@ public class FormAddProductoCant extends JFrame implements Serializable {
 		Cant_textField.setBounds(97, 200, 250, 35);
 		contentPane.add(Cant_textField);
 		Cant_textField.setColumns(10);
-		Cant_textField.setBackground(Color.decode("#9FA5A5"));
+		Cant_textField.setBackground(Color.decode(color2));
 		Cant_textField.setBorder(new LineBorder(new Color(237, 237, 237), 3, true));
 
 		JButton BuscBod_btn = new JButton("Buscar");
@@ -165,8 +168,8 @@ public class FormAddProductoCant extends JFrame implements Serializable {
 		});
 		BuscProd_btn.setBounds(369, 140, 88, 35);
 		contentPane.add(BuscProd_btn);
-		BuscBod_btn.setBackground(Color.decode("#27AFA3"));
-		BuscProd_btn.setBackground(Color.decode("#27AFA3"));
+		BuscBod_btn.setBackground(Color.decode(color3));
+		BuscProd_btn.setBackground(Color.decode(color3));
 
 		JButton btnAadir = new JButton("A\u00F1adir");//acción clic en el boton aceptar
 		btnAadir.setFont(new Font("Century Gothic", Font.PLAIN, 14));
@@ -182,19 +185,19 @@ public class FormAddProductoCant extends JFrame implements Serializable {
 					Producto prod=empresa.BuscarProducto(Integer.valueOf(Prod_textField.getText())); //buscar el producto a ingresar
 					bod.addProducto(prod,Integer.parseInt(Cant_textField.getText()));//añadir el producto a la bodega
 					Recursos.WriteFileObjectEmpresa("empresa.dat", empresa);//sobreescribir el archivo de datos de la empresa
-					dispose();
+
 				}catch (BodegaNoExiste e) {
 					JOptionPane.showMessageDialog(contentPane, e.getMessage());
 				}catch (ProductoNoEncontrado e) {
 					JOptionPane.showMessageDialog(contentPane, e.getMessage());
 				}
 				}
-
+				dispose();
 			}
 		});
 		btnAadir.setBounds(187, 308, 97, 35);
 		contentPane.add(btnAadir);
-		btnAadir.setBackground(Color.decode("#27AFA3"));
+		btnAadir.setBackground(Color.decode(color3));
 	}
 
 	public JTextField getBodega_textField() {
