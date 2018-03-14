@@ -65,8 +65,7 @@ public class FormLogin extends JFrame implements Serializable {
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
-		contentPane.setLayout(null);
-		
+		contentPane.setLayout(null);		
 		
 		JLabel lblNewLabel = new JLabel("Bienvenido");
 		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
