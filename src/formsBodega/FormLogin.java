@@ -1,12 +1,14 @@
 package formsBodega;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.EventQueue;
 import java.io.Serializable;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+import javax.swing.border.LineBorder;
 
 import clasesBodega.Empresa;
 import clasesBodega.Persona;
@@ -38,6 +40,7 @@ public class FormLogin extends JFrame implements Serializable {
 	private JTextField textField;
 	private JPasswordField passwordField;
 	private Empresa empresa;
+	private String color="#27AFA3";
 
 	public Empresa getEmpresa() {
 		return empresa;
@@ -75,24 +78,28 @@ public class FormLogin extends JFrame implements Serializable {
 		
 		JLabel lblUsuario = new JLabel("Usuario:");
 		lblUsuario.setFont(new Font("Century Gothic", Font.ITALIC, 14));
-		lblUsuario.setBounds(10, 162, 79, 22);
+		lblUsuario.setBounds(23, 162, 79, 22);
 		contentPane.add(lblUsuario);
 		
 		textField = new JTextField();
+		textField.setBorder(new LineBorder(Color.decode(color), 3, true));
 		textField.setBounds(118, 161, 158, 29);
 		contentPane.add(textField);
 		textField.setColumns(10);	
 		
 		JLabel lblContrasea = new JLabel("Contrase\u00F1a:");
 		lblContrasea.setFont(new Font("Century Gothic", Font.ITALIC, 14));
-		lblContrasea.setBounds(10, 219, 98, 26);
+		lblContrasea.setBounds(23, 218, 85, 26);
 		contentPane.add(lblContrasea);
 		
 		passwordField = new JPasswordField();
+		passwordField.setBorder(new LineBorder(Color.decode(color), 3, true));
 		passwordField.setBounds(118, 219, 158, 29);
 		contentPane.add(passwordField);
 		
 		JButton btnIngresar = new JButton("Ingresar");
+		btnIngresar.setBackground(Color.WHITE);
+		btnIngresar.setForeground(Color.BLACK);
 		btnIngresar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				Persona auxp = empresa.BuscarUser(textField.getText());
