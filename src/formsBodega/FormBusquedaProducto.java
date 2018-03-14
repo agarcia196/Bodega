@@ -8,11 +8,13 @@
 package formsBodega;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+import javax.swing.border.LineBorder;
 import javax.swing.table.DefaultTableModel;
 
 import clasesBodega.Empresa;
@@ -56,18 +58,20 @@ public class FormBusquedaProducto extends JFrame {
 	 * Create the frame.
 	 */
 	public FormBusquedaProducto(Empresa empresa, JTextField Prod_textField) {
+		setResizable(false);
 		this.empresa=empresa;
 		setIconImage(Toolkit.getDefaultToolkit().getImage("C:\\Java Estructuras\\Bodega\\png\\searching-magnifying-glass.png"));
 		setTitle("Seleccionar producto");
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		setBounds(100, 100, 702, 645);
+		setBounds(100, 100, 702, 665);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
+		contentPane.setBackground(Color.decode("#343A41"));
 
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(12, 80, 660, 453);
+		scrollPane.setBounds(10, 104, 660, 453);
 		contentPane.add(scrollPane);
 
 		String[] titulos= {"SKU", "Referencia", "Categoría"};//crear vector de titulos 
@@ -76,11 +80,13 @@ public class FormBusquedaProducto extends JFrame {
 		scrollPane.setViewportView(table);
 
 		JLabel lblBuscar = new JLabel("Buscar:");
+		lblBuscar.setForeground(Color.LIGHT_GRAY);
 		lblBuscar.setFont(new Font("Century Gothic", Font.ITALIC, 14));
-		lblBuscar.setBounds(10, 47, 73, 16);
+		lblBuscar.setBounds(10, 65, 73, 16);
 		contentPane.add(lblBuscar);
 
 		JButton btnBuscar = new JButton("Buscar");
+		btnBuscar.setFont(new Font("Century Gothic", Font.PLAIN, 14));
 		btnBuscar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				int numFilas = modeloTable.getRowCount();
@@ -93,16 +99,16 @@ public class FormBusquedaProducto extends JFrame {
 				}else {
 					int i=0;
 					while(i<empresa.getProductos().length) {	//recorrer el vector de productos para buscar
-						if(Integer.toString(empresa.getProductos()[i].getSku()).contains(prod)|| //buscar por sku
-								empresa.getProductos()[i].getReferencia().contains(prod)||		 //busccar por referencia
-								empresa.getProductos()[i].getCategoria().contains(prod)) {		 //buscar por categoría
+						if(Integer.toString(empresa.getProductos()[i].getSku()).toLowerCase().contains(prod)|| //buscar por sku
+								empresa.getProductos()[i].getReferencia().toLowerCase().contains(prod)||		 //busccar por referencia
+								empresa.getProductos()[i].getCategoria().toLowerCase().contains(prod)) {		 //buscar por categoría
 							String [] model= {Integer.toString(empresa.getProductos()[i].getSku()), //generar modelo para agregar filas
 									empresa.getProductos()[i].getReferencia(), empresa.getProductos()[i].getCategoria()};
 							modeloTable.addRow(model);			//ingresar modelo a la tabla en una nueva fila
 						}
 						i++;
 					}
-					if (i==empresa.getProductos().length) { //comprobar si logró encontrar coincidencias
+					if (i<empresa.getProductos().length) { //comprobar si logró encontrar coincidencias
 						JOptionPane.showMessageDialog(contentPane, "No es posible encontrar producto, por favor verifique");
 					}
 				}
@@ -110,13 +116,18 @@ public class FormBusquedaProducto extends JFrame {
 		});
 
 		Busc_textField = new JTextField();
-		Busc_textField.setBounds(95, 45, 350, 22);
+		Busc_textField.setFont(new Font("Century Gothic", Font.PLAIN, 14));
+		Busc_textField.setBounds(95, 56, 350, 35);
 		contentPane.add(Busc_textField);
 		Busc_textField.setColumns(10);
-		btnBuscar.setBounds(482, 44, 97, 25);
+		Busc_textField.setBackground(Color.decode("#9FA5A5"));
+		Busc_textField.setBorder(new LineBorder(new Color(237, 237, 237), 3, true));
+		btnBuscar.setBounds(482, 56, 97, 35);
 		contentPane.add(btnBuscar);
+		btnBuscar.setBackground(Color.decode("#27AFA3"));
 
 		JButton btnAceptar = new JButton("Aceptar");
+		btnAceptar.setFont(new Font("Century Gothic", Font.PLAIN, 14));
 		btnAceptar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if(table.getSelectedRow()==-1) {			//comprobar que se seleccione una fila
@@ -127,7 +138,14 @@ public class FormBusquedaProducto extends JFrame {
 				}
 			}
 		});
-		btnAceptar.setBounds(272, 560, 97, 25);
+		btnAceptar.setBounds(272, 570, 97, 35);
 		contentPane.add(btnAceptar);
+		btnAceptar.setBackground(Color.decode("#27AFA3"));
+		
+		JLabel lblIngreseCategoraO = new JLabel("Ingrese categor\u00EDa, referencia o SKU");
+		lblIngreseCategoraO.setForeground(Color.LIGHT_GRAY);
+		lblIngreseCategoraO.setFont(new Font("Century Gothic", Font.ITALIC, 14));
+		lblIngreseCategoraO.setBounds(10, 13, 263, 30);
+		contentPane.add(lblIngreseCategoraO);
 	}
 }

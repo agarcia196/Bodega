@@ -8,11 +8,13 @@
 package formsBodega;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+import javax.swing.border.LineBorder;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.text.AbstractDocument.Content;
 
@@ -72,6 +74,7 @@ public class FormBusquedaBodega extends JFrame {
 	 */
 
 	public FormBusquedaBodega(Empresa empresa, JTextField bodega_textField) {
+		setResizable(false);
 		this.empresa=empresa;
 		this.bodega_textField=bodega_textField;
 		setIconImage(Toolkit.getDefaultToolkit().getImage("C:\\Java Estructuras\\Bodega\\png\\searching-magnifying-glass.png"));
@@ -79,18 +82,20 @@ public class FormBusquedaBodega extends JFrame {
 		this.empresa= empresa;
 		this.bodega_textField=bodega_textField;
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		setBounds(100, 100, 702, 645);
+		setBounds(100, 100, 702, 665);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
+		contentPane.setBackground(Color.decode("#343A41"));
 
 		JLabel lblBuscarPorId = new JLabel("Buscar:");
+		lblBuscarPorId.setForeground(Color.LIGHT_GRAY);
 		lblBuscarPorId.setFont(new Font("Century Gothic", Font.ITALIC, 14));
-		lblBuscarPorId.setBounds(10, 47, 73, 16);
+		lblBuscarPorId.setBounds(10, 65, 73, 16);
 		contentPane.add(lblBuscarPorId);
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(12, 80, 660, 453);
+		scrollPane.setBounds(10, 104, 660, 453);
 		contentPane.add(scrollPane);
 		String [] titulos = {"ID Bodega", "Ciudad", "Dirección"};	//crear vector con titulos de la tabla
 		DefaultTableModel modeloTable= new DefaultTableModel(titulos,0); //crear modelo con el vector de titulos
@@ -99,9 +104,11 @@ public class FormBusquedaBodega extends JFrame {
 		scrollPane.setViewportView(table_1);
 
 		Busc_textField = new JTextField();
-		Busc_textField.setBounds(95, 45, 350, 22);
+		Busc_textField.setBounds(95, 56, 350, 35);
 		contentPane.add(Busc_textField);
 		Busc_textField.setColumns(10);
+		Busc_textField.setBackground(Color.decode("#9FA5A5"));
+		Busc_textField.setBorder(new LineBorder(new Color(237, 237, 237), 3, true));
 
 		JButton btnBuscar = new JButton("Buscar");
 		btnBuscar.addActionListener(new ActionListener() {
@@ -124,14 +131,15 @@ public class FormBusquedaBodega extends JFrame {
 						}
 						i++;
 					}
-					if (i==empresa.getBodegas().length) {		//comprobar si encontro la bodega
+					if (i<empresa.getBodegas().length) {		//comprobar si encontro la bodega
 						JOptionPane.showMessageDialog(contentPane, "No se puede encontrar, intente nuevamente");
 					}
 				}
 			}
 		});
-		btnBuscar.setBounds(482, 44, 97, 25);
+		btnBuscar.setBounds(482, 56, 97, 35);
 		contentPane.add(btnBuscar);
+		btnBuscar.setBackground(Color.decode("#27AFA3"));
 
 
 		JButton btnAceptar = new JButton("Aceptar");
@@ -145,10 +153,12 @@ public class FormBusquedaBodega extends JFrame {
 					dispose();}
 			}
 		});
-		btnAceptar.setBounds(286, 560, 97, 25);
+		btnAceptar.setBounds(272, 570, 97, 35);
 		contentPane.add(btnAceptar);
+		btnAceptar.setBackground(Color.decode("#27AFA3"));
 
 		JLabel lblPuedeBuscarPor = new JLabel("Puede buscar por ID de bodega o por ciudad.");
+		lblPuedeBuscarPor.setForeground(Color.LIGHT_GRAY);
 		lblPuedeBuscarPor.setFont(new Font("Century Gothic", Font.ITALIC, 14));
 		lblPuedeBuscarPor.setBounds(10, 13, 423, 16);
 		contentPane.add(lblPuedeBuscarPor);

@@ -159,13 +159,13 @@ public class Empresa implements Serializable{
 	 * @return the string
 	 * @throws CategoriaNoEncontrada the categoria no encontrada
 	 */
-	public void AddProducto(int cantidad_disponible, String referencia, String descripcion, String categoria,
+	public void AddProducto(int cantidad_disponible, String referencia, String descripcion, String categoria, String marca,
 			double volumen, double peso) {
 		if(productos==null)
 			productos=new Producto[1];
 		else 
 			productos=Arrays.copyOf(productos,productos.length+1);
-		productos[productos.length-1]= new Producto(cantidad_disponible,referencia,descripcion,categoria,volumen,peso);
+		productos[productos.length-1]= new Producto(cantidad_disponible,referencia,descripcion,categoria, marca,volumen,peso);
 	}
 	
 	/**

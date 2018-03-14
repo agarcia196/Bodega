@@ -3,13 +3,13 @@ package clasesBodega;
 
 public class Producto {
 	private int sku,cantidad_disponible;
-	private String referencia,descripcion,categoria;
+	private String referencia,descripcion,categoria, marca;
 	private double volumen,peso;
 	
-	public Producto(int cantidad_disponible, String referencia, String descripcion, String categoria,
+	public Producto(int cantidad_disponible, String referencia, String descripcion, String categoria, String marca,
 			double volumen, double peso) {
 		super();
-		this.sku = sku;//codigo del producto
+		this.marca=marca;
 		this.cantidad_disponible = cantidad_disponible;
 		this.referencia = referencia;
 		this.descripcion = descripcion;
@@ -20,6 +20,14 @@ public class Producto {
 
 	public int getCantidad_disponible() {
 		return cantidad_disponible;
+	}
+
+	public String getMarca() {
+		return marca;
+	}
+
+	public void setMarca(String marca) {
+		this.marca = marca;
 	}
 
 	public void setCantidad_disponible(int cantidad_disponible) {

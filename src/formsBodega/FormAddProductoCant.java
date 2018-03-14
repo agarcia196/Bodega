@@ -8,11 +8,13 @@
 package formsBodega;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+import javax.swing.border.LineBorder;
 
 import clasesBodega.Bodega;
 import clasesBodega.Empresa;
@@ -51,98 +53,118 @@ public class FormAddProductoCant extends JFrame {
 	/**
 	 * Launch the application.
 	 */
-/*	public static void main(String[] args) {
+	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					Persona per=new Persona();
+					//Persona per=new Persona();
 					Empresa empresa=new Empresa();
 					Bodega bodega1= new Bodega("bodega1", "1234", "df",0);
 					Bodega bodega2=new Bodega("Bodega2", "123", "sdf",0);
 					Bodega [] bode= {bodega1,bodega2};
 					empresa.setBodegas(bode);
-					FormAddProductoCant frame = new FormAddProductoCant(persona, empresa);
+					FormAddProductoCant frame = new FormAddProductoCant( empresa);
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
 			}
 		});
-	}*/
+	}
 
 	/**
 	 * Create the frame.
 	 */
 
-	public FormAddProductoCant(Persona persona, Empresa empresa) {
+	public FormAddProductoCant(/*Persona persona, */Empresa empresa) {
+		setResizable(false);
 		this.empresa= empresa;
 		this.persona = persona;
 		setIconImage(Toolkit.getDefaultToolkit().getImage("C:\\Java Estructuras\\Bodega\\png\\forward-arrow.png"));
 		setTitle("Ingresar producto");
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		setBounds(100, 100, 475, 370);
+		setBounds(100, 100, 475, 442);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
+		contentPane.setBackground(Color.decode("#343A41"));
 
 
 		JLabel lblDatosDeProducto = new JLabel("Datos de producto");
+		lblDatosDeProducto.setForeground(Color.LIGHT_GRAY);
 		lblDatosDeProducto.setFont(new Font("Century Gothic", Font.BOLD, 25));
 		lblDatosDeProducto.setBounds(108, 13, 239, 55);
 		contentPane.add(lblDatosDeProducto);
 
 		JLabel lblBodega = new JLabel("Bodega:");
+		lblBodega.setForeground(Color.LIGHT_GRAY);
 		lblBodega.setFont(new Font("Century Gothic", Font.ITALIC, 14));
-		lblBodega.setBounds(12, 83, 63, 19);
+		lblBodega.setBounds(12, 80, 63, 19);
 		contentPane.add(lblBodega);
 
 		JLabel lblProducto = new JLabel("Producto:");
+		lblProducto.setForeground(Color.LIGHT_GRAY);
 		lblProducto.setFont(new Font("Century Gothic", Font.ITALIC, 14));
 		lblProducto.setBounds(12, 140, 88, 16);
 		contentPane.add(lblProducto);
 
 		JLabel lblCatidad = new JLabel("Cantidad:");
+		lblCatidad.setForeground(Color.LIGHT_GRAY);
 		lblCatidad.setFont(new Font("Century Gothic", Font.ITALIC, 14));
-		lblCatidad.setBounds(12, 190, 73, 16);
+		lblCatidad.setBounds(12, 200, 73, 16);
 		contentPane.add(lblCatidad);
 
 		Bodega_textField = new JTextField();
-		Bodega_textField.setBounds(108, 82, 250, 20);
+		Bodega_textField.setFont(new Font("Century Gothic", Font.PLAIN, 14));
+		Bodega_textField.setBounds(97, 80, 250, 35);
 		contentPane.add(Bodega_textField);
 		Bodega_textField.setColumns(10);
+		Bodega_textField.setBackground(Color.decode("#9FA5A5"));
+		Bodega_textField.setBorder(new LineBorder(new Color(237, 237, 237), 3, true));
 
 		Prod_textField = new JTextField();
-		Prod_textField.setBounds(108, 138, 250, 22);
+		Prod_textField.setFont(new Font("Century Gothic", Font.PLAIN, 14));
+		Prod_textField.setBounds(97, 140, 250, 35);
 		contentPane.add(Prod_textField);
 		Prod_textField.setColumns(10);
+		Prod_textField.setBackground(Color.decode("#9FA5A5"));
+		Prod_textField.setBorder(new LineBorder(new Color(237, 237, 237), 3, true));
 
 		Cant_textField = new JTextField();
-		Cant_textField.setBounds(108, 188, 264, 22);
+		Cant_textField.setFont(new Font("Century Gothic", Font.PLAIN, 14));
+		Cant_textField.setBounds(97, 200, 250, 35);
 		contentPane.add(Cant_textField);
 		Cant_textField.setColumns(10);
+		Cant_textField.setBackground(Color.decode("#9FA5A5"));
+		Cant_textField.setBorder(new LineBorder(new Color(237, 237, 237), 3, true));
 
-		JButton BuscBod_btn = new JButton(".");
+		JButton BuscBod_btn = new JButton("Buscar");
+		BuscBod_btn.setFont(new Font("Century Gothic", Font.PLAIN, 14));
 		BuscBod_btn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				FormBusquedaBodega verFormbodega= new FormBusquedaBodega(empresa, Bodega_textField );
 				verFormbodega.setVisible(true);
 			}
 		});
-		BuscBod_btn.setBounds(384, 81, 43, 25);
+		BuscBod_btn.setBounds(369, 80, 88, 35);
 		contentPane.add(BuscBod_btn);
 
-		JButton BuscProd_btn = new JButton(".");
+		JButton BuscProd_btn = new JButton("Buscar");
+		BuscProd_btn.setFont(new Font("Century Gothic", Font.PLAIN, 14));
 		BuscProd_btn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				FormBusquedaProducto verFormProducto= new FormBusquedaProducto(empresa,Prod_textField);
 				verFormProducto.setVisible(true);
 			}
 		});
-		BuscProd_btn.setBounds(384, 137, 43, 25);
+		BuscProd_btn.setBounds(369, 140, 88, 35);
 		contentPane.add(BuscProd_btn);
+		BuscBod_btn.setBackground(Color.decode("#27AFA3"));
+		BuscProd_btn.setBackground(Color.decode("#27AFA3"));
 
 		JButton btnAadir = new JButton("A\u00F1adir");//acción clic en el boton aceptar
+		btnAadir.setFont(new Font("Century Gothic", Font.PLAIN, 14));
 		btnAadir.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				int alerta=JOptionPane.showConfirmDialog(contentPane, "¿Desea guardar?");
@@ -165,8 +187,9 @@ public class FormAddProductoCant extends JFrame {
 
 			}
 		});
-		btnAadir.setBounds(183, 236, 97, 25);
+		btnAadir.setBounds(187, 308, 97, 35);
 		contentPane.add(btnAadir);
+		btnAadir.setBackground(Color.decode("#27AFA3"));
 	}
 
 	public JTextField getBodega_textField() {
