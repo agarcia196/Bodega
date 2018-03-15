@@ -262,6 +262,20 @@ public class Empresa implements Serializable{
 			usuarios= Arrays.copyOf(usuarios, usuarios.length+1);
 		usuarios[usuarios.length-1]=p;
 	}
+	public void AddUser(String nombre,String apellido,String genero,String correo,String cc,String tipoid,String pwd,String cargo) {
+		if(usuarios==null) {
+			usuarios = new Persona[1];
+		}else {
+			usuarios= Arrays.copyOf(usuarios, usuarios.length+1);
+		if(cargo.compareTo("G")==0) {
+			Persona p=new Gerente(nombre,apellido,genero,correo,cc,tipoid,pwd);
+			usuarios[usuarios.length-1]=p;
+		}else {
+			Persona p=new Bodeguero(nombre,apellido,genero,correo,cc,tipoid,pwd);
+			usuarios[usuarios.length-1]=p;
+			}
+		}
+	}
 	
 	/**
 	 * Buscar user.
