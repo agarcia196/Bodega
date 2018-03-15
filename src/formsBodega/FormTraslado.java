@@ -10,6 +10,7 @@ import clasesBodega.Bodega;
 import clasesBodega.Empresa;
 import clasesBodega.Persona;
 import clasesBodega.Producto;
+import clasesBodega.Recursos;
 
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -269,6 +270,7 @@ public class FormTraslado extends JFrame implements Serializable {
 						i++;
 					}
 					JOptionPane.showMessageDialog(contentPane, "Se ha Realizado correctamente");
+					Recursos.WriteFileObjectEmpresa("empresa.dat", empresa);
 					dispose();
 				}
 			}

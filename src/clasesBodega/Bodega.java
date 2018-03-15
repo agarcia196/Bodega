@@ -154,6 +154,9 @@ public class Bodega implements Serializable{
 	 * @return the producto
 	 */
 	public Producto BuscarProducto(int sku) {
+		if(lista_producto==null)
+			return null;
+		else {
 		int i=0;
 		while(i<lista_producto.length && lista_producto[i].getSku()!=sku) {
 			i++;
@@ -162,7 +165,7 @@ public class Bodega implements Serializable{
 			return null;
 		}
 		else
-			return lista_producto[i];
+			return lista_producto[i];}
 	}
 	/**
 	 * Añadir the producto.
