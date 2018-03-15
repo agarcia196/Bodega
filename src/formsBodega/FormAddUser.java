@@ -72,7 +72,6 @@ public class FormAddUser extends JFrame implements Serializable {
 					frame.setVisible(true);
 				
 	}
-
 	/**
 	 * Create the frame.
 	 */

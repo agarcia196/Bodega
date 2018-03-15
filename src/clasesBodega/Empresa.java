@@ -253,8 +253,6 @@ public class Empresa implements Serializable{
 		else return bodegas[i];
 	}
 
-
-	
 	public void AddUser(Persona p) {
 		if(usuarios==null)
 			usuarios = new Persona[1];
