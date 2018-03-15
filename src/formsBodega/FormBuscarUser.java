@@ -22,6 +22,10 @@ import java.awt.event.ActionListener;
 
 public class FormBuscarUser extends JFrame implements Serializable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -3907153524750045967L;
 	private JPanel contentPane;
 	private JTextField txtIngreseCedulaPara;
 	private Persona persona;

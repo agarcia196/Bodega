@@ -40,10 +40,6 @@ public class Empresa implements Serializable{
 	
 	public Empresa(String nombre,String logo) {
 		super();
-		this.productos = new Producto[0];
-		this.bodegas = new Bodega [0];
-		this.categoria = new String [0];
-		this.usuarios = new Persona[0];
 		this.nombre = nombre;
 		this.logo=logo;
 	}

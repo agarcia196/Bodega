@@ -53,11 +53,13 @@ public class Bodega implements Serializable{
 		this.idBodega = idBodega;
 		this.ciudad = ciudad;
 		this.capacidadMax = capacidadMax;
-		lista_producto = new Producto[0];
-		seccion= new String[0];
 	}
 
 
+
+	public void setCapacidadMax(double capacidadMax) {
+		this.capacidadMax = capacidadMax;
+	}
 
 	/**
 	 * Gets the direccion.
@@ -68,10 +70,6 @@ public class Bodega implements Serializable{
 		return direccion;
 	}
 	
-	
-
-
-
 	/**
 	 * Gets the id bodega.
 	 *
@@ -99,10 +97,6 @@ public class Bodega implements Serializable{
 		return capacidadMax;
 	}
 	
-	public void setCapacidadMax(double d) {
-		this.capacidadMax = d;
-	}
-	
 	/**
 	 * Gets the seccion.
 	 *
@@ -112,6 +106,18 @@ public class Bodega implements Serializable{
 		return seccion;
 	}
 	
+	public Producto[] getLista_producto() {
+		return lista_producto;
+	}
+
+
+
+	public void setLista_producto(Producto[] lista_producto) {
+		this.lista_producto = lista_producto;
+	}
+
+
+
 	/**
 	 * Bucar seccion.
 	 *

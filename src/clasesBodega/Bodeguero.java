@@ -7,11 +7,18 @@
  */
 package clasesBodega;
 
+import java.io.Serializable;
+
 // TODO: Auto-generated Javadoc
 /**
  * The Class Bodeguero.
  */
-public class Bodeguero extends Persona{//Esta clase ereda de la clase Persona
+public class Bodeguero extends Persona implements Serializable{/**
+	 * 
+	 */
+	private static final long serialVersionUID = -4242783886175738953L;
+
+//Esta clase ereda de la clase Persona
 	
 	/**
  * Instantiates a new bodeguero.

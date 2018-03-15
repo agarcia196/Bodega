@@ -202,13 +202,13 @@ public class FormPrincipal implements Serializable {
 		JMenuItem mntmCrear = new JMenuItem("Crear");
 		mntmCrear.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+				
 				if (empresa.getCategoria()==null) {
 					JOptionPane.showMessageDialog(frmBodegas, "No existen categorías, por favor agregue una");
 					FormAgregarCategoria formcat = new FormAgregarCategoria(persona, empresa);
 					formcat.setVisible(true);
-				}else {
-				FormAddProducto crear_producto = new FormAddProducto(persona,empresa);
-				
+				}else { 
+					FormAddProducto crear_producto = new FormAddProducto(persona,empresa);
 				crear_producto.setVisible(true);}
 			}
 		});

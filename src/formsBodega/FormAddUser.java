@@ -2,13 +2,18 @@ package formsBodega;
 
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
+import java.io.Serializable;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
-public class FormAddUser extends JFrame {
+public class FormAddUser extends JFrame implements Serializable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -7999787811931911821L;
 	private JPanel contentPane;
 
 	/**

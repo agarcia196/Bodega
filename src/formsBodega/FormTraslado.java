@@ -46,6 +46,7 @@ public class FormTraslado extends JFrame implements Serializable {
 	private JTextField txtcantidad;
 	private JTable table;
 	private Producto [] productos;
+	private Bodega bodega;
 	/**
 	 * Launch the application.
 	 */
@@ -100,6 +101,7 @@ public class FormTraslado extends JFrame implements Serializable {
 		contentPane.add(BodegaOrigen);
 		BodegaOrigen.setColumns(10);
 		
+		
 		BodegaDestino = new JTextField();
 		BodegaDestino.setFont(new Font("Century Gothic", Font.PLAIN, 13));
 		BodegaDestino.setBounds(165, 92, 130, 20);
@@ -109,10 +111,18 @@ public class FormTraslado extends JFrame implements Serializable {
 		JButton btnBuscarO = new JButton("Buscar");
 		btnBuscarO.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+				if(empresa.getBodegas()==null) {
+					JOptionPane.showMessageDialog(contentPane, "Por favor crear bodega");
+					FormCrearBodega crear = new FormCrearBodega(persona, empresa);
+					crear.setVisible(true);
+				}else {
 				FormBusquedaBodega verFormbodega= new FormBusquedaBodega(empresa, BodegaOrigen );
 				verFormbodega.setVisible(true);
-			}
-		});
+				
+
+				}
+				}
+			});
 		btnBuscarO.setFont(new Font("Century Gothic", Font.PLAIN, 13));
 		btnBuscarO.setBounds(305, 55, 89, 23);
 		contentPane.add(btnBuscarO);
@@ -120,9 +130,14 @@ public class FormTraslado extends JFrame implements Serializable {
 		JButton btnBuscarD = new JButton("Buscar");
 		btnBuscarD.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+				if(empresa.getBodegas()==null||empresa.getBodegas().length<2) {
+					JOptionPane.showMessageDialog(contentPane, "No hay bodegas o son insuficientes");
+					FormCrearBodega crear = new FormCrearBodega(persona, empresa);
+					crear.setVisible(true);
+				}else {
 				FormBusquedaBodega verFormbodega= new FormBusquedaBodega(empresa, BodegaDestino );
 				verFormbodega.setVisible(true);
-			}
+			}}
 		});
 		btnBuscarD.setFont(new Font("Century Gothic", Font.PLAIN, 13));
 		btnBuscarD.setBounds(305, 91, 89, 23);
@@ -161,9 +176,35 @@ public class FormTraslado extends JFrame implements Serializable {
 		JButton btnBuscar = new JButton("Buscar");
 		btnBuscar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				FormBusquedaProducto producto = new FormBusquedaProducto(empresa, txtproducto);
-				producto.setVisible(true);
-			}
+				try {
+					if(BodegaOrigen.getText().compareTo("")==0) {
+						JOptionPane.showMessageDialog(contentPane, "Seleccione la bodega de origen");
+					}else {
+						if(bodega==null && BodegaOrigen.getText().compareTo("")!=0) {
+							bodega = empresa.BuscarBodega(BodegaOrigen.getText());
+						}
+						System.out.println(bodega.getIdBodega());
+						if(bodega.getLista_producto()==null) {
+							int validar= JOptionPane.showConfirmDialog(contentPane,
+									"Debe ingresar un producto para continua, ¿Desea hacerlo?");
+							if(validar == 0) {
+								if (empresa.getCategoria()==null) {
+									JOptionPane.showMessageDialog(contentPane, "No existen categorías, por favor agregue una");
+									FormAgregarCategoria formcat = new FormAgregarCategoria(persona, empresa);
+									formcat.setVisible(true);
+								}else { 
+									FormAddProductoCant ingreso = new FormAddProductoCant(persona,empresa);
+									ingreso.setVisible(true);}
+							}					
+						}
+						else {
+							FormBusquedaProductoconBodega producto = new FormBusquedaProductoconBodega(bodega, txtproducto);
+							producto.setVisible(true);}
+					} 
+				}catch (BodegaNoExiste e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}}
 		});
 		
 		JButton btnAgregar = new JButton("Agregar");
@@ -171,23 +212,17 @@ public class FormTraslado extends JFrame implements Serializable {
 			public void actionPerformed(ActionEvent arg0) {
 			/*	Producto pp= new Producto(3, "TTTT", "JuAN", "Camiones", "title", 23, 60);
 				productos= new Producto[1];
-				productos[0]=pp;*/
-				Bodega b1;
-				try {
-					b1 = empresa.BuscarBodega(BodegaOrigen.getText());
-					Producto p= b1.BuscarProducto(Integer.parseInt(txtproducto.getText()));
-					if(productos==null) {
-						productos= new Producto[1];
-					}
-					else {
-						productos= Arrays.copyOf(productos, productos.length+1);
-						productos[productos.length-1]=p;}
-				} catch (BodegaNoExiste e) {
-					// TODO Auto-generated catch block
-					JOptionPane.showMessageDialog(contentPane, e.getMessage());
-				}		
-					
+				productos[0]=pp;*/	
 				
+				Producto p= bodega.BuscarProducto(Integer.parseInt(txtproducto.getText()));
+				if(productos==null) {
+					productos= new Producto[1];
+				}
+				else {
+					productos= Arrays.copyOf(productos, productos.length+1);
+					productos[productos.length-1]=p;}
+
+
 				int i=0;
 				while(i<productos.length) {	//recorrer el vector de bodegas para hacer la busqueda
 						String [] model = {Integer.toString(productos[i].getSku()),productos[i].getMarca(),productos[i].getReferencia(),Integer.toString(productos[i].getCantidad_disponible())}; //crear modelo para agregar filas

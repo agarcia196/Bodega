@@ -32,6 +32,7 @@ import javax.swing.AbstractAction;
 import javax.swing.Action;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
+import java.io.Serializable;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.awt.event.ActionEvent;
@@ -42,8 +43,12 @@ import java.awt.Font;
 import javax.swing.JComboBox;
 import java.awt.Toolkit;
 
-public class FormBusquedaBodega extends JFrame {
+public class FormBusquedaBodega extends JFrame implements Serializable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1015505282670549380L;
 	private JPanel contentPane;
 	private Empresa empresa;
 	private Persona persona;

@@ -17,6 +17,7 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
 import javax.swing.table.DefaultTableModel;
 
+import clasesBodega.Bodega;
 import clasesBodega.Empresa;
 
 import javax.swing.JScrollPane;
@@ -32,16 +33,16 @@ import java.awt.event.ActionListener;
 import java.io.Serializable;
 import java.awt.event.ActionEvent;
 
-public class FormBusquedaProducto extends JFrame implements Serializable{
+public class FormBusquedaProductoconBodega extends JFrame implements Serializable {
 
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = -8557815956198767805L;
+	private static final long serialVersionUID = -1244579147619308923L;
 	private JPanel contentPane;
 	private JTable table;
 	private JTextField Busc_textField;
-	private Empresa empresa;
+	private Bodega bodega;
 
 	/**
 	 * Launch the application.
@@ -62,9 +63,9 @@ public class FormBusquedaProducto extends JFrame implements Serializable{
 	/**
 	 * Create the frame.
 	 */
-	public FormBusquedaProducto(Empresa empresa, JTextField Prod_textField) {
+	public FormBusquedaProductoconBodega(Bodega bodega, JTextField Prod_textField) {
 		setResizable(false);
-		this.empresa=empresa;
+		this.bodega=bodega;
 		setIconImage(Toolkit.getDefaultToolkit().getImage("C:\\Java Estructuras\\Bodega\\png\\searching-magnifying-glass.png"));
 		setTitle("Seleccionar producto");
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -99,21 +100,21 @@ public class FormBusquedaProducto extends JFrame implements Serializable{
 					modeloTable.removeRow(i);
 				}
 				String prod = Busc_textField.getText();			//capturar el tecto del textfile
-				if (empresa.getProductos()==null) {				//comprobar si existe el vector de productos
+				if (bodega.getLista_producto()==null) {				//comprobar si existe el vector de productos
 					JOptionPane.showMessageDialog(contentPane, "No existen productos");//alerta de no existe vector de productos
 				}else {
 					int i=0;
-					while(i<empresa.getProductos().length) {	//recorrer el vector de productos para buscar
-						if(Integer.toString(empresa.getProductos()[i].getSku()).toLowerCase().contains(prod)|| //buscar por sku
-								empresa.getProductos()[i].getReferencia().toLowerCase().contains(prod)||		 //busccar por referencia
-								empresa.getProductos()[i].getCategoria().toLowerCase().contains(prod)) {		 //buscar por categoría
-							String [] model= {Integer.toString(empresa.getProductos()[i].getSku()), //generar modelo para agregar filas
-									empresa.getProductos()[i].getReferencia(), empresa.getProductos()[i].getCategoria()};
+					while(i<bodega.getLista_producto().length) {	//recorrer el vector de productos para buscar
+						if(Integer.toString(bodega.getLista_producto()[i].getSku()).toLowerCase().contains(prod)|| //buscar por sku
+								bodega.getLista_producto()[i].getReferencia().toLowerCase().contains(prod)||		 //busccar por referencia
+								bodega.getLista_producto()[i].getCategoria().toLowerCase().contains(prod)) {		 //buscar por categoría
+							String [] model= {Integer.toString(bodega.getLista_producto()[i].getSku()), //generar modelo para agregar filas
+									bodega.getLista_producto()[i].getReferencia(), bodega.getLista_producto()[i].getCategoria()};
 							modeloTable.addRow(model);			//ingresar modelo a la tabla en una nueva fila
 						}
 						i++;
 					}
-					if (i<empresa.getProductos().length) { //comprobar si logró encontrar coincidencias
+					if (i<bodega.getLista_producto().length) { //comprobar si logró encontrar coincidencias
 						JOptionPane.showMessageDialog(contentPane, "No es posible encontrar producto, por favor verifique");
 					}
 				}

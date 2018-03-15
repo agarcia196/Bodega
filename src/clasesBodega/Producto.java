@@ -7,7 +7,13 @@
  */
 package clasesBodega;
 
-public class Producto {
+import java.io.Serializable;
+
+public class Producto implements Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -1703039357847833245L;
 	private int sku,cantidad_disponible;
 	private String referencia,descripcion,categoria, marca;
 	private double volumen,peso;

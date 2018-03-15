@@ -32,13 +32,18 @@ import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
 import java.awt.Toolkit;
 import java.awt.event.ActionListener;
+import java.io.Serializable;
 import java.awt.event.ActionEvent;
 import javax.swing.JEditorPane;
 import java.awt.SystemColor;
 
 
-public class FormAddProducto extends JFrame {
+public class FormAddProducto extends JFrame implements Serializable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -115008695315998652L;
 	private JPanel contentPane;
 	private JTextField Ref_textField;
 	private JTextField Peso_textField;
@@ -47,10 +52,6 @@ public class FormAddProducto extends JFrame {
 	private Persona persona;
 	private JTextField Vol_textField;
 	private JTextField Marca_textField;
-	private String color="#343A41";
-	private String color2="#57616D";
-	private String color3="#9FA5A5";
-	private String color4="#27AFA3";
 
 	/**
 	 * Launch the application.
@@ -73,18 +74,18 @@ public class FormAddProducto extends JFrame {
 	 * Create the frame.
 	 */
 	public FormAddProducto(Persona persona,Empresa empresa) {
-		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setResizable(false);
 		this.empresa= empresa;
 		this.persona = persona;
 		setIconImage(Toolkit.getDefaultToolkit().getImage("C:\\Java Estructuras\\Bodega\\png\\vender-producto.png"));
 		setTitle("A\u00F1adir producto");
+		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 503, 642);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
-		contentPane.setBackground(Color.decode(color));
+		contentPane.setBackground(Color.decode("#343A41"));
 		
 		JLabel lblDatosDeProducto = new JLabel("Datos de producto");
 		lblDatosDeProducto.setForeground(SystemColor.menu);
@@ -122,6 +123,12 @@ public class FormAddProducto extends JFrame {
 		lblIngreseTodosLos.setBounds(76, 70, 327, 30);
 		contentPane.add(lblIngreseTodosLos);
 		
+		if (empresa.getCategoria()==null) { //comprobar si existen categorias en la empresa
+			JOptionPane.showMessageDialog(contentPane, "No existen categorías, por favor ingrese una");
+			FormAgregarCategoria addCat = new FormAgregarCategoria(persona, empresa);	//enviar a la ventana de crear categoria
+			dispose();
+			addCat.setVisible(true);
+		}
 		
 		JLabel lblVolumen = new JLabel("Volumen:");
 		lblVolumen.setForeground(Color.LIGHT_GRAY);
@@ -138,24 +145,16 @@ public class FormAddProducto extends JFrame {
 		Cat_comboBox.setFont(new Font("Century Gothic", Font.ITALIC, 14));
 		Cat_comboBox.setBounds(121, 134, 239, 30);
 		contentPane.add(Cat_comboBox);
-		Cat_comboBox.setBackground(Color.decode(color2));
-
-		if (empresa.getCategoria()==null) { //comprobar si existen categorias en la empresa
-			JOptionPane.showMessageDialog(contentPane, "No existen categorías, por favor ingrese una");
-			FormAgregarCategoria addCat = new FormAgregarCategoria(persona, empresa);	//enviar a la ventana de crear categoria
-			dispose();
-			addCat.setVisible(true);
-		}else {
+		Cat_comboBox.setBackground(Color.decode("#57616D"));
 		DefaultComboBoxModel modelo = new DefaultComboBoxModel(empresa.getCategoria());//crear modelo para el comnbobox de categoria
 		Cat_comboBox.setModel(modelo);//ingresar el modelo creado en el combobox categoria
-		}
 		
 		Ref_textField = new JTextField();
 		Ref_textField.setFont(new Font("Century Gothic", Font.PLAIN, 14));
 		Ref_textField.setBounds(121, 190, 336, 35);
 		contentPane.add(Ref_textField);
 		Ref_textField.setColumns(10);
-		Ref_textField.setBackground(Color.decode(color3));
+		Ref_textField.setBackground(Color.decode("#9FA5A5"));
 		Ref_textField.setBorder(new LineBorder(new Color(237, 237, 237), 3, true));
 		
 		Peso_textField = new JTextField();
@@ -163,7 +162,7 @@ public class FormAddProducto extends JFrame {
 		Peso_textField.setBounds(121, 250, 336, 35);
 		contentPane.add(Peso_textField);
 		Peso_textField.setColumns(10);
-		Peso_textField.setBackground(Color.decode(color3));
+		Peso_textField.setBackground(Color.decode("#9FA5A5"));
 		Peso_textField.setBorder(new LineBorder(new Color(237, 237, 237), 3, true));
 		
 		Vol_textField = new JTextField();
@@ -171,25 +170,25 @@ public class FormAddProducto extends JFrame {
 		Vol_textField.setBounds(121, 310, 336, 35);
 		contentPane.add(Vol_textField);
 		Vol_textField.setColumns(10);
-		Vol_textField.setBackground(Color.decode(color3));
+		Vol_textField.setBackground(Color.decode("#9FA5A5"));
 		Vol_textField.setBorder(new LineBorder(new Color(237, 237, 237), 3, true));
 		
 		Marca_textField = new JTextField();
 		Marca_textField.setBounds(121, 380, 336, 35);
 		contentPane.add(Marca_textField);
 		Marca_textField.setColumns(10);
-		Marca_textField.setBackground(Color.decode(color3));
+		Marca_textField.setBackground(Color.decode("#9FA5A5"));
 		Marca_textField.setBorder(new LineBorder(new Color(237, 237, 237), 3, true));
 		
 		Descrip_textField = new JEditorPane();
 		Descrip_textField.setBounds(121, 440, 336, 100);
 		contentPane.add(Descrip_textField);
-		Descrip_textField.setBackground(Color.decode(color3));
+		Descrip_textField.setBackground(Color.decode("#9FA5A5"));
 		Descrip_textField.setBorder(new LineBorder(new Color(237, 237, 237), 3, true));
 		
 		JButton btnAadir = new JButton("A\u00F1adir");
 		btnAadir.setFont(new Font("Century Gothic", Font.PLAIN, 14));
-		btnAadir.setBackground(Color.decode(color4));
+		btnAadir.setBackground(Color.decode("#27AFA3"));
 		btnAadir.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				int alerta = JOptionPane.showConfirmDialog(contentPane, "¿Desea guardar?");//confirmar el guardado
@@ -204,8 +203,9 @@ public class FormAddProducto extends JFrame {
 					else {//agregar el producto al array de la empresa
 						empresa.AddProducto(0,Ref_textField.getText(),Descrip_textField.getText(),
 								Cat_comboBox.getSelectedItem().toString(),Marca_textField.getText(),0,Double.parseDouble(Peso_textField.getText()));
-						Recursos.WriteFileObjectEmpresa("empresa.dat", empresa);//sobreescribir el archivo de la empresa
-					}dispose();
+						dispose();
+					}
+					Recursos.WriteFileObjectEmpresa("empresa.dat", empresa);//sobreescribir el archivo de la empresa
 				}
 			}
 		});
@@ -223,6 +223,6 @@ public class FormAddProducto extends JFrame {
 		});
 		btnAgregar.setBounds(372, 132, 97, 35);
 		contentPane.add(btnAgregar);
-		btnAgregar.setBackground(Color.decode(color4));
+		btnAgregar.setBackground(Color.decode("#27AFA3"));
 	}
 }

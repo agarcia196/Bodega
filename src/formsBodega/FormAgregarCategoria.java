@@ -27,10 +27,15 @@ import javax.swing.JOptionPane;
 
 import java.awt.Font;
 import java.awt.event.ActionListener;
+import java.io.Serializable;
 import java.awt.event.ActionEvent;
 
-public class FormAgregarCategoria extends JFrame {
+public class FormAgregarCategoria extends JFrame implements Serializable{
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -4370912280968167635L;
 	private Empresa empresa;
 	private JPanel contentPane;
 	private JTextField nombre_textField;
@@ -83,9 +88,9 @@ public class FormAgregarCategoria extends JFrame {
 					empresa.AddCategoria(nombre_textField.getText());
 					FormAddProducto formProduct = new FormAddProducto(persona, empresa);
 					formProduct.setVisible(true);
-					Recursos.WriteFileObjectEmpresa("empresa.dat", empresa);//sobreescribir el archivo de la empresa
+					dispose();
 				}
-				dispose();
+				Recursos.WriteFileObjectEmpresa("empresa.dat", empresa);//sobreescribir el archivo de la empresa
 			}
 		});
 		btnAceptar.setBounds(134, 131, 97, 35);
