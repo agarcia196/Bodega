@@ -20,6 +20,7 @@ import clasesBodega.Empresa;
 import clasesBodega.Persona;
 import clasesBodega.Producto;
 import clasesBodega.Recursos;
+import clasesBodega.*;
 
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
