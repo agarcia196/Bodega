@@ -52,6 +52,7 @@ public class FormAddProducto extends JFrame implements Serializable {
 	private Persona persona;
 	private JTextField Vol_textField;
 	private JTextField Marca_textField;
+	private String color= "#9FA5A5";
 
 	/**
 	 * Launch the application.
@@ -154,7 +155,7 @@ public class FormAddProducto extends JFrame implements Serializable {
 		Ref_textField.setBounds(121, 190, 336, 35);
 		contentPane.add(Ref_textField);
 		Ref_textField.setColumns(10);
-		Ref_textField.setBackground(Color.decode("#9FA5A5"));
+		Ref_textField.setBackground(Color.decode(color));
 		Ref_textField.setBorder(new LineBorder(new Color(237, 237, 237), 3, true));
 		
 		Peso_textField = new JTextField();
@@ -162,7 +163,7 @@ public class FormAddProducto extends JFrame implements Serializable {
 		Peso_textField.setBounds(121, 250, 336, 35);
 		contentPane.add(Peso_textField);
 		Peso_textField.setColumns(10);
-		Peso_textField.setBackground(Color.decode("#9FA5A5"));
+		Peso_textField.setBackground(Color.decode(color));
 		Peso_textField.setBorder(new LineBorder(new Color(237, 237, 237), 3, true));
 		
 		Vol_textField = new JTextField();
@@ -170,20 +171,20 @@ public class FormAddProducto extends JFrame implements Serializable {
 		Vol_textField.setBounds(121, 310, 336, 35);
 		contentPane.add(Vol_textField);
 		Vol_textField.setColumns(10);
-		Vol_textField.setBackground(Color.decode("#9FA5A5"));
+		Vol_textField.setBackground(Color.decode(color));
 		Vol_textField.setBorder(new LineBorder(new Color(237, 237, 237), 3, true));
 		
 		Marca_textField = new JTextField();
 		Marca_textField.setBounds(121, 380, 336, 35);
 		contentPane.add(Marca_textField);
 		Marca_textField.setColumns(10);
-		Marca_textField.setBackground(Color.decode("#9FA5A5"));
+		Marca_textField.setBackground(Color.decode(color));
 		Marca_textField.setBorder(new LineBorder(new Color(237, 237, 237), 3, true));
 		
 		Descrip_textField = new JEditorPane();
 		Descrip_textField.setBounds(121, 440, 336, 100);
 		contentPane.add(Descrip_textField);
-		Descrip_textField.setBackground(Color.decode("#9FA5A5"));
+		Descrip_textField.setBackground(Color.decode(color));
 		Descrip_textField.setBorder(new LineBorder(new Color(237, 237, 237), 3, true));
 		
 		JButton btnAadir = new JButton("A\u00F1adir");
@@ -199,13 +200,18 @@ public class FormAddProducto extends JFrame implements Serializable {
 							Descrip_textField.getText().compareTo("")==0 || Cat_comboBox.getSelectedItem()==null
 							|| Marca_textField.getText().compareTo("")==0) {
 						JOptionPane.showMessageDialog(contentPane, "Por favor llene todos los campos para continuar");
+					}else if(Recursos.isNumeric(Peso_textField.getText())==false || 
+							Recursos.isNumeric(Vol_textField.getText())==false) {
+						JOptionPane.showMessageDialog(contentPane, "Ingrese solo números en peso y volumen");
 					}
 					else {//agregar el producto al array de la empresa
 						empresa.AddProducto(0,Ref_textField.getText(),Descrip_textField.getText(),
-								Cat_comboBox.getSelectedItem().toString(),Marca_textField.getText(),0,Double.parseDouble(Peso_textField.getText()));
+								Cat_comboBox.getSelectedItem().toString(),Marca_textField.getText(),
+								Double.parseDouble(Vol_textField.getText()),
+								Double.parseDouble(Peso_textField.getText()));
+						Recursos.WriteFileObjectEmpresa("empresa.dat", empresa);//sobreescribir el archivo de la empresa
 						dispose();
-					}
-					Recursos.WriteFileObjectEmpresa("empresa.dat", empresa);//sobreescribir el archivo de la empresa
+					}	
 				}
 			}
 		});
