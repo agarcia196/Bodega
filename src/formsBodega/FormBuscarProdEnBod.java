@@ -22,10 +22,15 @@ import javax.swing.JOptionPane;
 
 import java.awt.Font;
 import java.awt.event.ActionListener;
+import java.io.Serializable;
 import java.awt.event.ActionEvent;
 
-public class FormBuscarProdEnBod extends JFrame {
+public class FormBuscarProdEnBod extends JFrame implements Serializable{
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 3321516021996484216L;
 	private JPanel contentPane;
 	private JTextField Busc_textField;
 	private JTable table;
@@ -88,28 +93,32 @@ public class FormBuscarProdEnBod extends JFrame {
 		JButton btnBuscar = new JButton("Buscar");
 		btnBuscar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+				int numFilas = modelo.getRowCount();
+				for (int i=numFilas-1; i>=0; i--) {
+					modelo.removeRow(i);
+				}
 				String busqueda= Busc_textField.getText();
-				if(empresa.getBodegas()==null) {
+				if(empresa.getBodegas()==null) {		//comprobar si existen bodegas
 					JOptionPane.showMessageDialog(contentPane, "No existen bodegas");
 				}else {
 					int i=0;
-					while (i<empresa.getBodegas().length) {
-						if(empresa.getBodegas()[i].getIdBodega().compareTo(busqueda)==0||
-								empresa.getBodegas()[i].getCiudad().compareTo(busqueda)==0) {
+					while (i<empresa.getBodegas().length) {//recorrer arreglo de bodegas
+						if(empresa.getBodegas()[i].getIdBodega().compareTo(busqueda)==0||		//buscar por id
+								empresa.getBodegas()[i].getCiudad().compareTo(busqueda)==0) {	//buscar por ciudad
 							int j=0;
-							while(j<empresa.getBodegas()[i].getLista_producto().length) {
+							while(j<empresa.getBodegas()[i].getLista_producto().length) {	//recorrer arreglo de productos dentro de bodega
 								String[]model= {Integer.toString(empresa.getBodegas()[i].getLista_producto()[j].getSku()),
 										empresa.getBodegas()[i].getLista_producto()[j].getReferencia(),
 										empresa.getBodegas()[i].getLista_producto()[j].getMarca(),
 										Double.toString(empresa.getBodegas()[i].getLista_producto()[j].getVolumen()),
 										Double.toString(empresa.getBodegas()[i].getLista_producto()[j].getPeso()),
 										empresa.getBodegas()[i].getLista_producto()[j].getCategoria(),
-										empresa.getBodegas()[i].getLista_producto()[j].getCategoria()};
-								modelo.addRow(model);
+										empresa.getBodegas()[i].getLista_producto()[j].getCategoria()};	//crear modelo para la tabla
+								modelo.addRow(model);			//ingresar modelo a la tabla
 							}
 						}i++;
 					}
-					if(i<empresa.getBodegas().length) {
+					if(i<empresa.getBodegas().length) {	//no se encuentra la bodega
 						JOptionPane.showMessageDialog(contentPane, "No se puede encontrar, intente nuevamenrte");
 					}
 				}
