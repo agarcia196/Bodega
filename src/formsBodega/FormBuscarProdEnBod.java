@@ -42,7 +42,6 @@ public class FormBuscarProdEnBod extends JFrame implements Serializable{
 	private JTextField Busc_textField;
 	private JTable table;
 	private Empresa empresa;
-	private Persona persona;
 
 	/**
 	 * Launch the application.
@@ -63,8 +62,7 @@ public class FormBuscarProdEnBod extends JFrame implements Serializable{
 	/**
 	 * Create the frame.
 	 */
-	public FormBuscarProdEnBod(Persona persona, Empresa empresa) {
-		this.persona=persona;
+	public FormBuscarProdEnBod(Empresa empresa) {
 		this.empresa=empresa;
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);

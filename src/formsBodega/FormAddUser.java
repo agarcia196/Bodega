@@ -1,23 +1,17 @@
 package formsBodega;
 
-import java.awt.BorderLayout;
-import java.awt.Color;
-import java.awt.EventQueue;
 
+import java.awt.Color;
 import javax.swing.DefaultComboBoxModel;
-import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
-import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
-import javax.swing.filechooser.FileNameExtensionFilter;
 
 import clasesBodega.Empresa;
-import clasesBodega.Gerente;
 import clasesBodega.Persona;
 import clasesBodega.Recursos;
 
@@ -28,21 +22,8 @@ import java.awt.Font;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.File;
-import java.io.IOException;
-import java.nio.file.FileSystems;
-import java.nio.file.Files;
-import java.nio.file.StandardCopyOption;
-
 import javax.swing.JTextField;
-import javax.swing.SwingConstants;
-
-import java.awt.EventQueue;
 import java.io.Serializable;
-
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
 
 public class FormAddUser extends JFrame implements Serializable {
 
@@ -249,6 +230,7 @@ public class FormAddUser extends JFrame implements Serializable {
 					else {
 						empresa.AddUser(txtNombreU.getText(), txtApellidoU.getText(), comboBox.getSelectedItem().toString(), txtCorreoU.getText(), 
 								txtCcU.getText(), cbTipoIDU.getSelectedItem().toString(), String.valueOf(passwordField.getPassword()),comboBox_1.getSelectedItem().toString());
+						Recursos.WriteFileObjectEmpresa("empresa.dat", empresa);
 						JOptionPane.showMessageDialog(contentPane, "El Usuario fue creado exitosamente");
 					}
 					dispose();
