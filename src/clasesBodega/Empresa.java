@@ -26,7 +26,6 @@ public class Empresa implements Serializable{
 	
 	private Producto[] productos;
 	private Bodega [] bodegas;
-	/** The categoria. */
 	private String [] categoria;
 	private Persona [] usuarios;
 	private String nombre;
