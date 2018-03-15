@@ -1,3 +1,10 @@
+/**
+ * formsBodega: Empresa.
+ * 
+ * @author Jorge Luis Soriano Cuevas
+ * @version 2.3.2018
+ */
+
 package formsBodega;
 
 import java.awt.Color;
@@ -8,6 +15,7 @@ import javax.swing.border.LineBorder;
 
 import clasesBodega.Empresa;
 import clasesBodega.Persona;
+import clasesBodega.Recursos;
 
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -113,6 +121,7 @@ public class FormEditarUser extends JFrame implements Serializable {
 								String.valueOf(Nueva_passwordField.getPassword()).compareTo("")!=0  && 	//coincidan
 								String.valueOf(Rep_passwordField_1.getPassword()).compareTo("")!=0) {
 							persona.setPwd(String.valueOf(Nueva_passwordField.getPassword()));		//cambiar contraseña en la persona
+							Recursos.WriteFileObjectEmpresa("empresa.dat", empresa);//sobreescribir el archivo de la empresa
 							dispose();
 						}else {
 							JOptionPane.showMessageDialog(contentPane, "No se puede verificar nueva contraseña, por favor ingrese de nuevo");
