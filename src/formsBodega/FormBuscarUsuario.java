@@ -128,11 +128,13 @@ public class FormBuscarUsuario extends JFrame implements Serializable {
 								empresa.getUsuarios()[i] instanceof Bodeguero) {		//busqueda por cargo
 							if (empresa.getUsuarios()[i] instanceof Gerente) {			//imprimir gerentes
 								String [] model = {empresa.getUsuarios()[i].getNombre(),empresa.getUsuarios()[i].getApellido(),
-										empresa.getUsuarios()[i].getCc(),"Gerente"};
+										empresa.getUsuarios()[i].getTipoID(),empresa.getUsuarios()[i].getCc(),"Gerente",
+										empresa.getUsuarios()[i].getGenero(),empresa.getUsuarios()[i].getCorreo()};
 								modelo.addRow(model);
 							}else {				//imprimir bodequeros
 								String [] model = {empresa.getUsuarios()[i].getNombre(),empresa.getUsuarios()[i].getApellido(),
-										empresa.getUsuarios()[i].getCc(),"Bodeguero"};
+										empresa.getUsuarios()[i].getTipoID(),empresa.getUsuarios()[i].getCc(),"Bodeguero",
+										empresa.getUsuarios()[i].getGenero(),empresa.getUsuarios()[i].getCorreo()};
 								modelo.addRow(model);
 							}
 						}i++;
