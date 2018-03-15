@@ -7,10 +7,7 @@
 
 package formsBodega;
 
-import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.EventQueue;
-
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
@@ -18,8 +15,6 @@ import javax.swing.border.LineBorder;
 import javax.swing.table.DefaultTableModel;
 
 import clasesBodega.Empresa;
-import clasesBodega.Persona;
-
 import javax.swing.JTextField;
 import javax.swing.JButton;
 import javax.swing.JScrollPane;
@@ -63,6 +58,7 @@ public class FormBuscarProdEnBod extends JFrame implements Serializable{
 	 * Create the frame.
 	 */
 	public FormBuscarProdEnBod(Empresa empresa) {
+		setTitle("Buscar productos de bodega");
 		this.empresa=empresa;
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -72,29 +68,29 @@ public class FormBuscarProdEnBod extends JFrame implements Serializable{
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		contentPane.setBackground(Color.decode("#343A41"));
-
+		
 		JLabel lblIngreseBodegaA = new JLabel("Ingrese bodega a buscar:");
 		lblIngreseBodegaA.setForeground(Color.LIGHT_GRAY);
 		lblIngreseBodegaA.setFont(new Font("Century Gothic", Font.ITALIC, 14));
 		lblIngreseBodegaA.setBounds(12, 26, 206, 30);
 		contentPane.add(lblIngreseBodegaA);
-
+		
 		JScrollPane scrollPane = new JScrollPane();
 		scrollPane.setBounds(12, 134, 848, 535);
 		contentPane.add(scrollPane);
-
+		
 		String [] titulos= {"SKU", "Referencia", "Marca", "Volumen", "Peso", "Categoría", "cantidad"};
 		DefaultTableModel modelo = new DefaultTableModel(titulos, 0);
 		table = new JTable(modelo);
 		scrollPane.setViewportView(table);
-
+		
 		Busc_textField = new JTextField();
 		Busc_textField.setBounds(45, 69, 344, 35);
 		contentPane.add(Busc_textField);
 		Busc_textField.setColumns(10);
 		Busc_textField.setBackground(Color.decode("#9FA5A5"));
 		Busc_textField.setBorder(new LineBorder(new Color(237, 237, 237), 3, true));
-
+		
 		JButton btnBuscar = new JButton("Buscar");
 		btnBuscar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
@@ -103,27 +99,27 @@ public class FormBuscarProdEnBod extends JFrame implements Serializable{
 					modelo.removeRow(i);
 				}
 				String busqueda= Busc_textField.getText();
+				if(Busc_textField.getText().compareTo("")==0) {
+					FormBusquedaBodega buscarbo = new FormBusquedaBodega(empresa, Busc_textField);
+					buscarbo.setVisible(true);
+				}else {
 				if(empresa.getBodegas()==null) {		//comprobar si existen bodegas
 					JOptionPane.showMessageDialog(contentPane, "No existen bodegas");
 				}else {
 					int i=0;
 					while (i<empresa.getBodegas().length) {//recorrer arreglo de bodegas
 						if(empresa.getBodegas()[i].getIdBodega().compareTo(busqueda)==0) {//buscar por id
-							if(empresa.getBodegas()[i].getLista_producto()==null) {
-								JOptionPane.showMessageDialog(contentPane, "No hay productos en la lista de la bodega");
-							}else {
-								int j=0;
-								while(j<empresa.getBodegas()[i].getLista_producto().length) {	//recorrer arreglo de productos dentro de bodega
-									String[]model= {Integer.toString(empresa.getBodegas()[i].getLista_producto()[j].getSku()),
-											empresa.getBodegas()[i].getLista_producto()[j].getReferencia(),
-											empresa.getBodegas()[i].getLista_producto()[j].getMarca(),
-											Double.toString(empresa.getBodegas()[i].getLista_producto()[j].getVolumen()),
-											Double.toString(empresa.getBodegas()[i].getLista_producto()[j].getPeso()),
-											empresa.getBodegas()[i].getLista_producto()[j].getCategoria(),
-											Double.toString(empresa.getBodegas()[i].getLista_producto()[j].getCantidad_disponible())};	//crear modelo para la tabla
-									modelo.addRow(model);			//ingresar modelo a la tabla
-									j++;
-								}
+							int j=0;
+							while(j<empresa.getBodegas()[i].getLista_producto().length) {	//recorrer arreglo de productos dentro de bodega
+								String[]model= {Integer.toString(empresa.getBodegas()[i].getLista_producto()[j].getSku()),
+										empresa.getBodegas()[i].getLista_producto()[j].getReferencia(),
+										empresa.getBodegas()[i].getLista_producto()[j].getMarca(),
+										Double.toString(empresa.getBodegas()[i].getLista_producto()[j].getVolumen()),
+										Double.toString(empresa.getBodegas()[i].getLista_producto()[j].getPeso()),
+										empresa.getBodegas()[i].getLista_producto()[j].getCategoria(),
+										empresa.getBodegas()[i].getLista_producto()[j].getCategoria()};	//crear modelo para la tabla
+								modelo.addRow(model);			//ingresar modelo a la tabla
+							j++;
 							}
 						}i++;
 					}
@@ -131,7 +127,7 @@ public class FormBuscarProdEnBod extends JFrame implements Serializable{
 						JOptionPane.showMessageDialog(contentPane, "No se puede encontrar, intente nuevamenrte");
 					}
 				}
-			}
+			}}
 		});
 		btnBuscar.setBounds(462, 68, 97, 35);
 		contentPane.add(btnBuscar);

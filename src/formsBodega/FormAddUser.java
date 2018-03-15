@@ -232,8 +232,9 @@ public class FormAddUser extends JFrame implements Serializable {
 								txtCcU.getText(), cbTipoIDU.getSelectedItem().toString(), String.valueOf(passwordField.getPassword()),comboBox_1.getSelectedItem().toString());
 						Recursos.WriteFileObjectEmpresa("empresa.dat", empresa);
 						JOptionPane.showMessageDialog(contentPane, "El Usuario fue creado exitosamente");
+						dispose();
 					}
-					dispose();
+				
 				}
 			}
 		});
