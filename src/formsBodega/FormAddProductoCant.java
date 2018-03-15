@@ -171,13 +171,15 @@ public class FormAddProductoCant extends JFrame implements Serializable {
 				int alerta=JOptionPane.showConfirmDialog(contentPane, "¿Desea guardar?");
 				if (alerta==0) {
 					if(Bodega_textField.getText().compareTo("")==0 || Prod_textField.getText().compareTo("")==0 ||
-							Cant_textField.getText().compareTo("")==0) //revisar si hay campos vacíos
+							Cant_textField.getText().compareTo("")==0) {//revisar si hay campos vacíos
 						JOptionPane.showMessageDialog(contentPane, "Por favor llene todos los campos para continuar");
-				}else {try {
+				}else {
+					try {
 					Bodega bod = empresa.BuscarBodega(Bodega_textField.getText()); //buscar bodega para ingresar el producto
 					Producto prod=empresa.BuscarProducto(Integer.valueOf(Prod_textField.getText())); //buscar el producto a ingresar
 					bod.addProducto(prod,Integer.parseInt(Cant_textField.getText()));//añadir el producto a la bodega
-					Recursos.WriteFileObjectEmpresa("empresa.dat", empresa);//sobreescribir el archivo de datos de la empresa
+					System.out.println(bod.getLista_producto()[0].getMarca());
+					//sobreescribir el archivo de datos de la empresa
 					if (bod.getCapacidadMax()<(Double.parseDouble(Cant_textField.getText()))*prod.getVolumen()) {
 						JOptionPane.showMessageDialog(contentPane, "No se puede ingresar la cantidad de productos, la capacidad de la bodega no soporta.");
 					}else {
@@ -185,6 +187,7 @@ public class FormAddProductoCant extends JFrame implements Serializable {
 								*prod.getVolumen());//restar capMax de modega
 					}
 					
+					Recursos.WriteFileObjectEmpresa("empresa.dat", empresa);
 				}catch (BodegaNoExiste e) {
 					JOptionPane.showMessageDialog(contentPane, e.getMessage());
 				}catch (ProductoNoEncontrado e) {
@@ -192,6 +195,7 @@ public class FormAddProductoCant extends JFrame implements Serializable {
 				}
 				}
 				dispose();
+				}
 			}
 		});
 		btnAadir.setBounds(187, 308, 97, 35);
