@@ -1,8 +1,5 @@
 package formsBodega;
 
-import java.awt.BorderLayout;
-import java.awt.EventQueue;
-
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
@@ -12,7 +9,6 @@ import javax.swing.table.DefaultTableModel;
 import clasesBodega.Bodega;
 import clasesBodega.Empresa;
 import clasesBodega.Empresa.BodegaNoExiste;
-import clasesBodega.Gerente;
 import clasesBodega.Persona;
 import clasesBodega.Producto;
 
@@ -50,7 +46,7 @@ public class FormTraslado extends JFrame implements Serializable {
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String[] args) {
+	/*public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
@@ -175,60 +171,68 @@ public class FormTraslado extends JFrame implements Serializable {
 		
 		JButton btnBuscar = new JButton("Buscar");
 		btnBuscar.addActionListener(new ActionListener() {
+
 			public void actionPerformed(ActionEvent arg0) {
 				try {
 					if(BodegaOrigen.getText().compareTo("")==0) {
 						JOptionPane.showMessageDialog(contentPane, "Seleccione la bodega de origen");
 					}else {
-						if(bodega==null && BodegaOrigen.getText().compareTo("")!=0) {
-							bodega = empresa.BuscarBodega(BodegaOrigen.getText());
-						}
-						System.out.println(bodega.getIdBodega());
+						bodega = empresa.BuscarBodega(BodegaOrigen.getText());
+						
 						if(bodega.getLista_producto()==null) {
 							int validar= JOptionPane.showConfirmDialog(contentPane,
 									"Debe ingresar un producto para continua, ¿Desea hacerlo?");
 							if(validar == 0) {
-								if (empresa.getCategoria()==null) {
-									JOptionPane.showMessageDialog(contentPane, "No existen categorías, por favor agregue una");
-									FormAgregarCategoria formcat = new FormAgregarCategoria(persona, empresa);
-									formcat.setVisible(true);
-								}else { 
-									FormAddProductoCant ingreso = new FormAddProductoCant(persona,empresa);
+								FormAddProductoCant ingreso = new FormAddProductoCant(persona,empresa);
 									ingreso.setVisible(true);}
 							}					
-						}
 						else {
 							FormBusquedaProductoconBodega producto = new FormBusquedaProductoconBodega(bodega, txtproducto);
 							producto.setVisible(true);}
 					} 
 				}catch (BodegaNoExiste e) {
 					// TODO Auto-generated catch block
-					e.printStackTrace();
+					JOptionPane.showMessageDialog(contentPane,"Bodega no encontrada");
 				}}
 		});
 		
 		JButton btnAgregar = new JButton("Agregar");
 		btnAgregar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-			/*	Producto pp= new Producto(3, "TTTT", "JuAN", "Camiones", "title", 23, 60);
-				productos= new Producto[1];
-				productos[0]=pp;*/	
-				
-				Producto p= bodega.BuscarProducto(Integer.parseInt(txtproducto.getText()));
-				if(productos==null) {
-					productos= new Producto[1];
-				}
-				else {
-					productos= Arrays.copyOf(productos, productos.length+1);
-					productos[productos.length-1]=p;}
+				try {				
+					int numFilas = modeloTable.getRowCount();
+					for (int i=numFilas-1; i>=0; i--) {				//eliminar los datos de la tabla
+						modeloTable.removeRow(i);
+					}	
+						bodega = empresa.BuscarBodega(BodegaOrigen.getText());
+					
+					if(txtcantidad.getText().compareTo("")==0) {
+						JOptionPane.showMessageDialog(contentPane,"Ingrese la cantidad");
+					}
+					else {
+					if(productos==null) {
+						productos= new Producto[1];
+					}
+					else {
+						productos= Arrays.copyOf(productos, productos.length+1);
+					}
+					Producto p= bodega.BuscarProducto(Integer.parseInt(txtproducto.getText()));
+					p.setCantidad_disponible(Integer.valueOf(txtcantidad.getText()));
+					productos[productos.length-1]=p;
 
+					int i=0;
+					while(i<productos.length) {	//recorrer el vector de bodegas para hacer la busqueda
+						//{"SKU", "Marca", "Referencia", "Cantidad"};
 
-				int i=0;
-				while(i<productos.length) {	//recorrer el vector de bodegas para hacer la busqueda
 						String [] model = {Integer.toString(productos[i].getSku()),productos[i].getMarca(),productos[i].getReferencia(),Integer.toString(productos[i].getCantidad_disponible())}; //crear modelo para agregar filas
 						modeloTable.addRow(model);	//agregar modelo a las filas de la tabla
 						i++;
-					}}
+					}}}catch (BodegaNoExiste e) {
+						// TODO Auto-generated catch block
+						JOptionPane.showMessageDialog(contentPane,"Bodega no encontrada");
+					}
+			}
+
 		});
 		btnAgregar.setFont(new Font("Century Gothic", Font.PLAIN, 14));
 		btnAgregar.setBounds(440, 148, 89, 23);
@@ -240,14 +244,20 @@ public class FormTraslado extends JFrame implements Serializable {
 		JButton btnAceptar = new JButton("Aceptar");
 		btnAceptar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				if(productos==null) {
+				if(BodegaOrigen.getText().compareTo("")==0 || BodegaDestino.getText().compareTo("")==0) {
+					JOptionPane.showMessageDialog(contentPane, "Seleccione Origen y Destino");
+				}
+				else if(BodegaOrigen.getText().compareTo(BodegaDestino.getText())==0) {
+					JOptionPane.showMessageDialog(contentPane, "No puede ser igual el Origen y Destino");
+				}
+				else if(productos==null) {
 					JOptionPane.showMessageDialog(contentPane, "Seleccione productos");
 				}
 				else {
 					int i =0;
 					while(i<productos.length) {
 						try {
-							empresa.Transferencia(BodegaOrigen.getText(),BodegaDestino.getText(),productos[i].getSku(),Integer.valueOf(txtcantidad.getText()));
+							empresa.Transferencia(BodegaOrigen.getText(),BodegaDestino.getText(),productos[i].getSku(),productos[i].getCantidad_disponible());
 						} catch (NumberFormatException e) {
 							// TODO Auto-generated catch block
 							JOptionPane.showMessageDialog(contentPane, e.getMessage());
@@ -260,6 +270,8 @@ public class FormTraslado extends JFrame implements Serializable {
 						}
 						i++;
 					}
+					JOptionPane.showMessageDialog(contentPane, "Se ha Realizado correctamente");
+					dispose();
 				}
 			}
 		});

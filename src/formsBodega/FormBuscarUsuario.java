@@ -1,9 +1,6 @@
 package formsBodega;
 
-import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.EventQueue;
-
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -19,17 +16,21 @@ import clasesBodega.Persona;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.Serializable;
 
 import javax.swing.JTextField;
 import javax.swing.JButton;
 import javax.swing.JLabel;
-import javax.swing.ImageIcon;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import java.awt.Font;
 
-public class FormBuscarUsuario extends JFrame {
+public class FormBuscarUsuario extends JFrame implements Serializable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 533744064017327166L;
 	private JPanel contentPane;
 	private Persona persona;
 	private Empresa empresa;

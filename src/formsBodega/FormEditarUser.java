@@ -1,9 +1,6 @@
 package formsBodega;
 
-import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.EventQueue;
-
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
@@ -17,18 +14,25 @@ import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
+import java.io.Serializable;
 import java.awt.event.ActionEvent;
 import javax.swing.JPasswordField;
 import java.awt.Font;
 
-public class FormEditarUser extends JFrame {
+public class FormEditarUser extends JFrame implements Serializable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 3576076963182560984L;
 	private JPanel contentPane;
 	private JTextField Correo_textField;
 	private JPasswordField Nueva_passwordField;
 	private JPasswordField Rep_passwordField_1;
 	private JPasswordField Antigua_passwordField_2;
 	private String color="#9FA5A5";
+	private Empresa empresa;
+	private Persona persona;
 
 	/**
 	 * Launch the application.
@@ -50,6 +54,8 @@ public class FormEditarUser extends JFrame {
 	 * Create the frame.
 	 */
 	public FormEditarUser(Persona persona, Empresa empresa) {
+		this.empresa= empresa;
+		this.persona=persona;
 		setResizable(false);
 		setTitle("Cambiar datos");
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);

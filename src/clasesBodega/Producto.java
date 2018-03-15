@@ -17,7 +17,21 @@ public class Producto implements Serializable{
 	private int sku,cantidad_disponible;
 	private String referencia,descripcion,categoria, marca;
 	private double volumen,peso;
+	private static int count=0;
 	
+	public Producto(int sku,int cantidad_disponible, String referencia, String descripcion, String categoria, String marca,
+			double volumen, double peso) {
+		super();
+		this.marca=marca;
+		this.cantidad_disponible = cantidad_disponible;
+		this.referencia = referencia;
+		this.descripcion = descripcion;
+		this.categoria = categoria;
+		this.volumen = volumen;
+		this.peso = peso;
+		this.sku= sku;
+	
+	}
 	public Producto(int cantidad_disponible, String referencia, String descripcion, String categoria, String marca,
 			double volumen, double peso) {
 		super();
@@ -28,6 +42,8 @@ public class Producto implements Serializable{
 		this.categoria = categoria;
 		this.volumen = volumen;
 		this.peso = peso;
+		this.sku= count;
+		count++;
 	}
 
 	public int getCantidad_disponible() {

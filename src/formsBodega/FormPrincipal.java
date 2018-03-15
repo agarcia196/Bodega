@@ -1,6 +1,5 @@
 package formsBodega;
 
-import java.awt.EventQueue;
 import java.awt.Image;
 import java.io.Serializable;
 
@@ -13,10 +12,7 @@ import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import java.awt.Font;
-import javax.swing.JProgressBar;
 
-import clasesBodega.Gerente;
-import clasesBodega.Bodeguero;
 import clasesBodega.Empresa;
 import clasesBodega.Persona;
 import clasesBodega.Recursos;
@@ -219,13 +215,15 @@ public class FormPrincipal implements Serializable {
 		JMenuItem mntmBuscar = new JMenuItem("Buscar");
 		mntmBuscar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+				FormBusquedaProducto buscarp =new FormBusquedaProducto(empresa, null);
+				buscarp.setVisible(true);
 			}
 		});
 		mntmBuscar.setFont(new Font("Century Gothic", Font.PLAIN, n3));
 		mntmBuscar.setIcon(iconoConsultar);
 		mnProducto.add(mntmBuscar);
 		
-		JMenuItem mntmEditar = new JMenuItem("Editar");
+		/*JMenuItem mntmEditar = new JMenuItem("Editar");
 		mntmEditar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 			}
@@ -234,7 +232,7 @@ public class FormPrincipal implements Serializable {
 		ImageIcon iconEditar  =new ImageIcon("png\\edit.png");
 		Icon iconoEditar  = new ImageIcon(iconEditar.getImage().getScaledInstance(n,n, Image.SCALE_DEFAULT));
 		mntmEditar.setIcon(iconoEditar);
-		mnProducto.add(mntmEditar);
+		mnProducto.add(mntmEditar);*/
 		
 		JMenu mnUsuarios = new JMenu("Usuarios");
 		mnUsuarios.setFont(new Font("Century Gothic", Font.PLAIN, n2));
@@ -246,8 +244,8 @@ public class FormPrincipal implements Serializable {
 		JMenuItem mntmCrear_1 = new JMenuItem("Crear");
 		mntmCrear_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-//				FormAddUser agregar_usuario = new FormAddUser(empresa, persona);
-//				agregar_usuario.setVisible(true);
+			FormAddUser agregar_usuario = new FormAddUser(empresa, persona);
+			agregar_usuario.setVisible(true);
 			}
 		});
 		mntmCrear_1.setFont(new Font("Century Gothic", Font.PLAIN, n3));
@@ -259,6 +257,8 @@ public class FormPrincipal implements Serializable {
 		JMenuItem mntmConsultar_1 = new JMenuItem("Consultar");
 		mntmConsultar_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+				FormBuscarUsuario buscaru= new FormBuscarUsuario(empresa, persona);
+				buscaru.setVisible(true);
 			}
 		});
 		mntmConsultar_1.setFont(new Font("Century Gothic", Font.PLAIN, n3));
