@@ -1,3 +1,10 @@
+/**
+ * formsBodega: Empresa.
+ * 
+ * @author Jorge Luis Soriano Cuevas
+ * @version 2.3.2018
+ */
+
 package formsBodega;
 
 import java.awt.BorderLayout;
@@ -103,8 +110,7 @@ public class FormBuscarProdEnBod extends JFrame implements Serializable{
 				}else {
 					int i=0;
 					while (i<empresa.getBodegas().length) {//recorrer arreglo de bodegas
-						if(empresa.getBodegas()[i].getIdBodega().compareTo(busqueda)==0||		//buscar por id
-								empresa.getBodegas()[i].getCiudad().compareTo(busqueda)==0) {	//buscar por ciudad
+						if(empresa.getBodegas()[i].getIdBodega().compareTo(busqueda)==0) {//buscar por id
 							int j=0;
 							while(j<empresa.getBodegas()[i].getLista_producto().length) {	//recorrer arreglo de productos dentro de bodega
 								String[]model= {Integer.toString(empresa.getBodegas()[i].getLista_producto()[j].getSku()),
@@ -115,6 +121,7 @@ public class FormBuscarProdEnBod extends JFrame implements Serializable{
 										empresa.getBodegas()[i].getLista_producto()[j].getCategoria(),
 										empresa.getBodegas()[i].getLista_producto()[j].getCategoria()};	//crear modelo para la tabla
 								modelo.addRow(model);			//ingresar modelo a la tabla
+							j++;
 							}
 						}i++;
 					}
