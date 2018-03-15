@@ -267,7 +267,7 @@ public class FormPrincipalLogin extends JFrame implements Serializable, ActionLi
 					}
 					else {
 						Empresa empresa = new Empresa(txtNombre.getText(),textlogo.getText());
-						Persona p = new Gerente(txtNombreU.getText(), txtApellidoU.getText(), comboBox.getToolTipText(), txtCorreoU.getText(), txtCcU.getText(), cbTipoIDU.getToolTipText(), String.valueOf(passwordField.getPassword()));
+						Persona p = new Gerente(txtNombreU.getText(), txtApellidoU.getText(), comboBox.getSelectedItem().toString(), txtCorreoU.getText(), txtCcU.getText(), cbTipoIDU.getSelectedItem().toString(), String.valueOf(passwordField.getPassword()));
 						empresa.AddUser(p);
 						try {
 							Files.copy(FileSystems.getDefault().getPath(RutaImagen),
@@ -275,6 +275,7 @@ public class FormPrincipalLogin extends JFrame implements Serializable, ActionLi
 								       StandardCopyOption.REPLACE_EXISTING);
 							Recursos.WriteFileObjectEmpresa("empresa.dat", empresa);
 							dispose();
+							System.out.println(comboBox.getToolTipText());
 							FormLogin login = new FormLogin(empresa);
 							login.setVisible(true);
 						} catch (IOException e) {

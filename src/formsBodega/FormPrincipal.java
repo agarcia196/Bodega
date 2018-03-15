@@ -146,7 +146,7 @@ public class FormPrincipal implements Serializable {
 		JMenuItem mntmConsultar = new JMenuItem("Consultar");
 		mntmConsultar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				FormBusquedaBodega bbodega =new FormBusquedaBodega(empresa, null);
+				FormBuscarProdEnBod bbodega =new FormBuscarProdEnBod(empresa);
 				bbodega.setVisible(true);
 			}
 		});

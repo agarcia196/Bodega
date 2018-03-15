@@ -61,7 +61,8 @@ public class FormAddUser extends JFrame implements Serializable {
 	private int n=35;
 	private String color1="#27AFA3";
 	private String color2="#343A41";
-	private JTextField textField;
+	private Empresa empresa;
+	private Persona persona;
 	/**
 	 * Launch the application.
 	 *
@@ -72,14 +73,16 @@ public class FormAddUser extends JFrame implements Serializable {
 					frame.setVisible(true);
 				
 	}
+
 	/**
 	 * Create the frame.
 	 */
-	public FormAddUser(Empresa empresa) {
-		
+	public FormAddUser(Empresa empresa,Persona persona) {
+		this.empresa= empresa;
+		this.persona=persona;
 		setTitle("Crear Usuario");
 		setIconImage(Toolkit.getDefaultToolkit().getImage("icono-2png-130x130.png"));
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 630, 458);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -203,7 +206,7 @@ public class FormAddUser extends JFrame implements Serializable {
 		cpasswordField.setBorder(new LineBorder(Color.decode(color1), 3, true));
 		contentPane.add(cpasswordField);
 		
-		JLabel lblCargo = new JLabel("Cargo G \u00F3 B:");
+		JLabel lblCargo = new JLabel("Cargo:");
 		lblCargo.setFont(new Font("Century Gothic", Font.ITALIC, 14));
 		lblCargo.setBounds(15, 213, 90, 25);
 		contentPane.add(lblCargo);
@@ -212,6 +215,16 @@ public class FormAddUser extends JFrame implements Serializable {
 		lblmnimoCaracteres.setFont(new Font("Century Gothic", Font.ITALIC, 10));
 		lblmnimoCaracteres.setBounds(20, 367, 171, 14);
 		contentPane.add(lblmnimoCaracteres);
+		
+		JComboBox<String> comboBox_1 = new JComboBox<String>();
+		comboBox_1.setModel(new DefaultComboBoxModel(new String[] {"Gerente", "Bodeguero"}));
+		comboBox_1.setForeground(Color.WHITE);
+		comboBox_1.setFont(new Font("Century Gothic", Font.PLAIN, 14));
+		comboBox_1.setBorder(new LineBorder(Color.decode(color2)));
+		comboBox_1.setBackground(new Color(52, 58, 65));
+		comboBox_1.setBounds(95, 216, 195, 35);
+		
+		
 		
 		JButton btnAceptar = new JButton("Aceptar");
 		btnAceptar.setForeground(Color.WHITE);
@@ -234,23 +247,17 @@ public class FormAddUser extends JFrame implements Serializable {
 						JOptionPane.showMessageDialog(contentPane, "Las contraseñas no coinciden");
 					}
 					else {
-						empresa.AddUser(txtNombreU.getText(), txtApellidoU.getText(), comboBox.getToolTipText(), txtCorreoU.getText(), 
-								txtCcU.getText(), cbTipoIDU.getToolTipText(), String.valueOf(passwordField.getPassword()),btnAceptar.getText());
+						empresa.AddUser(txtNombreU.getText(), txtApellidoU.getText(), comboBox.getSelectedItem().toString(), txtCorreoU.getText(), 
+								txtCcU.getText(), cbTipoIDU.getSelectedItem().toString(), String.valueOf(passwordField.getPassword()),comboBox_1.getSelectedItem().toString());
+						JOptionPane.showMessageDialog(contentPane, "El Usuario fue creado exitosamente");
 					}
+					dispose();
 				}
 			}
 		});
+		
+		contentPane.add(comboBox_1);
 		btnAceptar.setBounds(244, 373, 90, 35);
-		contentPane.add(btnAceptar);		
-		
-		textField = new JTextField();
-		textField.setForeground(Color.BLACK);
-		textField.setBackground(Color.WHITE);
-		textField.setFont(new Font("Century Gothic", Font.PLAIN, 12));
-		textField.setBounds(115, 215, 195, n);
-		textField.setBorder(new LineBorder(Color.decode(color1), 3, true));
-		contentPane.add(textField);
-		textField.setColumns(10);
-		
+		contentPane.add(btnAceptar);
 	}
 }

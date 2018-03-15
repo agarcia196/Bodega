@@ -17,7 +17,7 @@ public class Producto implements Serializable{
 	private int sku,cantidad_disponible;
 	private String referencia,descripcion,categoria, marca;
 	private double volumen,peso;
-	private static int count=0;
+	private static int count=1;
 	
 	public Producto(int sku,int cantidad_disponible, String referencia, String descripcion, String categoria, String marca,
 			double volumen, double peso) {
@@ -42,7 +42,7 @@ public class Producto implements Serializable{
 		this.categoria = categoria;
 		this.volumen = volumen;
 		this.peso = peso;
-		this.sku= count;
+		this.sku= count+1;
 		count++;
 	}
 

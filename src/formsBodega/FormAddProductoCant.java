@@ -17,7 +17,6 @@ import javax.swing.border.LineBorder;
 import Excepciones.ProductoNoEncontrado;
 import clasesBodega.Bodega;
 import clasesBodega.Empresa;
-import clasesBodega.Empresa.BodegaNoExiste;
 import clasesBodega.Persona;
 import clasesBodega.Producto;
 import clasesBodega.Recursos;
@@ -78,8 +77,6 @@ public class FormAddProductoCant extends JFrame implements Serializable {
 	 */
 
 	public FormAddProductoCant(Persona persona, Empresa empresa) {
-		this.persona=persona;
-		this.empresa=empresa;
 		setResizable(false);
 		this.empresa= empresa;
 		this.persona = persona;
@@ -193,7 +190,7 @@ public class FormAddProductoCant extends JFrame implements Serializable {
 					}
 					
 					Recursos.WriteFileObjectEmpresa("empresa.dat", empresa);
-				}catch (BodegaNoExiste e) {
+				}catch (Excepciones.BodegaNoExiste e) {
 					JOptionPane.showMessageDialog(contentPane, e.getMessage());
 				}catch (ProductoNoEncontrado e) {
 					JOptionPane.showMessageDialog(contentPane, e.getMessage());

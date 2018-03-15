@@ -8,7 +8,6 @@ import javax.swing.table.DefaultTableModel;
 
 import clasesBodega.Bodega;
 import clasesBodega.Empresa;
-import clasesBodega.Empresa.BodegaNoExiste;
 import clasesBodega.Persona;
 import clasesBodega.Producto;
 
@@ -178,7 +177,6 @@ public class FormTraslado extends JFrame implements Serializable {
 						JOptionPane.showMessageDialog(contentPane, "Seleccione la bodega de origen");
 					}else {
 						bodega = empresa.BuscarBodega(BodegaOrigen.getText());
-						
 						if(bodega.getLista_producto()==null) {
 							int validar= JOptionPane.showConfirmDialog(contentPane,
 									"Debe ingresar un producto para continua, ¿Desea hacerlo?");
@@ -190,7 +188,7 @@ public class FormTraslado extends JFrame implements Serializable {
 							FormBusquedaProductoconBodega producto = new FormBusquedaProductoconBodega(bodega, txtproducto);
 							producto.setVisible(true);}
 					} 
-				}catch (BodegaNoExiste e) {
+				}catch (Excepciones.BodegaNoExiste e) {
 					// TODO Auto-generated catch block
 					JOptionPane.showMessageDialog(contentPane,"Bodega no encontrada");
 				}}
@@ -227,7 +225,7 @@ public class FormTraslado extends JFrame implements Serializable {
 						String [] model = {Integer.toString(productos[i].getSku()),productos[i].getMarca(),productos[i].getReferencia(),Integer.toString(productos[i].getCantidad_disponible())}; //crear modelo para agregar filas
 						modeloTable.addRow(model);	//agregar modelo a las filas de la tabla
 						i++;
-					}}}catch (BodegaNoExiste e) {
+					}}}catch (Excepciones.BodegaNoExiste e) {
 						// TODO Auto-generated catch block
 						JOptionPane.showMessageDialog(contentPane,"Bodega no encontrada");
 					}
@@ -261,7 +259,7 @@ public class FormTraslado extends JFrame implements Serializable {
 						} catch (NumberFormatException e) {
 							// TODO Auto-generated catch block
 							JOptionPane.showMessageDialog(contentPane, e.getMessage());
-						} catch (BodegaNoExiste e) {
+						} catch (Excepciones.BodegaNoExiste e) {
 							// TODO Auto-generated catch block
 							JOptionPane.showMessageDialog(contentPane, e.getMessage());
 						} catch (Excepciones.ProductoNoEncontrado e) {

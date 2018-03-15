@@ -10,6 +10,8 @@ package clasesBodega;
 import java.io.Serializable;
 import java.util.Arrays;
 
+import Excepciones.BodegaNoExiste;
+import Excepciones.CategoriaNoEncontrada;
 import Excepciones.ProductoNoEncontrado;
 
 // TODO: Auto-generated Javadoc
@@ -253,6 +255,8 @@ public class Empresa implements Serializable{
 		else return bodegas[i];
 	}
 
+
+	
 	public void AddUser(Persona p) {
 		if(usuarios==null)
 			usuarios = new Persona[1];
@@ -265,7 +269,7 @@ public class Empresa implements Serializable{
 			usuarios = new Persona[1];
 		}else {
 			usuarios= Arrays.copyOf(usuarios, usuarios.length+1);
-		if(cargo.compareTo("G")==0) {
+		if(cargo.compareTo("Gerente")==0) {
 			Persona p=new Gerente(nombre,apellido,genero,correo,cc,tipoid,pwd);
 			usuarios[usuarios.length-1]=p;
 		}else {
@@ -274,7 +278,6 @@ public class Empresa implements Serializable{
 			}
 		}
 	}
-	
 	/**
 	 * Buscar user.
 	 *
@@ -314,18 +317,6 @@ public class Empresa implements Serializable{
 		this.logo = logo;
 	}
 	
-	/**
-	 * The Class BodegaNoExiste.
-	 */
-	public class BodegaNoExiste extends Exception{
-		
-		/**
-		 * Instantiates a new bodega no existe.
-		 */
-		public BodegaNoExiste() {
-			super ("ID incorrecto o bodega no existe. Verifique nuevamente");
-		}
-	}
 	
 	/**
 	 * The Class UserNoExiste.
@@ -366,17 +357,6 @@ public class Empresa implements Serializable{
 		}
 	}
 	
-
-	public class CategoriaNoEncontrada extends Exception{
-		
-		/**
-		 * Instantiates a new categoria no encontrada.
-		 */
-		public CategoriaNoEncontrada() {
-			super("Categoria no encontrada");
-		}
-	}
-
 	public void Transferencia(String b1,String b2,int p,int cantidad)throws BodegaNoExiste,ProductoNoEncontrado{
 		Bodega bb1= BuscarBodega(b1);
 		Bodega bb2= BuscarBodega(b2);

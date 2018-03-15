@@ -155,7 +155,7 @@ public class Bodega implements Serializable{
 	 */
 	public Producto BuscarProducto(int sku) {
 		int i=0;
-		while(i<lista_producto.length && lista_producto[i].getSku()==sku) {
+		while(i<lista_producto.length && lista_producto[i].getSku()!=sku) {
 			i++;
 		}
 		if(i==lista_producto.length) {
@@ -178,7 +178,7 @@ public class Bodega implements Serializable{
 			//Producto deberia tener dos constructores, uno con cantidad = 0 
 			//y otro con la cantidad pasada como atributo en este metodo
 		}
-		Producto prod= new Producto(cantidad, producto.getReferencia(), producto.getDescripcion(),//crear nuevo
+		Producto prod= new Producto(producto.getSku(),cantidad, producto.getReferencia(), producto.getDescripcion(),//crear nuevo
 				producto.getCategoria(), producto.getMarca(), producto.getVolumen(),			  //producto(clonar)
 				producto.getPeso());
 		lista_producto[lista_producto.length-1]= prod;//Añadir producto
