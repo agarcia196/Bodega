@@ -68,11 +68,8 @@ public class FormAddUser extends JFrame implements Serializable {
 	 * @param empresa the empresa
 	 */
 	public static void main(String[] args) {
-		Empresa a=new Empresa("oiuhgf", "ojghf");
-		FormAddUser frame=new FormAddUser(a);
-			frame.setVisible(true);
-//				FormPrincipalLogin frame = new FormPrincipalLogin();
-//					frame.setVisible(true);
+				FormPrincipalLogin frame = new FormPrincipalLogin();
+					frame.setVisible(true);
 				
 	}
 
