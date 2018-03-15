@@ -75,6 +75,8 @@ public class FormAddProducto extends JFrame implements Serializable {
 	 * Create the frame.
 	 */
 	public FormAddProducto(Persona persona,Empresa empresa) {
+		this.persona=persona;
+		this.empresa=empresa;
 		setResizable(false);
 		this.empresa= empresa;
 		this.persona = persona;

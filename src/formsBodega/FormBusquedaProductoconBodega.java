@@ -65,6 +65,7 @@ public class FormBusquedaProductoconBodega extends JFrame implements Serializabl
 	 */
 	public FormBusquedaProductoconBodega(Bodega bodega, JTextField Prod_textField) {
 		setResizable(false);
+		this.Busc_textField=Busc_textField;
 		this.bodega=bodega;
 		setIconImage(Toolkit.getDefaultToolkit().getImage("C:\\Java Estructuras\\Bodega\\png\\searching-magnifying-glass.png"));
 		setTitle("Seleccionar producto");

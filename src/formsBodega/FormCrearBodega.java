@@ -35,6 +35,8 @@ public class FormCrearBodega extends JFrame implements Serializable {
 	private JTextField Ciudad_textField;
 	private JTextField Direcc_textField;
 	private JTextField CapMax_textField;
+	private Empresa empresa;
+	private Persona persona;
 	private String color="#343A41";
 	private String color2="#9FA5A5";
 	private String color3="#27AFA3";
@@ -60,7 +62,8 @@ public class FormCrearBodega extends JFrame implements Serializable {
 	 * Create the frame.
 	 */
 	public FormCrearBodega(Persona persona, Empresa empresa) {
-		
+		this.persona=persona;
+		this.empresa=empresa;
 		setResizable(false);
 		setTitle("Crear una nueva bodega");
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);

@@ -37,6 +37,7 @@ public class FormAgregarCategoria extends JFrame implements Serializable{
 	 */
 	private static final long serialVersionUID = -4370912280968167635L;
 	private Empresa empresa;
+	private Persona persona;
 	private JPanel contentPane;
 	private JTextField nombre_textField;
 
@@ -61,6 +62,8 @@ public class FormAgregarCategoria extends JFrame implements Serializable{
 	 * Create the frame.
 	 */
 	public FormAgregarCategoria(Persona persona, Empresa empresa) {
+		this.persona=persona;
+		this.empresa=empresa;
 		setResizable(false);
 		setTitle("Agregar categoria");
 		this.empresa= empresa;

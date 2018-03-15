@@ -78,6 +78,8 @@ public class FormAddProductoCant extends JFrame implements Serializable {
 	 */
 
 	public FormAddProductoCant(Persona persona, Empresa empresa) {
+		this.persona=persona;
+		this.empresa=empresa;
 		setResizable(false);
 		this.empresa= empresa;
 		this.persona = persona;

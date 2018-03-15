@@ -42,6 +42,7 @@ public class FormBusquedaProducto extends JFrame implements Serializable{
 	private JTable table;
 	private JTextField Busc_textField;
 	private Empresa empresa;
+	private JTextField Prod_textField;
 
 	/**
 	 * Launch the application.
@@ -64,6 +65,7 @@ public class FormBusquedaProducto extends JFrame implements Serializable{
 	 */
 	public FormBusquedaProducto(Empresa empresa, JTextField Prod_textField) {
 		setResizable(false);
+		this.Prod_textField=Prod_textField;
 		this.empresa=empresa;
 		setIconImage(Toolkit.getDefaultToolkit().getImage("C:\\Java Estructuras\\Bodega\\png\\searching-magnifying-glass.png"));
 		setTitle("Seleccionar producto");
