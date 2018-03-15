@@ -200,7 +200,7 @@ public class FormAddProducto extends JFrame implements Serializable {
 							Descrip_textField.getText().compareTo("")==0 || Cat_comboBox.getSelectedItem()==null
 							|| Marca_textField.getText().compareTo("")==0) {
 						JOptionPane.showMessageDialog(contentPane, "Por favor llene todos los campos para continuar");
-					}else if(Recursos.isNumeric(Peso_textField.getText())==false || 
+					}else if(Recursos.isNumeric(Peso_textField.getText())==false || //comprobar que se ingresen números donde corresponde
 							Recursos.isNumeric(Vol_textField.getText())==false) {
 						JOptionPane.showMessageDialog(contentPane, "Ingrese solo números en peso y volumen");
 					}

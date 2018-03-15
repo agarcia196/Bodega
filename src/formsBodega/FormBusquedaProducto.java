@@ -137,6 +137,7 @@ public class FormBusquedaProducto extends JFrame implements Serializable{
 			public void actionPerformed(ActionEvent e) {
 				if(table.getSelectedRow()==-1) {			//comprobar que se seleccione una fila
 					JOptionPane.showMessageDialog(contentPane, "Porfavor seleccione un producto para continuar");
+					dispose();
 				}else {//si se selecciona fila pasar contenido del sku al textfile del form para agregar producto
 					Prod_textField.setText((String) table.getValueAt(table.getSelectedRow(), 0));
 					dispose();

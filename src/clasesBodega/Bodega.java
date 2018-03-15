@@ -20,9 +20,7 @@ import Excepciones.ProductoNoEncontrado;
  */
 public class Bodega implements Serializable{
 
-	/**
-	 * 
-	 */
+	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 58352670855964000L;
 
 	/** The ciudad. */
@@ -33,10 +31,6 @@ public class Bodega implements Serializable{
 	
 	/** The capacidad max. */
 	private double capacidadMax;
-	
-	/** The seccion. */
-	private String [] seccion;
-
 
 
 	/**
@@ -57,6 +51,11 @@ public class Bodega implements Serializable{
 
 
 
+	/**
+	 * Sets the capacidad max.
+	 *
+	 * @param capacidadMax the new capacidad max
+	 */
 	public void setCapacidadMax(double capacidadMax) {
 		this.capacidadMax = capacidadMax;
 	}
@@ -97,59 +96,34 @@ public class Bodega implements Serializable{
 		return capacidadMax;
 	}
 	
-	/**
-	 * Gets the seccion.
-	 *
-	 * @return the seccion
-	 */
-	public String[] getSeccion() {
-		return seccion;
-	}
 	
+	/**
+	 * Gets the lista producto.
+	 *
+	 * @return the lista producto
+	 */
 	public Producto[] getLista_producto() {
 		return lista_producto;
 	}
 
 
 
+	/**
+	 * Sets the lista producto.
+	 *
+	 * @param lista_producto the new lista producto
+	 */
 	public void setLista_producto(Producto[] lista_producto) {
 		this.lista_producto = lista_producto;
 	}
 
 
-
 	/**
-	 * Bucar seccion.
+	 * Removes the producto.
 	 *
-	 * @param numseccion the numseccion
-	 * @return the string
+	 * @param producto the producto
+	 * @param cantidad the cantidad
 	 */
-	public String buscarSeccion(String numseccion) {//se Busca una sección por el número de sección
-		int i=0;								   //especifico de esta
-		while(i<seccion.length && seccion[i].compareTo(numseccion)!=0) {//condición de parada:
-			i++;	//aumentar el contador								//-al recorrer el vector
-		}																//-al encontrar la sección
-		if(i==seccion.length) {						//condición de no encontrada
-			return null;
-
-		}else {										//se encontró la sección
-			return seccion[i];
-		}
-	}
-	
-	/**
-	 * Añadir una seccion.
-	 */
-	public void AddSeccion() {
-		int i=1;
-		if (seccion == null) {
-			seccion = new String[1];
-		} else {
-			seccion = Arrays.copyOf(seccion, seccion.length + 1);
-			String aux="A-0"+(i++);
-			seccion[seccion.length - 1] = aux;
-		}
-	}
 	public void RemoveProducto(Producto producto,int cantidad) {
 		if(cantidad==producto.getCantidad_disponible()) {
 			
@@ -157,6 +131,14 @@ public class Bodega implements Serializable{
 			producto.setCantidad_disponible(producto.getCantidad_disponible()-cantidad);
 		}
 	}
+	
+	/**
+	 * Adds the producto.
+	 *
+	 * @param sku the sku
+	 * @param cantidad the cantidad
+	 * @throws ProductoNoEncontrado the producto no encontrado
+	 */
 	public void addProducto(int sku,int cantidad) throws ProductoNoEncontrado{
 		Producto p= BuscarProducto(sku);
 		if(p==null) 
@@ -164,6 +146,13 @@ public class Bodega implements Serializable{
 		else
 		p.setCantidad_disponible(p.getCantidad_disponible()+cantidad);
 	}
+	
+	/**
+	 * Buscar producto.
+	 *
+	 * @param sku the sku
+	 * @return the producto
+	 */
 	public Producto BuscarProducto(int sku) {
 		int i=0;
 		while(i<lista_producto.length && lista_producto[i].getSku()==sku) {
@@ -201,6 +190,9 @@ public class Bodega implements Serializable{
 	 * @param sku el sku
 	 * @param cantidad la cantidad
 	 * @throws CantidadInsuficiente la cantidad es insuficiente
+	 * @throws ProductoNoExistente the producto no existente
+	 * @throws ProductoCasiAgotado the producto casi agotado
+	 * @throws SinProducto the sin producto
 	 */
 	public void compradeproducto(int sku,int cantidad)throws CantidadInsuficiente,ProductoNoExistente,ProductoCasiAgotado,SinProducto {
 		int i=0;

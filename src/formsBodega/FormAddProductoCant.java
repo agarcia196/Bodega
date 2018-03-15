@@ -84,7 +84,7 @@ public class FormAddProductoCant extends JFrame implements Serializable {
 		setIconImage(Toolkit.getDefaultToolkit().getImage("C:\\Java Estructuras\\Bodega\\png\\forward-arrow.png"));
 		setTitle("Ingresar producto");
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		setBounds(100, 100, 475, 442);
+		setBounds(100, 100, 475, 370);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -182,7 +182,10 @@ public class FormAddProductoCant extends JFrame implements Serializable {
 					//sobreescribir el archivo de datos de la empresa
 					if (bod.getCapacidadMax()<(Double.parseDouble(Cant_textField.getText()))*prod.getVolumen()) {
 						JOptionPane.showMessageDialog(contentPane, "No se puede ingresar la cantidad de productos, la capacidad de la bodega no soporta.");
-					}else {
+					}else if(Recursos.isNumeric(Cant_textField.getText())==false) {	//comprobar que se ingresen números donde corresponda
+						JOptionPane.showMessageDialog(contentPane, "Por favor ingrese solo números en cantidad");
+					}
+					else {
 						bod.setCapacidadMax(bod.getCapacidadMax()-Double.parseDouble(Cant_textField.getText())
 								*prod.getVolumen());//restar capMax de modega
 					}
@@ -198,7 +201,7 @@ public class FormAddProductoCant extends JFrame implements Serializable {
 				}
 			}
 		});
-		btnAadir.setBounds(187, 308, 97, 35);
+		btnAadir.setBounds(187, 264, 97, 35);
 		contentPane.add(btnAadir);
 		btnAadir.setBackground(Color.decode(color3));
 	}

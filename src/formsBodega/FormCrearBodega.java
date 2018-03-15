@@ -22,6 +22,7 @@ import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.io.Serializable;
 import java.awt.event.ActionEvent;
+import java.awt.Toolkit;
 
 public class FormCrearBodega extends JFrame implements Serializable {
 
@@ -45,7 +46,8 @@ public class FormCrearBodega extends JFrame implements Serializable {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					FormCrearBodega frame = new FormCrearBodega();
+					Empresa empresa= new Empresa();
+					FormCrearBodega frame = new FormCrearBodega(empresa);
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -58,6 +60,8 @@ public class FormCrearBodega extends JFrame implements Serializable {
 	 * Create the frame.
 	 */
 	public FormCrearBodega(Persona persona, Empresa empresa) {
+		
+		setResizable(false);
 		setTitle("Crear una nueva bodega");
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 482, 405);
@@ -131,19 +135,23 @@ public class FormCrearBodega extends JFrame implements Serializable {
 			public void actionPerformed(ActionEvent arg0) {
 				int alerta = JOptionPane.showConfirmDialog(contentPane, "¿Desea guardar?");//confirmar el guardado
 				if (alerta==0) {
-					if (ID_textField.getText().compareTo("")==0 
+					if (ID_textField.getText().compareTo("")==0 		//revisar que los campos esten llenos
 							|| Ciudad_textField.getText().compareTo("")==0 || Direcc_textField.getText().compareTo("")==0 
 							|| CapMax_textField.getText().compareTo("")==0) {
 						JOptionPane.showMessageDialog(contentPane, "Por favor llene todos los campos para continuar");
-					}else {
+					}else if(Recursos.isNumeric(CapMax_textField.getText())==false){	//comprobar que se ingresen númeron donde corresponde
+						JOptionPane.showMessageDialog(contentPane, "Ingrese un número en la capacidad");
+					}
+					else{		//agregar la bodega mediante metodo AddBodega
 						empresa.AddBodega(ID_textField.getText(), Direcc_textField.getText(),
 								Ciudad_textField.getText(),
 								Integer.parseInt(CapMax_textField.getText()));
 						Recursos.WriteFileObjectEmpresa("empresa.dat", empresa);//sobreescribir el archivo de la empresa
 					}
-					dispose();
 				}
-			}
+				dispose();
+
+				}
 		});
 		btnAceptar.setBounds(184, 310, 97, 35);
 		contentPane.add(btnAceptar);

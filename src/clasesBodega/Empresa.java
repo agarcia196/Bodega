@@ -215,21 +215,7 @@ public class Empresa implements Serializable{
 			return categoria[i];
 	}
 	
-	/**
-	 * Ingreso.
-	 *
-	 * @return the logo
-	 */
-	/*public void  Ingreso (String bodega, int sku, int cantidad) {
-		Bodega b = BuscarBodega(bodega);
-		Producto p = BuscarProducto(sku);
-		if(b==null || p==null || cantidad<0) {
-			throw new DatosInsuficientes();
-		}else {
-			b.AddProducto(p,cantidad);		
-		}
-	}
-	
+
 	/**
 	 * Adds the bodega.
 	 *
@@ -267,30 +253,7 @@ public class Empresa implements Serializable{
 		else return bodegas[i];
 	}
 
-	/**
-	 * Adds the user.
-	 *
-	 * @param nombre El nombre
-	 * @param apellido the apellido
-	 * @param genero the genero
-	 * @param correo the correo
-	 * @param CC the cc
-	 * @param tipoID the tipo ID
-	 * @param user the user
-	 * @param pwd the pwd
-	 * @param perfil the perfil
-	 * @param tipoPerfil the tipo perfil
-	 */
-	//Agregar Usuario
-	/*public void AddUser(String nombre, String apellido, String genero, String correo, String CC, String tipoID,
-			String user, String pwd, String perfil, String tipoPerfil) {
-		Persona usuario1=new User(nombre,apellido,genero,correo,CC,tipoID,user,pwd,perfil,tipoPerfil);
-		if(usuarios==null)
-			usuarios = new usuarios[1];
-		else
-			usuarios= Arrays.copyOf(usuarios, usuarios.length+1);
-		usuarios[usuarios.length-1]=usuario1;
-	}*/
+
 	
 	public void AddUser(Persona p) {
 		if(usuarios==null)
@@ -319,21 +282,6 @@ public class Empresa implements Serializable{
 			return usuarios[i];
 	}	
 	
-	/**
-	 * Validar user.
-	 *
-	 * @param user the user
-	 * @param pwd the pwd
-	 * @throws PwdIncorrecta the pwd incorrecta
-	 */
-	//Validar Usuario
-	/*public void ValidarUser(String user, String pwd) throws PwdIncorrecta {
-		if (BuscarUser(user).Acceder(user, pwd)==(-1)) {
-			throw new PwdIncorrecta();
-		}
-		else
-			System.out.println("ingresando...");
-	}
 	
 	/**
 	 * Gets the logo.
