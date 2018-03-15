@@ -41,12 +41,11 @@ public class FormCrearBodega extends JFrame implements Serializable {
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String[] args) {
+	/*public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					Empresa empresa=new Empresa();
-					FormCrearBodega frame = new FormCrearBodega(empresa );
+					FormCrearBodega frame = new FormCrearBodega();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -58,7 +57,7 @@ public class FormCrearBodega extends JFrame implements Serializable {
 	/**
 	 * Create the frame.
 	 */
-	public FormCrearBodega(/*Persona persona,*/ Empresa empresa) {
+	public FormCrearBodega(Persona persona, Empresa empresa) {
 		setTitle("Crear una nueva bodega");
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 482, 405);
@@ -136,18 +135,14 @@ public class FormCrearBodega extends JFrame implements Serializable {
 							|| Ciudad_textField.getText().compareTo("")==0 || Direcc_textField.getText().compareTo("")==0 
 							|| CapMax_textField.getText().compareTo("")==0) {
 						JOptionPane.showMessageDialog(contentPane, "Por favor llene todos los campos para continuar");
-					}else if(Recursos.isNumeric(CapMax_textField.getText())==false){
-						JOptionPane.showMessageDialog(contentPane, "Ingrese un número en la capacidad");
-					}
-					else{
+					}else {
 						empresa.AddBodega(ID_textField.getText(), Direcc_textField.getText(),
 								Ciudad_textField.getText(),
 								Integer.parseInt(CapMax_textField.getText()));
 						Recursos.WriteFileObjectEmpresa("empresa.dat", empresa);//sobreescribir el archivo de la empresa
 					}
-					
+					dispose();
 				}
-				dispose();
 			}
 		});
 		btnAceptar.setBounds(184, 310, 97, 35);
