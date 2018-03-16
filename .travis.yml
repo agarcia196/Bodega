@@ -1,16 +1,4 @@
-language:
-      - java
-  jdk:
-      - oraclejdk8
-      - openjdk7
+language: java
   script:
-      - mvn clean test 
-  cache:
-      directories:
-          - $HOME/.m2
-  dist:
-      - trusty
-  sudo:
-      - false
-  notifications:
-      - email: false
+      -mvn install -DskipTests=true
+      - mvn test 
