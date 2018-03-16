@@ -7,40 +7,23 @@
 
 package formsBodega;
 
-import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.EventQueue;
-
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.text.AbstractDocument.Content;
-
-import com.sun.glass.events.KeyEvent;
-
-import clasesBodega.Bodega;
 import clasesBodega.Empresa;
-import clasesBodega.Persona;
-
-import javax.swing.JList;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
-import javax.swing.JToggleButton;
-import javax.swing.AbstractAction;
-import javax.swing.Action;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.io.Serializable;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 import java.awt.event.ActionEvent;
 import javax.swing.JTextField;
 import javax.swing.JScrollPane;
 import javax.swing.JLabel;
 import java.awt.Font;
-import javax.swing.JComboBox;
 import java.awt.Toolkit;
 
 public class FormBusquedaBodega extends JFrame implements Serializable {
@@ -50,12 +33,10 @@ public class FormBusquedaBodega extends JFrame implements Serializable {
 	 */
 	private static final long serialVersionUID = 1015505282670549380L;
 	private JPanel contentPane;
-	private Empresa empresa;
-	private Persona persona;
 	//	private FormAddProductoCant form;
 	private JTextField Busc_textField;
 	private JTable table_1;
-	private JTextField bodega_textField;
+	
 
 
 	/**
@@ -80,12 +61,8 @@ public class FormBusquedaBodega extends JFrame implements Serializable {
 
 	public FormBusquedaBodega(Empresa empresa, JTextField bodega_textField) {
 		setResizable(false);
-		this.empresa=empresa;
-		this.bodega_textField=bodega_textField;
 		setIconImage(Toolkit.getDefaultToolkit().getImage("C:\\Java Estructuras\\Bodega\\png\\searching-magnifying-glass.png"));
 		setTitle("Seleccionar bodega");
-		this.empresa= empresa;
-		this.bodega_textField=bodega_textField;
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 702, 665);
 		contentPane = new JPanel();

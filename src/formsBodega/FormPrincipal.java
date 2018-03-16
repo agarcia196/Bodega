@@ -2,7 +2,6 @@ package formsBodega;
 
 import java.awt.Image;
 import java.io.Serializable;
-
 import javax.swing.JFrame;
 import javax.swing.JMenuBar;
 import javax.swing.JMenu;
@@ -11,16 +10,12 @@ import javax.swing.JOptionPane;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
-
-import java.awt.EventQueue;
 import java.awt.Font;
-
 import clasesBodega.Bodeguero;
 import clasesBodega.Empresa;
 import clasesBodega.Gerente;
 import clasesBodega.Persona;
 import clasesBodega.Recursos;
-
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
@@ -36,25 +31,7 @@ public class FormPrincipal implements Serializable {
 	private int n=16; //Tamaño iconos
 	private int n2= 15; //Tamaño Titulos barra de menú
 	private int n3= 14; //Tampo de Subtitulos barra de menu
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					Empresa em= new Empresa();
-					Persona p = new Bodeguero("Alexis", "Garcia", "mascu", "ddd", "ddd", "CC", "1234") {
-					};
-					FormPrincipal window = new FormPrincipal(em,p);
-					window.frmBodegas.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
-
+	
 	/**
 	 * Create the application.
 	 */

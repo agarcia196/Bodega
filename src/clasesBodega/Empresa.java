@@ -3,7 +3,7 @@
  *
  * @author Alexis García Ramirez 
  * @author Jorge Luis Soriano Cuevas
- * @version 2.3.2018
+ * @version 16.3.2018
  */
 package clasesBodega;
 
@@ -12,9 +12,10 @@ import java.util.Arrays;
 
 import Excepciones.BodegaNoExiste;
 import Excepciones.CategoriaNoEncontrada;
+import Excepciones.EBodegas;
+import Excepciones.ECamposVacios;
 import Excepciones.ProductoNoEncontrado;
 
-// TODO: Auto-generated Javadoc
 /**
  * The Class Empresa.
  */
@@ -24,16 +25,27 @@ public class Empresa implements Serializable{
 	private static final long serialVersionUID = -306383744197773352L;
 	
 	
+	/** The productos. */
 	private Producto[] productos;
+	
+	/** The bodegas. */
 	private Bodega [] bodegas;
+	
+	/** The categoría. */
 	private String [] categoria;
+	
+	/** The usuarios. */
 	private Persona [] usuarios;
+	
+	/** The nombre. */
 	private String nombre;
+	
+	/** The logo. */
 	private String logo;
 	
 	/**
 	 *  
-	 * Constructor.
+	 * Instancia de nueva empresa.
 	 *
 	 * @param nombre de la empresa
 	 * @param logo ruta de acceso de el logo de la empresa
@@ -43,50 +55,23 @@ public class Empresa implements Serializable{
 		super();
 		this.nombre = nombre;
 		this.logo=logo;
+		this.usuarios= new Persona[0];
 	}
 	
-	
-	public Persona[] getUsuarios() {
-		return usuarios;
-	}
-
-
-	public void setUsuarios(Persona[] usuarios) {
-		this.usuarios = usuarios;
-	}
-
-
 	/**
-	 * Instantiates a new empresa.
+	 * Instancia de nueva empresa.
 	 */
 	public Empresa() {
-		
-	}
-	
-	/**
-	 * Gets the bodegas.
-	 *
-	 * @return the bodegas
-	 */
-	public Bodega[] getBodegas() {
-		return bodegas;
 	}
 
 	/**
-	 * Sets the bodegas.
-	 *
-	 * @param bodegas the new bodegas
-	 */
-	public void setBodegas(Bodega[] bodegas) {
-		this.bodegas = bodegas;
-	}
-
-	/**
-<<<<<<< HEAD
 	 * Gets the usuarios.
 	 *
 	 * @return the usuarios
 	 */
+	public Persona[] getUsuarios() {
+		return usuarios;
+	}
 
 
 	/**
@@ -94,85 +79,108 @@ public class Empresa implements Serializable{
 	 *
 	 * @param usuarios the new usuarios
 	 */
+	public void setUsuarios(Persona[] usuarios) {
+		this.usuarios = usuarios;
+	}
 	
 	/**
-=======
->>>>>>> 775aae149eb50f47990b589cd22ef9342d3a405b
-	 * Gets the categoria.
+	 * Gets Bodegas.
 	 *
-	 * @return the categoria
+	 * @return Array Bodegas
+	 */
+	public Bodega[] getBodegas() {
+		return bodegas;
+	}
+
+	/**
+	 * Sets Bodegas.
+	 *
+	 * @param bodegas nueva bodega
+	 */
+	public void setBodegas(Bodega[] bodegas) {
+		this.bodegas = bodegas;
+	}
+	
+	/**
+	 * Gets Categoría.
+	 *
+	 * @return Array categoría
 	 */
 	public String[] getCategoria() {
 		return categoria;
 	}
 	
 	/**
-	 * Sets the categoria.
+	 * Sets Categoría.
 	 *
-	 * @param categoria the new categoria
+	 * @param categoria nueva categoría
 	 */
 	public void setCategoria(String[] categoria) {
 		this.categoria = categoria;
 	}
 	
 	/**
-	 * Gets the nombre.
+	 * Gets Nombre.
 	 *
-	 * @return the nombre
+	 * @return  Nombre
 	 */
 	public String getNombre() {
 		return nombre;
 	}
 	
 	/**
-	 * Sets the nombre.
+	 * Sets Nombre.
 	 *
-	 * @param nombre the new nombre
+	 * @param nombre nuevo nombre
 	 */
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
 	}
 	
 	/**
-	 * Gets the productos.
+	 * Gets Producto.
 	 *
-	 * @return the productos
+	 * @return Array Productos
 	 */
 	public Producto[] getProductos() {
 		return productos;
 	}
 	
 	/**
-	 * Sets the productos.
+	 * Sets Producto.
 	 *
-	 * @param productos the new productos
+	 * @param productos Nuevo producto
 	 */
 	public void setProductos(Producto[] productos) {
 		this.productos = productos;
 	}
 
+	
 	/**
-	 * Adds the producto.
+	 * Agregar producto.
 	 *
-	 * @param categ the categ
-	 * @return the string
-	 * @throws CategoriaNoEncontrada the categoria no encontrada
+	 * @param cantidad_disponible La cantidad disponible
+	 * @param referencia Referencia
+	 * @param descripcion Descripción
+	 * @param categoria Categoría
+	 * @param marca Marca
+	 * @param volumen Volumen
+	 * @param peso Peso
 	 */
-	public void AddProducto(int cantidad_disponible, String referencia, String descripcion, String categoria, String marca,
-			double volumen, double peso) {
+	public void AddProducto(Producto p) {
 		if(productos==null)
 			productos=new Producto[1];
 		else 
 			productos=Arrays.copyOf(productos,productos.length+1);
-		productos[productos.length-1]= new Producto(cantidad_disponible,referencia,descripcion,categoria, marca,volumen,peso);
+		productos[productos.length-1]= p;
 	}
 	
 	/**
 	 * Buscar producto.
 	 *
-	 * @param codigo the codigo
-	 * @return the producto
-	 * @throws ProductoNoEncontrado the producto no encontrado
+	 * @param codigo SKU del producto
+	 * @return Producto
+	 * @throws ProductoNoEncontrado Producto no encontrado
 	 */
 	public Producto BuscarProducto(int codigo)throws ProductoNoEncontrado {
 		int i=0;
@@ -186,11 +194,15 @@ public class Empresa implements Serializable{
 	}
 	
 	/**
-	 * Adds the categoria.
+	 * Agregar categoría
 	 *
-	 * @param categ the categ
+	 * @param categ Categoría
+	 * @throws ECamposVacios 
 	 */
-	public void AddCategoria(String categ) {
+	public void AddCategoria(String categ) throws ECamposVacios {
+		if(categ.compareTo("")==0) {
+			throw new ECamposVacios();
+		}
 		if(categoria==null)
 			categoria=new String[1];
 		else 
@@ -199,11 +211,11 @@ public class Empresa implements Serializable{
 	}
 	
 	/**
-	 * Buscar categoria.
+	 * Buscar categoría.
 	 *
-	 * @param categ the categ
+	 * @param categ Categoría
 	 * @return the string
-	 * @throws CategoriaNoEncontrada the categoria no encontrada
+	 * @throws CategoriaNoEncontrada the categoría no encontrada
 	 */
 	public String BuscarCategoria(String categ)throws CategoriaNoEncontrada {
 		int i=0;
@@ -218,14 +230,13 @@ public class Empresa implements Serializable{
 	
 
 	/**
-	 * Adds the bodega.
+	 * Agregar bodega.
 	 *
-	 * @param IDBodega the ID bodega
-	 * @param direccion the direccion
-	 * @param ciudad the ciudad
-	 * @param capMaxima the cap maxima
-	 */
-	//Agregar bodega	
+	 * @param IDBodega Nombre
+	 * @param direccion dirección
+	 * @param ciudad Ciudad
+	 * @param capMaxima Capacidad Maxima
+	 */	
 	public void AddBodega(String IDBodega, String direccion, String ciudad, int capMaxima) {
 		Bodega bodega1 = new Bodega(direccion, IDBodega, ciudad, capMaxima);
 		if (bodegas==null)
@@ -238,11 +249,10 @@ public class Empresa implements Serializable{
 	/**
 	 * Buscar bodega.
 	 *
-	 * @param IDBodega the ID bodega
-	 * @return the bodega
-	 * @throws BodegaNoExiste the bodega no existe
+	 * @param IDBodega Nombre de la bodega
+	 * @return Objeto Bodega
+	 * @throws BodegaNoExiste ID incorrecto o bodega no existe
 	 */
-	//Buscar bodega
 	public Bodega BuscarBodega(String IDBodega) throws BodegaNoExiste{
 		int i=0;
 		while (i<bodegas.length && bodegas[i].getIdBodega().compareTo(IDBodega)!=0) {
@@ -256,35 +266,13 @@ public class Empresa implements Serializable{
 
 
 	
-	public void AddUser(Persona p) {
-		if(usuarios==null)
-			usuarios = new Persona[1];
-		else
-			usuarios= Arrays.copyOf(usuarios, usuarios.length+1);
-		usuarios[usuarios.length-1]=p;
-	}
-	public void AddUser(String nombre,String apellido,String genero,String correo,String cc,String tipoid,String pwd,String cargo) {
-		if(usuarios==null) {
-			usuarios = new Persona[1];
-		}else {
-			usuarios= Arrays.copyOf(usuarios, usuarios.length+1);
-		if(cargo.compareTo("Gerente")==0) {
-			Persona p=new Gerente(nombre,apellido,genero,correo,cc,tipoid,pwd);
-			usuarios[usuarios.length-1]=p;
-		}else {
-			Persona p=new Bodeguero(nombre,apellido,genero,correo,cc,tipoid,pwd);
-			usuarios[usuarios.length-1]=p;
-			}
-		}
-	}
+	
 	/**
-	 * Buscar user.
+	 * Buscar usuario por número de documento.
 	 *
-	 * @param user the user
-	 * @return the user
-	 * @throws UserNoExiste the user no existe
+	 * @param cc Cédula
+	 * @return El Usuario
 	 */
-	//Buscar Usuario por User
 	public Persona BuscarUser(String cc) {
 		int i=0;
 		while (i<usuarios.length && cc.compareTo(usuarios[i].getCc())!=0) {
@@ -296,11 +284,33 @@ public class Empresa implements Serializable{
 			return usuarios[i];
 	}	
 	
+	public String[][] BuscarProductoEnBodega(String Bodega) throws EBodegas, BodegaNoExiste {
+		
+		if(bodegas==null) {
+			throw new EBodegas("No hay bodegas registradas");
+		}else {
+			Bodega b = BuscarBodega(Bodega);
+			String[][]model=new String[b.getLista_producto().length][7];
+			int i=0;
+			while(i<b.getLista_producto().length) {	//recorrer arreglo de productos dentro de bodega
+				model[i][0]=Integer.toString(b.getLista_producto()[i].getSku());
+				model[i][1]=b.getLista_producto()[i].getReferencia();
+				model[i][2]=b.getLista_producto()[i].getMarca();
+				model[i][3]=Double.toString(b.getLista_producto()[i].getVolumen());
+				model[i][4]=Double.toString(b.getLista_producto()[i].getPeso());
+				model[i][5]=b.getLista_producto()[i].getCategoria();
+				model[i][6]=Integer.toString(b.getLista_producto()[i].getCantidad_disponible());
+				i++;
+			}
+			return model;
+		}
+	}
+	
 	
 	/**
-	 * Gets the logo.
+	 * Gets logo.
 	 *
-	 * @return the logo
+	 * @return ruta relativa de logo
 	 */
 	public String getLogo() {
 		return logo;
@@ -317,44 +327,14 @@ public class Empresa implements Serializable{
 	}
 	
 	
-	/**
-	 * The Class UserNoExiste.
+	 /*
+	 * @param b1 Bodega Origen
+	 * @param b2 Bodega Destino
+	 * @param p  Producto
+	 * @param cantidad Cantidad de producto
+	 * @throws BodegaNoExiste ID incorrecto o bodega no existe
+	 * @throws ProductoNoEncontrado Producto no encontrado
 	 */
-	public class UserNoExiste extends Exception{
-		
-		/**
-		 * Instantiates a new user no existe.
-		 */
-		public UserNoExiste() {
-			super("User incorrecto o no existe. Verifique nuevamente");
-		}
-	}
-	
-	/**
-	 * The Class PwdIncorrecta.
-	 */
-	public class PwdIncorrecta extends Exception{
-		
-		/**
-		 * Instantiates a new pwd incorrecta.
-		 */
-		public PwdIncorrecta() {
-			super("Contraseña o usuario incorrectos, verifique nuevamente");
-		}
-	}
-	
-	/**
-	 * The Class DatosInsuficientes.
-	 */
-	public class DatosInsuficientes extends Exception{
-		
-		/**
-		 * Instantiates a new datos insuficientes.
-		 */
-		public DatosInsuficientes() {
-			super("Datos incompletos");
-		}
-	}
 	
 	public void Transferencia(String b1,String b2,int p,int cantidad)throws BodegaNoExiste,ProductoNoEncontrado{
 		Bodega bb1= BuscarBodega(b1);
@@ -369,7 +349,20 @@ public class Empresa implements Serializable{
 
 	}
 	
-	
+	/**
+	 * Agregar Usuario a el array usuarios.
+	 *
+	 * @param p Persona
+	 */
+	public void AddUser(Persona p) {
+		if(usuarios==null) {
+			usuarios = new Persona[1];
+		}
+		else {
+			usuarios= Arrays.copyOf(usuarios, usuarios.length+1);
+			usuarios[usuarios.length-1]=p;
+		}
+	}
 	
 }
 

@@ -1,3 +1,11 @@
+/**
+ * clasesBodega: Recursos.
+ *
+ * @author Alexis García Ramirez 
+ * @author Jeisson Harbey Barrera Sánchez
+ * @version 16.3.2018
+ * 
+ */
 package formsBodega;
 
 
@@ -11,6 +19,10 @@ import javax.swing.JPasswordField;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
 
+import Excepciones.ECamposVacios;
+import Excepciones.EIgualdad;
+import Excepciones.ELongitud;
+import Excepciones.ETipoInconrrecto;
 import clasesBodega.Empresa;
 import clasesBodega.Persona;
 import clasesBodega.Recursos;
@@ -42,25 +54,10 @@ public class FormAddUser extends JFrame implements Serializable {
 	private int n=35;
 	private String color1="#27AFA3";
 	private String color2="#343A41";
-	private Empresa empresa;
-	private Persona persona;
-	/**
-	 * Launch the application.
-	 *
-	 * @param empresa the empresa
-	 */
-	public static void main(String[] args) {
-				FormPrincipalLogin frame = new FormPrincipalLogin();
-					frame.setVisible(true);
-				
-	}
-
 	/**
 	 * Create the frame.
 	 */
 	public FormAddUser(Empresa empresa,Persona persona) {
-		this.empresa= empresa;
-		this.persona=persona;
 		setTitle("Crear Usuario");
 		setIconImage(Toolkit.getDefaultToolkit().getImage("icono-2png-130x130.png"));
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -108,14 +105,14 @@ public class FormAddUser extends JFrame implements Serializable {
 		lblGeneroU.setBounds(15, 113, 80, 14);
 		contentPane.add(lblGeneroU);
 				
-		JComboBox <String> comboBox = new JComboBox<>();
-		comboBox.setForeground(Color.WHITE);
-		comboBox.setFont(new Font("Century Gothic", Font.PLAIN, 14));
-		comboBox.setModel(new DefaultComboBoxModel<String>(new String[] {"Masculino", "Femenino", "Otro"}));
-		comboBox.setBounds(95, 102, 195, n);
-		comboBox.setBackground(Color.decode(color2));
-		comboBox.setBorder(new LineBorder(Color.decode(color2)));
-		contentPane.add(comboBox);
+		JComboBox <String> cbGenero = new JComboBox<>();
+		cbGenero.setForeground(Color.WHITE);
+		cbGenero.setFont(new Font("Century Gothic", Font.PLAIN, 14));
+		cbGenero.setModel(new DefaultComboBoxModel<String>(new String[] {"Masculino", "Femenino", "Otro"}));
+		cbGenero.setBounds(95, 102, 195, n);
+		cbGenero.setBackground(Color.decode(color2));
+		cbGenero.setBorder(new LineBorder(Color.decode(color2)));
+		contentPane.add(cbGenero);
 		
 		JLabel lblCorreoU = new JLabel("E-mail :");
 		lblCorreoU.setFont(new Font("Century Gothic", Font.PLAIN, 14));
@@ -136,14 +133,14 @@ public class FormAddUser extends JFrame implements Serializable {
 		lblTipoIDU.setBounds(15, 163, 80, 18);
 		contentPane.add(lblTipoIDU);
 		
-		JComboBox <String> cbTipoIDU = new JComboBox<>();
-		cbTipoIDU.setForeground(Color.WHITE);
-		cbTipoIDU.setFont(new Font("Century Gothic", Font.PLAIN, 14));
-		cbTipoIDU.setModel(new DefaultComboBoxModel<String>(new String[] {"Cédula", "Pasaporte","Nit"}));
-		cbTipoIDU.setBounds(95, 155, 195, n);
-		cbTipoIDU.setBackground(Color.decode(color2));
-		cbTipoIDU.setBorder(new LineBorder(Color.decode(color2)));
-		contentPane.add(cbTipoIDU);
+		JComboBox <String> cbTipo = new JComboBox<>();
+		cbTipo.setForeground(Color.WHITE);
+		cbTipo.setFont(new Font("Century Gothic", Font.PLAIN, 14));
+		cbTipo.setModel(new DefaultComboBoxModel<String>(new String[] {"Cédula", "Pasaporte","Nit"}));
+		cbTipo.setBounds(95, 155, 195, n);
+		cbTipo.setBackground(Color.decode(color2));
+		cbTipo.setBorder(new LineBorder(Color.decode(color2)));
+		contentPane.add(cbTipo);
 		
 		JLabel lblCcU = new JLabel("Número :");
 		lblCcU.setFont(new Font("Century Gothic", Font.PLAIN, 14));
@@ -197,13 +194,13 @@ public class FormAddUser extends JFrame implements Serializable {
 		lblmnimoCaracteres.setBounds(20, 367, 171, 14);
 		contentPane.add(lblmnimoCaracteres);
 		
-		JComboBox<String> comboBox_1 = new JComboBox<String>();
-		comboBox_1.setModel(new DefaultComboBoxModel(new String[] {"Gerente", "Bodeguero"}));
-		comboBox_1.setForeground(Color.WHITE);
-		comboBox_1.setFont(new Font("Century Gothic", Font.PLAIN, 14));
-		comboBox_1.setBorder(new LineBorder(Color.decode(color2)));
-		comboBox_1.setBackground(new Color(52, 58, 65));
-		comboBox_1.setBounds(95, 216, 195, 35);
+		JComboBox<String> cbCargo = new JComboBox<String>();
+		cbCargo.setModel(new DefaultComboBoxModel<String>(new String[] {"Gerente", "Bodeguero"}));
+		cbCargo.setForeground(Color.WHITE);
+		cbCargo.setFont(new Font("Century Gothic", Font.PLAIN, 14));
+		cbCargo.setBorder(new LineBorder(Color.decode(color2)));
+		cbCargo.setBackground(new Color(52, 58, 65));
+		cbCargo.setBounds(95, 216, 195, 35);
 		
 		
 		
@@ -217,29 +214,22 @@ public class FormAddUser extends JFrame implements Serializable {
 				int validar = JOptionPane.showConfirmDialog(contentPane,
 						"¿Está seguro de que la información es correcta?");
 				if (validar == 0) {
-				
-					if (txtNombreU.getText().compareTo("")==0 ||txtApellidoU.getText().compareTo("")==0 || txtCcU.getText().compareTo("")==0 || 
-						txtCorreoU.getText().compareTo("")==0 ||String.valueOf(passwordField.getPassword()).compareTo("") == 0 ||
-						String.valueOf(cpasswordField.getPassword()).compareTo("") == 0) {
-						JOptionPane.showMessageDialog(contentPane, "Todos los campos deben rellenarse");
-					}else if(String.valueOf(passwordField.getPassword()).length()<8) {
-						JOptionPane.showMessageDialog(contentPane, "La contraseña debe tener minimo 8 carateres");
-					}else if(String.valueOf(cpasswordField.getPassword()).compareTo(String.valueOf(passwordField.getPassword()))!=0) {
-						JOptionPane.showMessageDialog(contentPane, "Las contraseñas no coinciden");
-					}
-					else {
-						empresa.AddUser(txtNombreU.getText(), txtApellidoU.getText(), comboBox.getSelectedItem().toString(), txtCorreoU.getText(), 
-								txtCcU.getText(), cbTipoIDU.getSelectedItem().toString(), String.valueOf(passwordField.getPassword()),comboBox_1.getSelectedItem().toString());
+					try {
+						persona.AddUser(txtNombreU.getText(),txtApellidoU.getText(),cbGenero.getSelectedItem().toString(),
+								txtCorreoU.getText(),txtCcU.getText(),cbTipo.getSelectedItem().toString(),
+								String.valueOf(passwordField.getPassword()),String.valueOf(cpasswordField.getPassword()),
+								cbCargo.getSelectedItem().toString(),empresa);
 						Recursos.WriteFileObjectEmpresa("empresa.dat", empresa);
-						JOptionPane.showMessageDialog(contentPane, "El Usuario fue creado exitosamente");
 						dispose();
+						JOptionPane.showMessageDialog(contentPane, "El Usuario fue creado exitosamente");
+					} catch (ECamposVacios | ELongitud | EIgualdad | ETipoInconrrecto e) {
+						JOptionPane.showMessageDialog(contentPane, e.getMessage());
 					}
-				
 				}
 			}
 		});
 		
-		contentPane.add(comboBox_1);
+		contentPane.add(cbCargo);
 		btnAceptar.setBounds(244, 373, 90, 35);
 		contentPane.add(btnAceptar);
 	}

@@ -7,26 +7,19 @@
 
 package formsBodega;
 
-import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.EventQueue;
-
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
 import javax.swing.table.DefaultTableModel;
-
 import clasesBodega.Bodega;
-import clasesBodega.Empresa;
-
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JButton;
 import javax.swing.JTextField;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
-
 import java.awt.Font;
 import java.awt.Toolkit;
 import java.awt.event.ActionListener;
@@ -42,32 +35,13 @@ public class FormBusquedaProductoconBodega extends JFrame implements Serializabl
 	private JPanel contentPane;
 	private JTable table;
 	private JTextField Busc_textField;
-	private Bodega bodega;
-
-	/**
-	 * Launch the application.
-	 */
-	/*public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					FromBusquedaProducto frame = new FromBusquedaProducto(empresa);
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}/
-
+	
 	/**
 	 * Create the frame.
 	 */
 	public FormBusquedaProductoconBodega(Bodega bodega, JTextField Prod_textField) {
 		setResizable(false);
-		this.Busc_textField=Busc_textField;
-		this.bodega=bodega;
-		setIconImage(Toolkit.getDefaultToolkit().getImage("C:\\Java Estructuras\\Bodega\\png\\searching-magnifying-glass.png"));
+		setIconImage(Toolkit.getDefaultToolkit().getImage("png\\searching-magnifying-glass.png"));
 		setTitle("Seleccionar producto");
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 702, 665);
@@ -95,6 +69,7 @@ public class FormBusquedaProductoconBodega extends JFrame implements Serializabl
 		JButton btnBuscar = new JButton("Buscar");
 		btnBuscar.setFont(new Font("Century Gothic", Font.PLAIN, 14));
 		btnBuscar.addActionListener(new ActionListener() {
+			
 			public void actionPerformed(ActionEvent e) {
 				int numFilas = modeloTable.getRowCount();
 				for (int i=numFilas-1; i>=0; i--) {				//eliminar los datos de la tabla

@@ -2,26 +2,21 @@ package formsBodega;
 
 import java.awt.Color;
 import java.io.Serializable;
-
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
-
 import clasesBodega.Empresa;
 import clasesBodega.Persona;
-
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JTextField;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
-
 import java.awt.Font;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
-
 import javax.swing.SwingConstants;
 import javax.swing.JPasswordField;
 import java.awt.event.ActionListener;

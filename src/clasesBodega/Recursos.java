@@ -2,12 +2,12 @@
  * clasesBodega: Recursos.
  *
  * @author Alexis García Ramirez 
+ * @author Jorge Luis Soriano Cuevas
  * @version 4.3.2018
  * 
  */
 package clasesBodega;
 
-import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;

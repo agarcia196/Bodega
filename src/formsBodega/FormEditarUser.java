@@ -12,14 +12,11 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
-
 import clasesBodega.Empresa;
 import clasesBodega.Persona;
 import clasesBodega.Recursos;
-
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
-import javax.swing.JTextField;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.io.Serializable;
@@ -38,31 +35,12 @@ public class FormEditarUser extends JFrame implements Serializable {
 	private JPasswordField Rep_passwordField_1;
 	private JPasswordField Antigua_passwordField_2;
 	private String color="#9FA5A5";
-	private Empresa empresa;
-	private Persona persona;
-
-	/**
-	 * Launch the application.
-	 */
-	/*public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					FormEditarUser frame = new FormEditarUser();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
+	
 
 	/**
 	 * Create the frame.
 	 */
 	public FormEditarUser(Persona persona, Empresa empresa) {
-		this.empresa= empresa;
-		this.persona=persona;
 		setResizable(false);
 		setTitle("Cambiar datos");
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);

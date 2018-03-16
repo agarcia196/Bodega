@@ -7,25 +7,20 @@
 
 package formsBodega;
 
-import java.awt.BorderLayout;
-import java.awt.Color;
-import java.awt.EventQueue;
 
+import java.awt.Color;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
 import javax.swing.table.DefaultTableModel;
-
 import clasesBodega.Empresa;
-
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JButton;
 import javax.swing.JTextField;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
-
 import java.awt.Font;
 import java.awt.Toolkit;
 import java.awt.event.ActionListener;
@@ -41,32 +36,12 @@ public class FormBusquedaProducto extends JFrame implements Serializable{
 	private JPanel contentPane;
 	private JTable table;
 	private JTextField Busc_textField;
-	private Empresa empresa;
-	private JTextField Prod_textField;
-
-	/**
-	 * Launch the application.
-	 */
-	/*public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					FromBusquedaProducto frame = new FromBusquedaProducto(empresa);
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}/
-
+	
 	/**
 	 * Create the frame.
 	 */
 	public FormBusquedaProducto(Empresa empresa, JTextField Prod_textField) {
 		setResizable(false);
-		this.Prod_textField=Prod_textField;
-		this.empresa=empresa;
 		setIconImage(Toolkit.getDefaultToolkit().getImage("C:\\Java Estructuras\\Bodega\\png\\searching-magnifying-glass.png"));
 		setTitle("Seleccionar producto");
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);

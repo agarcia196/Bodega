@@ -14,17 +14,16 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
 
+import Excepciones.BodegaNoExiste;
+import Excepciones.ECamposVacios;
+import Excepciones.ELetrasEnCampoN;
+import Excepciones.ELimiteDeAlmacenamiento;
 import Excepciones.ProductoNoEncontrado;
-import clasesBodega.Bodega;
 import clasesBodega.Empresa;
 import clasesBodega.Persona;
-import clasesBodega.Producto;
 import clasesBodega.Recursos;
-import clasesBodega.*;
-
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
-
 import java.awt.Font;
 import javax.swing.JTextField;
 import javax.swing.JButton;
@@ -32,8 +31,6 @@ import java.awt.event.ActionListener;
 import java.io.Serializable;
 import java.awt.event.ActionEvent;
 import java.awt.Toolkit;
-import javax.swing.ImageIcon;
-import javax.swing.JTextArea;
 
 public class FormAddProductoCant extends JFrame implements Serializable {
 
@@ -42,8 +39,6 @@ public class FormAddProductoCant extends JFrame implements Serializable {
 	 */
 	private static final long serialVersionUID = 6351524704096647185L;
 	private JPanel contentPane;
-	private Persona persona;
-	private Empresa empresa;
 	private JTextField Cant_textField;
 	private JTextField Prod_textField;
 	private JTextField Bodega_textField;
@@ -52,36 +47,11 @@ public class FormAddProductoCant extends JFrame implements Serializable {
 	private String color3="#27AFA3";
 
 	/**
-	 * Launch the application.
-	 */
-	/*public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					//Persona per=new Persona();
-					Empresa empresa=new Empresa();
-					Bodega bodega1= new Bodega("bodega1", "1234", "df",0);
-					Bodega bodega2=new Bodega("Bodega2", "123", "sdf",0);
-					Bodega [] bode= {bodega1,bodega2};
-					empresa.setBodegas(bode);
-					FormAddProductoCant frame = new FormAddProductoCant( empresa);
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
-
-	/**
 	 * Create the frame.
 	 */
-
 	public FormAddProductoCant(Persona persona, Empresa empresa) {
 		setResizable(false);
-		this.empresa= empresa;
-		this.persona = persona;
-		setIconImage(Toolkit.getDefaultToolkit().getImage("C:\\Java Estructuras\\Bodega\\png\\forward-arrow.png"));
+		setIconImage(Toolkit.getDefaultToolkit().getImage("png\\forward-arrow.png"));
 		setTitle("Ingresar producto");
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 475, 370);
@@ -170,35 +140,18 @@ public class FormAddProductoCant extends JFrame implements Serializable {
 			public void actionPerformed(ActionEvent arg0) {
 				int alerta=JOptionPane.showConfirmDialog(contentPane, "¿Desea guardar?");
 				if (alerta==0) {
-					if(Bodega_textField.getText().compareTo("")==0 || Prod_textField.getText().compareTo("")==0 ||
-							Cant_textField.getText().compareTo("")==0) {//revisar si hay campos vacíos
-						JOptionPane.showMessageDialog(contentPane, "Por favor llene todos los campos para continuar");
-				}else {
 					try {
-					Bodega bod = empresa.BuscarBodega(Bodega_textField.getText()); //buscar bodega para ingresar el producto
-					Producto prod=empresa.BuscarProducto(Integer.valueOf(Prod_textField.getText())); //buscar el producto a ingresar
-					bod.addProducto(prod,Integer.parseInt(Cant_textField.getText()));//añadir el producto a la bodega
-					System.out.println(bod.getLista_producto()[0].getMarca());
-					//sobreescribir el archivo de datos de la empresa
-					if (bod.getCapacidadMax()<(Double.parseDouble(Cant_textField.getText()))*prod.getVolumen()) {
-						JOptionPane.showMessageDialog(contentPane, "No se puede ingresar la cantidad de productos, la capacidad de la bodega no soporta.");
-					}else if(Recursos.isNumeric(Cant_textField.getText())==false) {	//comprobar que se ingresen números donde corresponda
-						JOptionPane.showMessageDialog(contentPane, "Por favor ingrese solo números en cantidad");
+						persona.Ingreso(Bodega_textField.getText(), Prod_textField.getText(), Cant_textField.getText(), empresa);
+						Recursos.WriteFileObjectEmpresa("empresa.dat", empresa);
+						dispose();
+						JOptionPane.showMessageDialog(contentPane, "Producto(s) ingresado(s) correctamente a la bodega "+Bodega_textField.getText());
+					} catch (NumberFormatException | ProductoNoEncontrado | BodegaNoExiste | ECamposVacios
+							| ELimiteDeAlmacenamiento e) {
+						JOptionPane.showMessageDialog(contentPane, e.getMessage());
+					}catch (ELetrasEnCampoN e) {
+						JOptionPane.showMessageDialog(contentPane, e.getMessage()+" en cantidad");
 					}
-					else {
-						bod.setCapacidadMax(bod.getCapacidadMax()-Double.parseDouble(Cant_textField.getText())
-								*prod.getVolumen());//restar capMax de modega
-					}
-					
-					Recursos.WriteFileObjectEmpresa("empresa.dat", empresa);
-				}catch (Excepciones.BodegaNoExiste e) {
-					JOptionPane.showMessageDialog(contentPane, e.getMessage());
-				}catch (ProductoNoEncontrado e) {
-					JOptionPane.showMessageDialog(contentPane, e.getMessage());
-				}
-				}
-				dispose();
-				}
+				}	
 			}
 		});
 		btnAadir.setBounds(187, 264, 97, 35);

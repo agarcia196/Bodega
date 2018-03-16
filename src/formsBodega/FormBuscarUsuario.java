@@ -47,22 +47,7 @@ public class FormBuscarUsuario extends JFrame implements Serializable {
 		return persona;
 	}
 
-	/**
-	 * Launch the application.
-	 */
-	/*public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					FormBuscarUsuario frame = new FormBuscarUsuario();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
-
+	
 	/**
 	 * Create the frame.
 	 */
@@ -73,7 +58,7 @@ public class FormBuscarUsuario extends JFrame implements Serializable {
 		setTitle("Buscador De Usuarios");
 		setIconImage(Toolkit.getDefaultToolkit().getImage("png\\searching-magnifying-glass.png"));
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		setBounds(100, 100, 823, 750);
+		setBounds(100, 100, 900, 700);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -81,7 +66,7 @@ public class FormBuscarUsuario extends JFrame implements Serializable {
 		contentPane.setBackground(Color.decode("#57616D"));
 
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(12, 121, 781, 524);
+		scrollPane.setBounds(15, 115, 850, 450);
 		contentPane.add(scrollPane);
 		String [] titulos = {"Nombre","Apellido","Tipo ID", "ID", "Cargo", "Genero", "Correo"};
 		DefaultTableModel modelo = new DefaultTableModel(titulos, 0);
@@ -163,7 +148,7 @@ public class FormBuscarUsuario extends JFrame implements Serializable {
 			}
 		});
 		btnEditar.setFont(new Font("Century Gothic", Font.PLAIN, 14));
-		btnEditar.setBounds(372, 658, 97, 35);
+		btnEditar.setBounds(350, 600, 100, 35);
 		contentPane.add(btnEditar);
 		btnEditar.setBackground(Color.decode("#27AFA3"));
 	}

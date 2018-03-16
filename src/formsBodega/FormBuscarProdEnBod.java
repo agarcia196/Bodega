@@ -2,7 +2,8 @@
  * formsBodega: Empresa.
  * 
  * @author Jorge Luis Soriano Cuevas
- * @version 2.3.2018
+ * @author Alexis_García_Ramirez
+ * @version 16.3.2018
  */
 
 package formsBodega;
@@ -14,6 +15,8 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
 import javax.swing.table.DefaultTableModel;
 
+import Excepciones.BodegaNoExiste;
+import Excepciones.EBodegas;
 import clasesBodega.Empresa;
 import javax.swing.JTextField;
 import javax.swing.JButton;
@@ -21,48 +24,38 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
-
 import java.awt.Font;
 import java.awt.event.ActionListener;
 import java.io.Serializable;
 import java.awt.event.ActionEvent;
 
+/**
+ * The Class FormBuscarProdEnBod.
+ */
 public class FormBuscarProdEnBod extends JFrame implements Serializable{
 
-	/**
-	 * 
-	 */
+	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 3321516021996484216L;
+	
+	/** The content pane. */
 	private JPanel contentPane;
+	
+	/** The Busc text field. */
 	private JTextField Busc_textField;
+	
+	/** The table. */
 	private JTable table;
-	private Empresa empresa;
-
+	
 	/**
-	 * Launch the application.
-	 */
-	/*public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					FormBuscarProdEnBod frame = new FormBuscarProdEnBod();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
-
-	/**
-	 * Create the frame.
+	 * Creación de interfaz de búsqueda de productor en bodegas.
+	 *
+	 * @param empresa La empresa
 	 */
 	public FormBuscarProdEnBod(Empresa empresa) {
 		setTitle("Buscar productos de bodega");
-		this.empresa=empresa;
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		setBounds(100, 100, 878, 729);
+		setBounds(100, 100, 900, 700);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -76,7 +69,7 @@ public class FormBuscarProdEnBod extends JFrame implements Serializable{
 		contentPane.add(lblIngreseBodegaA);
 		
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(12, 134, 848, 535);
+		scrollPane.setBounds(15, 120, 850, 525);
 		contentPane.add(scrollPane);
 		
 		String [] titulos= {"SKU", "Referencia", "Marca", "Volumen", "Peso", "Categoría", "cantidad"};
@@ -98,36 +91,29 @@ public class FormBuscarProdEnBod extends JFrame implements Serializable{
 				for (int i=numFilas-1; i>=0; i--) {
 					modelo.removeRow(i);
 				}
-				String busqueda= Busc_textField.getText();
 				if(Busc_textField.getText().compareTo("")==0) {
 					FormBusquedaBodega buscarbo = new FormBusquedaBodega(empresa, Busc_textField);
 					buscarbo.setVisible(true);
 				}else {
-				if(empresa.getBodegas()==null) {		//comprobar si existen bodegas
-					JOptionPane.showMessageDialog(contentPane, "No existen bodegas");
-				}else {
-					int i=0;
-					while (i<empresa.getBodegas().length) {//recorrer arreglo de bodegas
-						if(empresa.getBodegas()[i].getIdBodega().compareTo(busqueda)==0) {//buscar por id
+					String[][] matriz;
+					try {
+						matriz = empresa.BuscarProductoEnBodega(Busc_textField.getText());
+						String[] model = new String[matriz[0].length];
+						int i=0;
+						while(i<matriz.length) {
 							int j=0;
-							while(j<empresa.getBodegas()[i].getLista_producto().length) {	//recorrer arreglo de productos dentro de bodega
-								String[]model= {Integer.toString(empresa.getBodegas()[i].getLista_producto()[j].getSku()),
-										empresa.getBodegas()[i].getLista_producto()[j].getReferencia(),
-										empresa.getBodegas()[i].getLista_producto()[j].getMarca(),
-										Double.toString(empresa.getBodegas()[i].getLista_producto()[j].getVolumen()),
-										Double.toString(empresa.getBodegas()[i].getLista_producto()[j].getPeso()),
-										empresa.getBodegas()[i].getLista_producto()[j].getCategoria(),
-										empresa.getBodegas()[i].getLista_producto()[j].getCategoria()};	//crear modelo para la tabla
-								modelo.addRow(model);			//ingresar modelo a la tabla
-							j++;
+							while(j<matriz[i].length) {																	
+								model[j] = matriz[i][j];
+								j++;								    
 							}
-						}i++;
+							modelo.addRow(model);
+							i++;
+						}
+					} catch (EBodegas | BodegaNoExiste e) {
+						JOptionPane.showMessageDialog(contentPane, e.getMessage());
 					}
-					if(i<empresa.getBodegas().length) {	//no se encuentra la bodega
-						JOptionPane.showMessageDialog(contentPane, "No se puede encontrar, intente nuevamenrte");
-					}
-				}
-			}}
+				}	
+			}
 		});
 		btnBuscar.setBounds(462, 68, 97, 35);
 		contentPane.add(btnBuscar);

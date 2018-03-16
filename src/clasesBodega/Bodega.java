@@ -11,7 +11,6 @@ package clasesBodega;
 
 import java.io.Serializable;
 import java.util.Arrays;
-
 import Excepciones.ProductoNoEncontrado;
 
 // TODO: Auto-generated Javadoc
@@ -188,7 +187,7 @@ public class Bodega implements Serializable{
 	}
 	
 	/**
-	 * Compradeproducto.
+	 * Compra de producto.
 	 *
 	 * @param sku el sku
 	 * @param cantidad la cantidad
@@ -235,7 +234,7 @@ class ProductoCasiAgotado extends Exception{
 }
  class CantidadInsuficiente extends Exception{
 	 public CantidadInsuficiente() {
-		 super("La cantidad de productos es insufucuiente");
+		 super("La cantidad de productos es insuficiente");
 	 }	 
  }
  class ProductoNoExistente extends Exception{

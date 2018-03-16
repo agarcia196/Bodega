@@ -42,7 +42,7 @@ public class Producto implements Serializable{
 		this.categoria = categoria;
 		this.volumen = volumen;
 		this.peso = peso;
-		this.sku= count+1;
+		this.sku= count;
 		count++;
 	}
 

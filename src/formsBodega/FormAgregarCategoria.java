@@ -7,24 +7,21 @@
 
 package formsBodega;
 
-import java.awt.BorderLayout;
-import java.awt.Color;
-import java.awt.EventQueue;
 
+import java.awt.Color;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
 
+import Excepciones.ECamposVacios;
 import clasesBodega.Empresa;
 import clasesBodega.Persona;
 import clasesBodega.Recursos;
-
 import javax.swing.JTextField;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
-
 import java.awt.Font;
 import java.awt.event.ActionListener;
 import java.io.Serializable;
@@ -36,37 +33,15 @@ public class FormAgregarCategoria extends JFrame implements Serializable{
 	 * 
 	 */
 	private static final long serialVersionUID = -4370912280968167635L;
-	private Empresa empresa;
-	private Persona persona;
 	private JPanel contentPane;
 	private JTextField nombre_textField;
-
-	/**
-	 * Launch the application.
-	 */
-	/*public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					Empresa empresa=new Empresa();
-					FormAgregarCategoria frame = new FormAgregarCategoria(empresa);
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
 
 	/**
 	 * Create the frame.
 	 */
 	public FormAgregarCategoria(Persona persona, Empresa empresa) {
-		this.persona=persona;
-		this.empresa=empresa;
 		setResizable(false);
 		setTitle("Agregar categoria");
-		this.empresa= empresa;
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 383, 226);
 		contentPane = new JPanel();
@@ -85,15 +60,16 @@ public class FormAgregarCategoria extends JFrame implements Serializable{
 		btnAceptar.setFont(new Font("Century Gothic", Font.PLAIN, 14));
 		btnAceptar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				if (nombre_textField.getText().compareTo("")==0) {
-					JOptionPane.showMessageDialog(contentPane, "Debe ingresar un nombre para continuar");
-				}else {
+				try {
 					empresa.AddCategoria(nombre_textField.getText());
+					Recursos.WriteFileObjectEmpresa("empresa.dat", empresa);
+				} catch (ECamposVacios e) {
+					JOptionPane.showMessageDialog(contentPane, e.getMessage());
+				}finally {
 					FormAddProducto formProduct = new FormAddProducto(persona, empresa);
 					formProduct.setVisible(true);
 					dispose();
 				}
-				Recursos.WriteFileObjectEmpresa("empresa.dat", empresa);//sobreescribir el archivo de la empresa
 			}
 		});
 		btnAceptar.setBounds(134, 131, 97, 35);

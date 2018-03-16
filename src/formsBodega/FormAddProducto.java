@@ -6,8 +6,6 @@
  */
 package formsBodega;
 
-import java.awt.BorderLayout;
-import java.awt.EventQueue;
 import java.awt.Color;
 
 import javax.swing.JFrame;
@@ -15,16 +13,13 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
 
-import clasesBodega.Producto;
+import Excepciones.ECamposVacios;
+import Excepciones.ELetrasEnCampoN;
 import clasesBodega.Recursos;
 import clasesBodega.Empresa;
-import clasesBodega.Main;
 import clasesBodega.Persona;
-import jdk.nashorn.internal.scripts.JO;
-
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
-
 import java.awt.Font;
 import javax.swing.JComboBox;
 import javax.swing.JTextField;
@@ -48,39 +43,15 @@ public class FormAddProducto extends JFrame implements Serializable {
 	private JTextField Ref_textField;
 	private JTextField Peso_textField;
 	private JEditorPane Descrip_textField;
-	private Empresa empresa;
-	private Persona persona;
 	private JTextField Vol_textField;
 	private JTextField Marca_textField;
 	private String color= "#9FA5A5";
-
-	/**
-	 * Launch the application.
-	 */
-	/*public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					Empresa empresa = new Empresa();
-					FormAddProducto frame = new FormAddProducto(empresa);
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
-
 	/**
 	 * Create the frame.
 	 */
 	public FormAddProducto(Persona persona,Empresa empresa) {
-		this.persona=persona;
-		this.empresa=empresa;
 		setResizable(false);
-		this.empresa= empresa;
-		this.persona = persona;
-		setIconImage(Toolkit.getDefaultToolkit().getImage("C:\\Java Estructuras\\Bodega\\png\\vender-producto.png"));
+		setIconImage(Toolkit.getDefaultToolkit().getImage("png\\vender-producto.png"));
 		setTitle("A\u00F1adir producto");
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 503, 642);
@@ -144,13 +115,13 @@ public class FormAddProducto extends JFrame implements Serializable {
 		lblMarca.setForeground(Color.LIGHT_GRAY);
 		lblMarca.setBounds(12, 380, 56, 16);
 		contentPane.add(lblMarca);
-		JComboBox Cat_comboBox = new JComboBox();
+		JComboBox<String> Cat_comboBox = new JComboBox<String>();
 		Cat_comboBox.setFont(new Font("Century Gothic", Font.ITALIC, 14));
 		Cat_comboBox.setBounds(121, 134, 239, 30);
-		contentPane.add(Cat_comboBox);
 		Cat_comboBox.setBackground(Color.decode("#57616D"));
-		DefaultComboBoxModel modelo = new DefaultComboBoxModel(empresa.getCategoria());//crear modelo para el comnbobox de categoria
+		DefaultComboBoxModel<String> modelo = new DefaultComboBoxModel<String>(empresa.getCategoria());//crear modelo para el comnbobox de categoria
 		Cat_comboBox.setModel(modelo);//ingresar el modelo creado en el combobox categoria
+		contentPane.add(Cat_comboBox);
 		
 		Ref_textField = new JTextField();
 		Ref_textField.setFont(new Font("Century Gothic", Font.PLAIN, 14));
@@ -195,25 +166,20 @@ public class FormAddProducto extends JFrame implements Serializable {
 		btnAadir.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				int alerta = JOptionPane.showConfirmDialog(contentPane, "¿Desea guardar?");//confirmar el guardado
-				if (alerta==0) {		//acepta guardado
-					if (Ref_textField.getText().compareTo("")==0
-							||Peso_textField.getText().compareTo("")==0
-							|| Cat_comboBox.getSelectedItem().toString().compareTo("")==0||		//comparar datos vacíos
-							Descrip_textField.getText().compareTo("")==0 || Cat_comboBox.getSelectedItem()==null
-							|| Marca_textField.getText().compareTo("")==0) {
-						JOptionPane.showMessageDialog(contentPane, "Por favor llene todos los campos para continuar");
-					}else if(Recursos.isNumeric(Peso_textField.getText())==false || //comprobar que se ingresen números donde corresponde
-							Recursos.isNumeric(Vol_textField.getText())==false) {
-						JOptionPane.showMessageDialog(contentPane, "Ingrese solo números en peso y volumen");
-					}
-					else {//agregar el producto al array de la empresa
-						empresa.AddProducto(0,Ref_textField.getText(),Descrip_textField.getText(),
-								Cat_comboBox.getSelectedItem().toString(),Marca_textField.getText(),
-								Double.parseDouble(Vol_textField.getText()),
-								Double.parseDouble(Peso_textField.getText()));
-						Recursos.WriteFileObjectEmpresa("empresa.dat", empresa);//sobreescribir el archivo de la empresa
+				if (alerta==0) {				
+						try {
+						persona.AddProducto(Ref_textField.getText(),Descrip_textField.getText(),
+									Cat_comboBox.getSelectedItem().toString(),Marca_textField.getText(),
+									Vol_textField.getText(),Peso_textField.getText(),empresa);
+						Recursos.WriteFileObjectEmpresa("empresa.dat", empresa);
 						dispose();
-					}	
+						JOptionPane.showMessageDialog(contentPane, "Producto creado correctamente");
+						} catch (ECamposVacios e) {
+							// TODO Auto-generated catch block
+							JOptionPane.showMessageDialog(contentPane, e.getMessage());
+						}catch (ELetrasEnCampoN e) {
+							JOptionPane.showMessageDialog(contentPane, e.getMessage()+" en Peso y Volumen");
+						}						
 				}
 			}
 		});
