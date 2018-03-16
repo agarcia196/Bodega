@@ -5,7 +5,6 @@ Sistema simple de bodegas
 
 - Jorge Luis Soriano Cuevas
 - Nicolas Pérez 
-- Youlvis Jiménez
 - Jeisson Harvey Barrera
 - Alexis García Ramirez
 
