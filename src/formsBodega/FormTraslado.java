@@ -33,8 +33,6 @@ public class FormTraslado extends JFrame implements Serializable {
 	 */
 	private static final long serialVersionUID = -2987933687111238768L;
 	private JPanel contentPane;
-	private Empresa empresa;
-	private Persona persona;
 	private int n=14;
 	private JTextField BodegaOrigen;
 	private JTextField BodegaDestino;
@@ -65,8 +63,6 @@ public class FormTraslado extends JFrame implements Serializable {
 	 * Create the frame.
 	 */
 	public FormTraslado(Empresa empresa,Persona persona) {
-		this.empresa=empresa;
-		this.persona=persona;
 		setIconImage(Toolkit.getDefaultToolkit().getImage("png\\traslado.png"));
 		setTitle("Traslado");
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);

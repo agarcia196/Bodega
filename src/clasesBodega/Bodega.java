@@ -11,7 +11,12 @@ package clasesBodega;
 
 import java.io.Serializable;
 import java.util.Arrays;
+
+import Excepciones.CantidadInsuficiente;
+import Excepciones.ProductoCasiAgotado;
 import Excepciones.ProductoNoEncontrado;
+import Excepciones.ProductoNoExistente;
+import Excepciones.SinProducto;
 
 // TODO: Auto-generated Javadoc
 /**
@@ -217,28 +222,7 @@ public class Bodega implements Serializable{
 			if(lista_producto[i].getCantidad_disponible()==0) {
 				throw new SinProducto();
 			}
-		}
-		
-	}
-	
+		}	
+	}	
 }
-class SinProducto extends Exception{
-	 public SinProducto() {
-		 super("Se agotando el producto");
-	 }	 
-}
-class ProductoCasiAgotado extends Exception{
-	 public ProductoCasiAgotado() {
-		 super("Se esta agotando su existencia");
-	 }	 
-}
- class CantidadInsuficiente extends Exception{
-	 public CantidadInsuficiente() {
-		 super("La cantidad de productos es insuficiente");
-	 }	 
- }
- class ProductoNoExistente extends Exception{
-	 public ProductoNoExistente() {
-		 super("Producto no Existente");
-	 }
-}
+

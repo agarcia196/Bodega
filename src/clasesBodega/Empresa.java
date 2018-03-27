@@ -9,11 +9,11 @@ package clasesBodega;
 
 import java.io.Serializable;
 import java.util.Arrays;
-
 import Excepciones.BodegaNoExiste;
 import Excepciones.CategoriaNoEncontrada;
 import Excepciones.EBodegas;
 import Excepciones.ECamposVacios;
+import Excepciones.EUsuarios;
 import Excepciones.ProductoNoEncontrado;
 
 /**
@@ -364,5 +364,65 @@ public class Empresa implements Serializable{
 		}
 	}
 	
+	/**
+	 * Buscar usuario.
+	 *
+	 * @param busqueda the busqueda
+	 * @return the string[][]
+	 * @throws EUsuarios the e usuarios
+	 */
+	public String [][] BuscarUsuario(String busqueda) throws EUsuarios {
+		if(usuarios==null) {
+			throw new EUsuarios("No existen usuarios");
+		}else {
+			String [][] model=null;
+			int j=0;
+			int count = 0;
+			while (j<usuarios.length) {
+				if(usuarios[j].getNombre().contains(busqueda) ||	//busqueda por nombre
+						usuarios[j].getApellido().contains(busqueda) ||	//busqueda por apellido
+						usuarios[j].getCc().contains(busqueda)) {
+					count++;
+				}
+				j++;
+			}
+			if(count>0) {
+				int i=0;
+				int k=0;
+				model = new String[count][7];
+				while(i<usuarios.length) {	//recorrer vector de usuarios
+					if(usuarios[i].getNombre().contains(busqueda) ||	//busqueda por nombre
+							usuarios[i].getApellido().contains(busqueda) ||	//busqueda por apellido
+							usuarios[i].getCc().contains(busqueda)) {
+						if (usuarios[i] instanceof Gerente) {			//imprimir gerentes
+							model[k][0] = usuarios[i].getNombre();
+							model[k][1] = usuarios[i].getApellido();
+							model[k][2] = usuarios[i].getTipoID();
+							model[k][3] = usuarios[i].getCc();
+							model[k][4] = "Gerente";
+							model[k][5] = usuarios[i].getGenero();
+							model[k][6] = usuarios[i].getCorreo();
+						}else {				//imprimir bodequeros
+							model[k][0] = usuarios[i].getNombre();
+							model[k][1] = usuarios[i].getApellido();
+							model[k][2] = usuarios[i].getTipoID();
+							model[k][3] = usuarios[i].getCc();
+							model[k][4] = "Bodeguero";
+							model[k][5] = usuarios[i].getGenero();
+							model[k][6] = usuarios[i].getCorreo();
+						}
+						k++;
+					}
+					i++;
+				}			
+			}
+			if(model==null) {
+				throw new EUsuarios("No se ha encontrado el usuario");
+			}
+			else {
+				return model;
+			}	
+		}
+	}
 }
 

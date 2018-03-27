@@ -8,9 +8,8 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
 import javax.swing.table.DefaultTableModel;
 
-import clasesBodega.Bodeguero;
+import Excepciones.EUsuarios;
 import clasesBodega.Empresa;
-import clasesBodega.Gerente;
 import clasesBodega.Persona;
 
 import java.awt.Toolkit;
@@ -100,34 +99,24 @@ public class FormBuscarUsuario extends JFrame implements Serializable {
 				for (int i=numFilas-1; i>=0; i--) {
 					modelo.removeRow(i);
 				}
-				String busqueda=Buscar_textField.getText();
-				if(empresa.getUsuarios()==null) {			//no existe vector de usuarios
-					JOptionPane.showMessageDialog(contentPane, "No existen usuarios");
-				}else {
-					int i=0;
-					while(i<empresa.getUsuarios().length) {	//recorrer vector de usuarios
-						if(empresa.getUsuarios()[i].getNombre().contains(busqueda) ||	//busqueda por nombre
-								empresa.getUsuarios()[i].getApellido().contains(busqueda) ||	//busqueda por apellido
-								empresa.getUsuarios()[i].getCc().contains(busqueda) ||	//busqueda por CC
-								empresa.getUsuarios()[i] instanceof Gerente ||			//busqueda por cargo
-								empresa.getUsuarios()[i] instanceof Bodeguero) {		//busqueda por cargo
-							if (empresa.getUsuarios()[i] instanceof Gerente) {			//imprimir gerentes
-								String [] model = {empresa.getUsuarios()[i].getNombre(),empresa.getUsuarios()[i].getApellido(),
-										empresa.getUsuarios()[i].getTipoID(),empresa.getUsuarios()[i].getCc(),"Gerente",
-										empresa.getUsuarios()[i].getGenero(),empresa.getUsuarios()[i].getCorreo()};
-								modelo.addRow(model);
-							}else {				//imprimir bodequeros
-								String [] model = {empresa.getUsuarios()[i].getNombre(),empresa.getUsuarios()[i].getApellido(),
-										empresa.getUsuarios()[i].getTipoID(),empresa.getUsuarios()[i].getCc(),"Bodeguero",
-										empresa.getUsuarios()[i].getGenero(),empresa.getUsuarios()[i].getCorreo()};
-								modelo.addRow(model);
-							}
-						}i++;
-					}
-					if(i<empresa.getUsuarios().length) {		//no hay coincidencias
-						JOptionPane.showMessageDialog(contentPane, "No se puede encontrar, intente nuevamente");
-					}
-				}
+     			String[][] matriz;
+     			try {
+     				matriz = empresa.BuscarUsuario(Buscar_textField.getText());
+     				String[] model = new String[matriz[0].length];
+     				int i=0;
+     				while(i<matriz.length) {
+     					int j=0;
+     					while(j<matriz[i].length) {																	
+     						model[j] = matriz[i][j];
+     						j++;								    
+     					}
+     					modelo.addRow(model);
+     					i++;
+     				}
+     			} catch (EUsuarios e) {
+     				JOptionPane.showMessageDialog(contentPane, e.getMessage());
+     			}
+
 			}
 		});
 		btnBuscar.setFont(new Font("Century Gothic", Font.PLAIN, 14));
@@ -139,7 +128,7 @@ public class FormBuscarUsuario extends JFrame implements Serializable {
 		btnEditar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				if (table.getSelectedRow()==-1) {		//comprobar si se selecciono una fila
-					JOptionPane.showMessageDialog(contentPane, "Seleccione una bodega para continuar");
+					JOptionPane.showMessageDialog(contentPane, "Seleccione un usuario para continuar");
 				}else{		//abrir el form de editar usuario
 					FormEditarUser formEditar= new FormEditarUser(persona, empresa);
 					dispose();
