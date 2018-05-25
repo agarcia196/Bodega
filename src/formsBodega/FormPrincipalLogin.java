@@ -238,7 +238,6 @@ public class FormPrincipalLogin extends JFrame implements Serializable, ActionLi
 				int validar = JOptionPane.showConfirmDialog(contentPane,
 						"¿Está seguro de que la información es correcta?");
 				if (validar == 0) {
-
 					if (txtNombre.getText().compareTo("")==0 || txtNombreU.getText().compareTo("")==0 ||
 							txtApellidoU.getText().compareTo("")==0 || txtCcU.getText().compareTo("")==0 || 
 							txtCorreoU.getText().compareTo("")==0 ||

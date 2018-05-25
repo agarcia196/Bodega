@@ -107,7 +107,7 @@ public class FormBusquedaProducto extends JFrame implements Serializable{
 		btnBuscar.setBounds(482, 56, 97, 35);
 		contentPane.add(btnBuscar);
 		btnBuscar.setBackground(Color.decode("#27AFA3"));
-
+		if(Prod_textField!=null) {
 		JButton btnAceptar = new JButton("Aceptar");
 		btnAceptar.setFont(new Font("Century Gothic", Font.PLAIN, 14));
 		btnAceptar.addActionListener(new ActionListener() {
@@ -124,7 +124,7 @@ public class FormBusquedaProducto extends JFrame implements Serializable{
 		btnAceptar.setBounds(272, 570, 97, 35);
 		contentPane.add(btnAceptar);
 		btnAceptar.setBackground(Color.decode("#27AFA3"));
-		
+		}
 		JLabel lblIngreseCategoraO = new JLabel("Ingrese categor\u00EDa, referencia o SKU");
 		lblIngreseCategoraO.setForeground(Color.LIGHT_GRAY);
 		lblIngreseCategoraO.setFont(new Font("Century Gothic", Font.ITALIC, 14));
