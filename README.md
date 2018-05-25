@@ -3,8 +3,7 @@ Sistema simple de bodegas
 
 ## Autores
 
-- Jorge Luis Soriano Cuevas
-- Nicolas Pérez 
+- Jorge Luis Soriano Cuevas 
 - Jeisson Harvey Barrera
 - Alexis García Ramirez
 
